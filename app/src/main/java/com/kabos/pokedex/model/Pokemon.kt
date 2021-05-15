@@ -12,3 +12,5 @@ data class Sprites (
     val front_default: String?,
     val front_shiny: String?
 )
+
+//統合データクラスで取り扱ったほうが楽かも

@@ -18,17 +18,12 @@ object ApiModule {
 
     @Singleton
     @Provides
-    fun provideRetrofit(): Retrofit =
+    fun providePokeApiService(): PokeApiService =
             Retrofit.Builder()
                     .baseUrl(HTTPS_API_URL)
                     .addConverterFactory(MoshiConverterFactory.create())
                     .build()
-
-    @Singleton
-    @Provides
-    fun providePokeApiService(retrofit: Retrofit): PokeApiService =
-            retrofit.create(PokeApiService::class.java)
-
+                    .create(PokeApiService::class.java)
 
     @Singleton
     @Provides
