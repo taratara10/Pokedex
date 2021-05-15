@@ -1,7 +1,7 @@
 package com.kabos.pokedex.di
 
-import com.kabos.pokedex.model.PokeApiService
-import com.kabos.pokedex.model.PokemonRepository
+import com.kabos.pokedex.repository.PokeApiService
+import com.kabos.pokedex.repository.PokemonRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
