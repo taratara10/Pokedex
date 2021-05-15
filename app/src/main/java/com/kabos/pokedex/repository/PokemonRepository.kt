@@ -16,15 +16,15 @@ class PokemonRepository @Inject constructor(private val pokeApiService: PokeApiS
 
     fun mergePokemonData(info: PokemonInfo, species: PokemonSpecies): Pokemon =
             Pokemon(
-                species.id,
-                species.names[0].name,
-                species.genera[0].genus,
-                info.weight,
-                info.height,
-                species.flavor_text_entries[0].flavor_text, //todo 0じゃないので修正
-                info.sprites.front_default,
-                info.types[0].type.name,
-                info.types[1].type.name
+                id = species.id,
+                name = species.names[0].name,
+                genera = species.genera[0].genus,
+                weight = info.weight,
+                height = info.height,
+                flavor_text = species.flavor_text_entries[0].flavor_text, //todo 0じゃないので修正
+                sprites = info.sprites.front_default,
+                type_one = info.types[0].type.name,
+                type_two = info.types[1].type.name
             )
 
 }
