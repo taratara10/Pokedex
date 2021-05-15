@@ -1,7 +1,5 @@
 package com.kabos.pokedex.model
 
-import android.graphics.Color
-import android.graphics.drawable.shapes.Shape
 import okhttp3.internal.Version
 
 data class PokemonSpecies(
