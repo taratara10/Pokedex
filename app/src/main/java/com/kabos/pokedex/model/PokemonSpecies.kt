@@ -38,5 +38,3 @@ data class LanguageX(
     val name: String,
     val url: String
 )
-
-//id, name, genera, weight, height, type, description, sprite,
