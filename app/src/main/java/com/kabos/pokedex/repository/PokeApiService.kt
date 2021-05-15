@@ -1,14 +1,15 @@
 package com.kabos.pokedex.repository
 
-import com.kabos.pokedex.model.PokeApiResponse
+import com.kabos.pokedex.model.Pokemon
+import com.kabos.pokedex.model.PokemonSpecies
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path
-import retrofit2.http.Query
 
 interface PokeApiService {
     @GET("pokemon/{id}")
     suspend fun getPokemonInfo(@Path("id") id: Int): Response<Pokemon>
-    @GET("pokemon-species")
-    suspend fun getPokemonList(@Query("limit") limit: Int, @Query("offset") offset: Int): Response<PokeApiResponse>
+
+    @GET("pokemon/{id}")
+    suspend fun getPokemonSpecies(@Path("id") id: Int): Response<PokemonSpecies>
 }
