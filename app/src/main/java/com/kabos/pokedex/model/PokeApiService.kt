@@ -1,4 +1,4 @@
 package com.kabos.pokedex.model
 
-class Repository {
+interface PokeApiService {
 }
