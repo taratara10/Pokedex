@@ -10,6 +10,6 @@ data class Pokemon(
     val flavor_text: String,
     val sprites: String,
     val type_one: String,
-    val type_two: String?
+    val type_two: String? = null
 )
 //id, name, genera, weight, height, type, description, sprite,

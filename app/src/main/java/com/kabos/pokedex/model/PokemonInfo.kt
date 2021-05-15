@@ -12,7 +12,7 @@ data class PokemonInfo (
 )
 
 data class Sprites (
-    val front_default: String?,
+    val front_default: String,
     val front_shiny: String?
 )
 data class Types(
