@@ -10,6 +10,6 @@ interface PokeApiService {
     @GET("pokemon/{id}")
     suspend fun getPokemonInfo(@Path("id") id: Int): Response<Pokemon>
 
-    @GET("pokemon/{id}")
+    @GET("pokemon-species/{id}")
     suspend fun getPokemonSpecies(@Path("id") id: Int): Response<PokemonSpecies>
 }
