@@ -1,6 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/dialog_bg"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <TextView
+        android:id="@+id/dialog_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="ちほう　を　えらぶ"
+        android:textColor="@color/white"
+        android:textSize="25sp"
+        app:layout_constraintEnd_toStartOf="@id/guideline_end"
+        app:layout_constraintStart_toStartOf="@id/guideline_begin"
+        app:layout_constraintTop_toTopOf="parent" />
+
+<!--  Kanto  -->
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/dialog_kanto"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="69dp"
+        android:background="@drawable/shape_rounded_corner"
+        app:layout_constraintStart_toStartOf="@+id/guideline_begin"
+        app:layout_constraintTop_toBottomOf="@+id/dialog_title">
+
+        <TextView
+            android:id="@+id/dialog_kanto_number"
+            android:layout_width="98dp"
+            android:layout_height="wrap_content"
+            android:text="No.001~151"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/dialog_kanto_title"
+            android:layout_width="98dp"
+            android:layout_height="wrap_content"
+            android:text="カントー"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/dialog_kanto_number" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_begin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.15" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_end"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.85" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
