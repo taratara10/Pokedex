@@ -25,7 +25,7 @@
         app:layout_constraintEnd_toStartOf="@id/guideline_end"
         app:layout_constraintStart_toStartOf="@id/guideline_begin"
         app:layout_constraintTop_toBottomOf="@id/sp_pokedex"
-        tools:listitem="@layout/adapter_pokemon_detail"/>
+        tools:listitem="@layout/adapter_pokedex"/>
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline_begin"
