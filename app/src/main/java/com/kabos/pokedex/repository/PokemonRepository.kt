@@ -16,7 +16,6 @@ class PokemonRepository @Inject constructor(private val pokeApiService: PokeApiS
 
     fun mergePokemonData(info: PokemonInfo, species: PokemonSpecies): Pokemon {
         val typeSize = info.types.size
-
         //typeが1つならtype_twoはnull
         return if (typeSize == 1) Pokemon(
             id = species.id,
