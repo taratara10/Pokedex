@@ -1,16 +1,15 @@
 package com.kabos.pokedex.model
 
-data class Pokemon (
+//成形後のデータ
+data class Pokemon(
     val id: Int,
     val name: String,
+    val genera: String,
     val weight: Float,
     val height: Float,
-    val sprites: Sprites
+    val flavor_text: String,
+    val sprites: String,
+    val type_one: String,
+    val type_two: String? = null
 )
-
-data class Sprites (
-    val front_default: String?,
-    val front_shiny: String?
-)
-
-//統合データクラスで取り扱ったほうが楽かも
+//id, name, genera, weight, height, type, description, sprite,

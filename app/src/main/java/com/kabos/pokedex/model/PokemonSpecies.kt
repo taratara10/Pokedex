@@ -1,7 +1,5 @@
 package com.kabos.pokedex.model
 
-import android.graphics.Color
-import android.graphics.drawable.shapes.Shape
 import okhttp3.internal.Version
 
 data class PokemonSpecies(
@@ -40,5 +38,3 @@ data class LanguageX(
     val name: String,
     val url: String
 )
-
-//id, name, genera, weight, height, type, description, sprite,
