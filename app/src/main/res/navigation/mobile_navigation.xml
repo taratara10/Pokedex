@@ -9,17 +9,17 @@
         android:id="@+id/navigation_home"
         android:name="com.kabos.pokedex.ui.home.HomeFragment"
         android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_pokedex" />
 
     <fragment
         android:id="@+id/navigation_dashboard"
         android:name="com.kabos.pokedex.ui.dashboard.DashboardFragment"
         android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
+        tools:layout="@layout/fragment_four_choice" />
 
     <fragment
         android:id="@+id/navigation_notifications"
         android:name="com.kabos.pokedex.ui.notifications.NotificationsFragment"
         android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_notifications" />
+        tools:layout="@layout/fragment_buzzer" />
 </navigation>

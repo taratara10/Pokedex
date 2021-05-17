@@ -4,11 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+        <variable
+            name="pokedexVM"
+            type="com.kabos.pokedex.ui.viewModel.PokedexViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/pokemon_detail_adapter"
+        android:id="@+id/adapter_pokedex"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
         android:background="@drawable/shape_rounded_corner"
