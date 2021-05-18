@@ -4,9 +4,14 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.kabos.pokedex.model.Pokemon
+import com.kabos.pokedex.model.PokemonInfo
+import com.kabos.pokedex.model.PokemonSpecies
 import com.kabos.pokedex.repository.PokemonRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @HiltViewModel
@@ -14,7 +19,7 @@ class PokedexViewModel @Inject constructor(private val repository: PokemonReposi
     : ViewModel(){
 
     var pokemonList: MutableLiveData<List<Pokemon>> = MutableLiveData()
-    var country:List<Int> = listOf()
+    var pokemonNumber:Int = 0
 
     //country毎にfetchしたやつをListで保持する
 
@@ -32,19 +37,35 @@ class PokedexViewModel @Inject constructor(private val repository: PokemonReposi
 
         //getPokemon(id,limit=20)
 
-        //insert pokemonList
     }
 
     private fun getPokemon(id: Int) = viewModelScope.launch {
+        val pokemonInfo = async {
+            try {
+                val request = repository.getPokemonInfoById(id)
+                if(request.isSuccessful) request.body() else null //todo null怖い
+            } catch (e: Exception){
+                e.stackTrace
+            }
+        }
 
+        val pokemonSpecies = async {
+            try {
+                val request = repository.getPokemonSpeciesById(id)
+                if(request.isSuccessful) request.body() else null //todo null怖い
+            } catch (e: Exception){
+                e.stackTrace
+            }
+        }
 
+        val pokemon = repository.mergePokemonData(
+                pokemonInfo.await() as PokemonInfo,
+                pokemonSpecies.await() as PokemonSpecies
+                )
 
-        //pokemonInfoを取得
-
-        //pokemonSpeciesを取得
-
-        //merge Pokemon()
-
+        //Listへinsertの処理
     }
+
+
 
 }
