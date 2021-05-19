@@ -64,9 +64,9 @@ class PokedexViewModel @Inject constructor(private val repository: PokemonReposi
             }
 
             val pokemon = repository.mergePokemonData(
-                pokemonInfo.await() as PokemonInfo,
-                pokemonSpecies.await() as PokemonSpecies
-            )
+                            pokemonInfo.await() as PokemonInfo,
+                            pokemonSpecies.await() as PokemonSpecies
+                            )
 
             pokemonListOne.add(pokemon)
         }
