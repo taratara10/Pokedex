@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+        <variable
+            name="pokemonData"
+            type="com.kabos.pokedex.model.Pokemon" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -18,6 +20,7 @@
             android:layout_height="0dp"
             android:layout_marginTop="32dp"
             android:src="@drawable/_1"
+            app:imageUrl="@{pokemonData.sprite}"
             app:layout_constraintBottom_toTopOf="@+id/dialog_divider"
             app:layout_constraintEnd_toStartOf="@+id/guideline_center"
             app:layout_constraintStart_toStartOf="parent"
@@ -29,6 +32,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
+            android:text="@{pokemonData.id}"
             app:layout_constraintStart_toStartOf="@+id/guideline_center"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="No.001" />
@@ -38,6 +42,7 @@
             android:id="@+id/tv_detail_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="@{pokemonData.name}"
             app:layout_constraintStart_toEndOf="@id/guideline_center"
             app:layout_constraintTop_toBottomOf="@+id/tv_detail_number"
             tools:text="フシギダネ" />
@@ -47,6 +52,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
+            android:text="@{pokemonData.genera}"
             app:layout_constraintStart_toEndOf="@id/guideline_center"
             app:layout_constraintTop_toBottomOf="@id/tv_detail_name"
             tools:text="たねポケモン" />
@@ -55,6 +61,7 @@
             android:id="@+id/tv_detail_height"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="@{@string/pokemon_height(pokemonData.height/10)}"
             app:layout_constraintStart_toEndOf="@id/guideline_center"
             app:layout_constraintTop_toBottomOf="@id/tv_detail_genera"
             tools:text="たかさ　0.7m" />
@@ -63,6 +70,7 @@
             android:id="@+id/tv_detail_weight"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="@{@string/pokemon_weight(pokemonData.weight/10)}"
             app:layout_constraintStart_toEndOf="@id/guideline_center"
             app:layout_constraintTop_toBottomOf="@id/tv_detail_height"
             tools:text="おもさ　6.9kg" />
@@ -74,6 +82,7 @@
             android:layout_height="19dp"
             android:layout_marginStart="12dp"
             android:layout_marginTop="16dp"
+            app:imageUrl="@{pokemonData.type_one}"
             app:layout_constraintStart_toEndOf="@+id/adapter_type_two"
             app:layout_constraintTop_toBottomOf="@+id/tv_detail_weight"
             tools:srcCompat="@tools:sample/avatars" />
@@ -82,6 +91,7 @@
             android:id="@+id/adapter_type_two"
             android:layout_width="22dp"
             android:layout_height="19dp"
+            app:imageUrl="@{pokemonData.type_two}"
             app:layout_constraintBottom_toBottomOf="@+id/adapter_type_one"
             app:layout_constraintStart_toStartOf="@+id/guideline_center"
             app:layout_constraintTop_toTopOf="@+id/adapter_type_one"
@@ -94,6 +104,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="80dp"
             android:layout_marginEnd="80dp"
+            android:text="@{pokemonData.flavor_text}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
