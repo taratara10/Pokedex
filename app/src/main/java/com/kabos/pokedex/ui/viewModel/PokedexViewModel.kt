@@ -9,10 +9,8 @@ import com.kabos.pokedex.model.PokemonInfo
 import com.kabos.pokedex.model.PokemonSpecies
 import com.kabos.pokedex.repository.PokemonRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.async
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import kotlinx.coroutines.*
+import retrofit2.Response
 import javax.inject.Inject
 
 @HiltViewModel
@@ -49,7 +47,7 @@ class PokedexViewModel @Inject constructor(private val repository: PokemonReposi
     }
 
     private fun getPokemon(id: Int, pokemonList:MutableLiveData<List<Pokemon>>) = viewModelScope.launch {
-        val pokemonInfo = async {
+        val pokemonInfo: Deferred<Any?> = async {
             try {
                 val request = repository.getPokemonInfoById(id)
                 if(request.isSuccessful) request.body() else null //todo null怖い
@@ -58,7 +56,7 @@ class PokedexViewModel @Inject constructor(private val repository: PokemonReposi
             }
         }
 
-        val pokemonSpecies = async {
+        val pokemonSpecies: Deferred<Any?> = async {
             try {
                 val request = repository.getPokemonSpeciesById(id)
                 if(request.isSuccessful) request.body() else null //todo null怖い

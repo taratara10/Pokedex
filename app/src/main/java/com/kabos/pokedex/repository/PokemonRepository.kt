@@ -8,7 +8,7 @@ import javax.inject.Inject
 
 class PokemonRepository @Inject constructor(private val pokeApiService: PokeApiService){
 
-    suspend fun getPokemonInfoById(id: Int):Response<Pokemon> =
+    suspend fun getPokemonInfoById(id: Int):Response<PokemonInfo> =
         pokeApiService.getPokemonInfoById(id)
 
     suspend fun getPokemonSpeciesById(id: Int): Response<PokemonSpecies> =
