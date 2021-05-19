@@ -5,8 +5,8 @@
 
     <data>
         <variable
-            name="pokedexVM"
-            type="com.kabos.pokedex.ui.viewModel.PokedexViewModel" />
+            name="pokemonData"
+            type="com.kabos.pokedex.model.Pokemon" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -23,6 +23,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:background="@drawable/shape_rounded_corner"
+            app:imageUrl="@{pokemonData.sprites}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/guideline2"
             app:layout_constraintStart_toStartOf="parent"
