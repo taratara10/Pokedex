@@ -31,6 +31,7 @@
             app:layout_constraintEnd_toStartOf="@id/guideline_end"
             app:layout_constraintStart_toStartOf="@id/guideline_begin"
             app:layout_constraintTop_toBottomOf="@id/sp_pokedex"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             tools:listitem="@layout/adapter_pokedex" />
 
         <androidx.constraintlayout.widget.Guideline
@@ -46,5 +47,6 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             app:layout_constraintGuide_end="24dp" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
