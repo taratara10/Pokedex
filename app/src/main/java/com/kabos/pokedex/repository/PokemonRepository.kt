@@ -16,6 +16,10 @@ class PokemonRepository @Inject constructor(private val pokeApiService: PokeApiS
 
     fun mergePokemonData(info: PokemonInfo, species: PokemonSpecies): Pokemon {
         val typeSize = info.types.size
+        val flavorText = species.flavor_text_entries.findLast {
+            it.language.name == "ja-Hrkt"
+        }//実際はversion.name == "sword"にしたいけど、未登場ポケモンがnullなので、findLastで最新の説明を引用
+
         //typeが1つならtype_twoはnull
         return if (typeSize == 1) Pokemon(
             id = species.id,
@@ -23,7 +27,7 @@ class PokemonRepository @Inject constructor(private val pokeApiService: PokeApiS
             genera = species.genera[0].genus,
             weight = info.weight,
             height = info.height,
-            flavor_text = species.flavor_text_entries[0].flavor_text, //todo 0じゃないので修正
+            flavor_text = flavorText!!.flavor_text,
             sprite = info.sprites.front_default,
             type_one = info.types[0].type.name,
             type_two = null
@@ -34,7 +38,7 @@ class PokemonRepository @Inject constructor(private val pokeApiService: PokeApiS
             genera = species.genera[0].genus,
             weight = info.weight,
             height = info.height,
-            flavor_text = species.flavor_text_entries[0].flavor_text, //todo 0じゃないので修正
+            flavor_text = flavorText!!.flavor_text,
             sprite = info.sprites.front_default,
             type_one = info.types[0].type.name,
             type_two = info.types[1].type.name
