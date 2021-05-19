@@ -19,6 +19,7 @@ import javax.inject.Inject
 class PokedexViewModel @Inject constructor(private val repository: PokemonRepository)
     : ViewModel(){
 
+    //todo PokeListの中に1~8のLiveDataListを格納する
     var pokemonListOne: MutableLiveData<List<Pokemon>> = MutableLiveData() //Kanto
     var pokemonListTwo: MutableLiveData<List<Pokemon>> = MutableLiveData()
     var pokemonListThree: MutableLiveData<List<Pokemon>> = MutableLiveData()
