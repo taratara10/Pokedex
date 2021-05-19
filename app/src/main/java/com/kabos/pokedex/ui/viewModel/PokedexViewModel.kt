@@ -1,5 +1,6 @@
 package com.kabos.pokedex.ui.viewModel
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -18,8 +19,16 @@ import javax.inject.Inject
 class PokedexViewModel @Inject constructor(private val repository: PokemonRepository)
     : ViewModel(){
 
-    var pokemonList: MutableLiveData<List<Pokemon>> = MutableLiveData()
-    var pokemonNumber:Int = 0
+    var pokemonListOne: MutableLiveData<List<Pokemon>> = MutableLiveData() //Kanto
+    var pokemonListTwo: MutableLiveData<List<Pokemon>> = MutableLiveData()
+    var pokemonListThree: MutableLiveData<List<Pokemon>> = MutableLiveData()
+    var pokemonListFour: MutableLiveData<List<Pokemon>> = MutableLiveData()
+    var pokemonListFive: MutableLiveData<List<Pokemon>> = MutableLiveData()
+    var pokemonListSix: MutableLiveData<List<Pokemon>> = MutableLiveData()
+    var pokemonListSeven: MutableLiveData<List<Pokemon>> = MutableLiveData()
+    var pokemonListEight: MutableLiveData<List<Pokemon>> = MutableLiveData()
+
+    var pokemonNumber:Int = 1
 
     //country毎にfetchしたやつをListで保持する
 
@@ -27,19 +36,18 @@ class PokedexViewModel @Inject constructor(private val repository: PokemonReposi
         getPokemonList()
     }
 
-    //listの初期化
-    private fun initCountry(){
+    private fun selectCountry(){
 
     }
 
     private fun getPokemonList(){
-        //for で回す　[150回すのは無理なので、limit=30]
-
-        //getPokemon(id,limit=20)
-
+        for (i in pokemonNumber..pokemonNumber+30) {
+            getPokemon(i,pokemonListOne)
+        }
+        Log.d("getPokemonList"," $pokemonListOne")
     }
 
-    private fun getPokemon(id: Int) = viewModelScope.launch {
+    private fun getPokemon(id: Int, pokemonList:MutableLiveData<List<Pokemon>>) = viewModelScope.launch {
         val pokemonInfo = async {
             try {
                 val request = repository.getPokemonInfoById(id)
@@ -63,7 +71,7 @@ class PokedexViewModel @Inject constructor(private val repository: PokemonReposi
                 pokemonSpecies.await() as PokemonSpecies
                 )
 
-        //Listへinsertの処理
+        pokemonList.postValue(listOf(pokemon))
     }
 
 
