@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_home">
+    app:startDestination="@+id/navigation_pokedex">
 
     <fragment
         android:id="@+id/navigation_pokedex"
@@ -18,14 +18,14 @@
         tools:layout="@layout/fragment_pokedex" />
 
     <fragment
-        android:id="@+id/navigation_dashboard"
-        android:name="com.kabos.pokedex.ui.buzzerQuiz.BuzzerMainFragment"
-        android:label="Buzzer"
-        tools:layout="@layout/fragment_four_choice" />
-
-    <fragment
-        android:id="@+id/navigation_notifications"
+        android:id="@+id/navigation_four_choices"
         android:name="com.kabos.pokedex.ui.fourChoicesQuiz.FourChoicesMainFragment"
         android:label="FourChoices"
+        tools:layout="@layout/fragment_four_choices" />
+
+    <fragment
+        android:id="@+id/navigation_buzzer"
+        android:name="com.kabos.pokedex.ui.buzzerQuiz.BuzzerMainFragment"
+        android:label="Buzzer"
         tools:layout="@layout/fragment_buzzer" />
 </navigation>
