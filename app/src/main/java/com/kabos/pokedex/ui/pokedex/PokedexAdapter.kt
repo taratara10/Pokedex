@@ -43,6 +43,6 @@ private object DiffCallback: DiffUtil.ItemCallback<Pokemon>() {
     }
 
     override fun areContentsTheSame(oldItem: Pokemon, newItem: Pokemon): Boolean {
-        return oldItem == newItem
+        return oldItem.name == newItem.name
     }
 }
