@@ -24,7 +24,7 @@ class PokemonRepository @Inject constructor(private val pokeApiService: PokeApiS
             weight = info.weight,
             height = info.height,
             flavor_text = species.flavor_text_entries[0].flavor_text, //todo 0じゃないので修正
-            sprites = info.sprites.front_default,
+            sprite = info.sprites.front_default,
             type_one = info.types[0].type.name,
             type_two = null
         )
@@ -35,7 +35,7 @@ class PokemonRepository @Inject constructor(private val pokeApiService: PokeApiS
             weight = info.weight,
             height = info.height,
             flavor_text = species.flavor_text_entries[0].flavor_text, //todo 0じゃないので修正
-            sprites = info.sprites.front_default,
+            sprite = info.sprites.front_default,
             type_one = info.types[0].type.name,
             type_two = info.types[1].type.name
         )
