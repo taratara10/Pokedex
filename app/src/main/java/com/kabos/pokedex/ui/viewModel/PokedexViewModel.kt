@@ -17,62 +17,64 @@ import javax.inject.Inject
 class PokedexViewModel @Inject constructor(private val repository: PokemonRepository)
     : ViewModel(){
 
-    //todo PokeListの中に1~8のLiveDataListを格納する
-    var pokemonListOne: MutableLiveData<List<Pokemon>> = MutableLiveData() //Kanto
-    var pokemonListTwo: MutableLiveData<List<Pokemon>> = MutableLiveData()
-    var pokemonListThree: MutableLiveData<List<Pokemon>> = MutableLiveData()
-    var pokemonListFour: MutableLiveData<List<Pokemon>> = MutableLiveData()
-    var pokemonListFive: MutableLiveData<List<Pokemon>> = MutableLiveData()
-    var pokemonListSix: MutableLiveData<List<Pokemon>> = MutableLiveData()
-    var pokemonListSeven: MutableLiveData<List<Pokemon>> = MutableLiveData()
-    var pokemonListEight: MutableLiveData<List<Pokemon>> = MutableLiveData()
+    //todo PokeMutableListの中に1~8のLiveDataMutableListを格納する
+    var pokemonList:MutableLiveData<List<Pokemon>> = MutableLiveData()
+
+    var pokemonListOne: MutableList<Pokemon> = mutableListOf() //Kanto
+    var pokemonListTwo: MutableList<Pokemon> = mutableListOf()
+    var pokemonListThree: MutableList<Pokemon> = mutableListOf()
+    var pokemonListFour: MutableList<Pokemon> = mutableListOf()
+    var pokemonListFive: MutableList<Pokemon> = mutableListOf()
+    var pokemonListSix: MutableList<Pokemon> = mutableListOf()
+    var pokemonListSeven: MutableList<Pokemon> = mutableListOf()
+    var pokemonListEight: MutableList<Pokemon> = mutableListOf()
 
     var pokemonNumber:Int = 1
 
-    //country毎にfetchしたやつをListで保持する
+    //country毎にfetchしたやつをMutableListで保持する
 
     init {
         getPokemonList()
     }
 
     private fun selectCountry(){
+        //when 1-> kanto とかで、MainLiveDataにセット
 
     }
 
-    private fun getPokemonList(){
-        for (i in pokemonNumber..pokemonNumber+30) {
-            getPokemon(i,pokemonListOne)
-        }
-        Log.d("getPokemonList"," $pokemonListOne")
-    }
-
-    private fun getPokemon(id: Int, pokemonList:MutableLiveData<List<Pokemon>>) = viewModelScope.launch {
-        val pokemonInfo: Deferred<Any?> = async {
-            try {
-                val request = repository.getPokemonInfoById(id)
-                if(request.isSuccessful) request.body() else null //todo null怖い
-            } catch (e: Exception){
-                e.stackTrace
+    fun getPokemonList()= viewModelScope.launch(Dispatchers.IO) {
+        //if (list.isEmpty()) -> forループで取得
+        for (i in pokemonNumber..pokemonNumber + 30) {
+            val pokemonInfo: Deferred<Any?> = async {
+                try {
+                    val request = repository.getPokemonInfoById(i)
+                    if (request.isSuccessful) request.body() else null //todo null怖い
+                } catch (e: Exception) {
+                    e.stackTrace
+                }
             }
-        }
 
-        val pokemonSpecies: Deferred<Any?> = async {
-            try {
-                val request = repository.getPokemonSpeciesById(id)
-                if(request.isSuccessful) request.body() else null //todo null怖い
-            } catch (e: Exception){
-                e.stackTrace
+            val pokemonSpecies: Deferred<Any?> = async {
+                try {
+                    val request = repository.getPokemonSpeciesById(i)
+                    if (request.isSuccessful) request.body() else null //todo null怖い
+                } catch (e: Exception) {
+                    e.stackTrace
+                }
             }
-        }
 
-        val pokemon = repository.mergePokemonData(
+            val pokemon = repository.mergePokemonData(
                 pokemonInfo.await() as PokemonInfo,
                 pokemonSpecies.await() as PokemonSpecies
-                )
+            )
 
-        pokemonList.postValue(listOf(pokemon))
+            pokemonListOne.add(pokemon)
+        }
+        pokemonList.postValue(pokemonListOne)
+        Log.d("getPokemonMutableList", " $pokemonListOne")
+
+
     }
-
 
 
 }

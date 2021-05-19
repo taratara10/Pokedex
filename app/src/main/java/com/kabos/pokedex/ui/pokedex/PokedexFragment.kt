@@ -28,13 +28,14 @@ class PokedexFragment: Fragment(){
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        pokedexViewModel.pokemonListOne.observe(viewLifecycleOwner, {list ->
+        pokedexViewModel.pokemonList.observe(viewLifecycleOwner, {list ->
             pokedexAdapter.submitList(list)
         })
 
         binding.apply {
             rvPokedex.adapter = pokedexAdapter
             lifecycleOwner = this@PokedexFragment
+
         }
 
     }
