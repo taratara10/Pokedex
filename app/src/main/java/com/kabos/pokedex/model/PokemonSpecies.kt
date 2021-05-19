@@ -1,6 +1,5 @@
 package com.kabos.pokedex.model
 
-import okhttp3.internal.Version
 
 data class PokemonSpecies(
     val id: Int,
@@ -37,4 +36,8 @@ data class Genera(
 data class LanguageX(
     val name: String,
     val url: String
+)
+
+data class Version(
+    val name: String
 )
