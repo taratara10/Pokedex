@@ -6,20 +6,26 @@
     app:startDestination="@+id/navigation_home">
 
     <fragment
-        android:id="@+id/navigation_home"
-        android:name="com.kabos.pokedex.ui.home.HomeFragment"
-        android:label="@string/title_home"
+        android:id="@+id/navigation_pokedex"
+        android:name="com.kabos.pokedex.ui.pokedex.PokedexFragment"
+        android:label="pokedex"
+        tools:layout="@layout/fragment_pokedex" />
+
+    <fragment
+        android:id="@+id/navigation_pokedex_detail"
+        android:name="com.kabos.pokedex.ui.pokedex.PokedexFragment"
+        android:label="PokedexDetail"
         tools:layout="@layout/fragment_pokedex" />
 
     <fragment
         android:id="@+id/navigation_dashboard"
-        android:name="com.kabos.pokedex.ui.dashboard.DashboardFragment"
-        android:label="@string/title_dashboard"
+        android:name="com.kabos.pokedex.ui.buzzerQuiz.BuzzerMainFragment"
+        android:label="Buzzer"
         tools:layout="@layout/fragment_four_choice" />
 
     <fragment
         android:id="@+id/navigation_notifications"
-        android:name="com.kabos.pokedex.ui.notifications.NotificationsFragment"
-        android:label="@string/title_notifications"
+        android:name="com.kabos.pokedex.ui.fourChoicesQuiz.FourChoicesMainFragment"
+        android:label="FourChoices"
         tools:layout="@layout/fragment_buzzer" />
 </navigation>
