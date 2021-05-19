@@ -42,27 +42,11 @@ class PokedexViewModel @Inject constructor(private val repository: PokemonReposi
 
     }
 
-    fun getPokemonList()= viewModelScope.launch(Dispatchers.IO) {
+    fun getPokemonList()= viewModelScope.launch {
         //if (list.isEmpty()) -> forループで取得
-        for (i in pokemonNumber..pokemonNumber + 30) {
-            val pokemonInfo: Deferred<Any?> = async {
-                try {
-                    val request = repository.getPokemonInfoById(i)
-                    if (request.isSuccessful) request.body() else null //todo null怖い
-                } catch (e: Exception) {
-                    e.stackTrace
-                }
-            }
-
-            val pokemonSpecies: Deferred<Any?> = async {
-                try {
-                    val request = repository.getPokemonSpeciesById(i)
-                    if (request.isSuccessful) request.body() else null //todo null怖い
-                } catch (e: Exception) {
-                    e.stackTrace
-                }
-            }
-
+        for (id in pokemonNumber..pokemonNumber + 30) {
+            val pokemonInfo = getPokemonInfo(id)
+            val pokemonSpecies = getPokemonSpecies(id)
             val pokemon = repository.mergePokemonData(
                             pokemonInfo.await() as PokemonInfo,
                             pokemonSpecies.await() as PokemonSpecies
@@ -71,10 +55,28 @@ class PokedexViewModel @Inject constructor(private val repository: PokemonReposi
             pokemonListOne.add(pokemon)
         }
         pokemonList.postValue(pokemonListOne)
-        Log.d("getPokemonMutableList", " $pokemonListOne")
-
-
     }
 
+    suspend fun getPokemonInfo(id: Int): Deferred<Any?> = withContext(Dispatchers.IO) {
+        async {
+            try {
+                val request = repository.getPokemonInfoById(id)
+                if (request.isSuccessful) request.body() else null //todo null怖い
+            } catch (e: Exception) {
+                e.stackTrace
+            }
+        }
+    }
+
+    suspend fun getPokemonSpecies(id: Int): Deferred<Any?> = withContext(Dispatchers.IO) {
+        async {
+            try {
+                val request = repository.getPokemonSpeciesById(id)
+                if (request.isSuccessful) request.body() else null //todo null怖い
+            } catch (e: Exception) {
+                e.stackTrace
+            }
+        }
+    }
 
 }

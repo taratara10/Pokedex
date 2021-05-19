@@ -9,13 +9,18 @@
         android:id="@+id/navigation_pokedex"
         android:name="com.kabos.pokedex.ui.pokedex.PokedexFragment"
         android:label="pokedex"
-        tools:layout="@layout/fragment_pokedex" />
+        tools:layout="@layout/fragment_pokedex" >
+
+        <action
+            android:id="@+id/action_navigation_pokedex_to_navigation_pokedex_detail2"
+            app:destination="@id/navigation_pokedex_detail" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_pokedex_detail"
-        android:name="com.kabos.pokedex.ui.pokedex.PokedexFragment"
+        android:name="com.kabos.pokedex.ui.pokedex.PokedexDetailFragment"
         android:label="PokedexDetail"
-        tools:layout="@layout/fragment_pokedex" />
+        tools:layout="@layout/dialog_pokedex_detail" />
 
     <fragment
         android:id="@+id/navigation_four_choices"
