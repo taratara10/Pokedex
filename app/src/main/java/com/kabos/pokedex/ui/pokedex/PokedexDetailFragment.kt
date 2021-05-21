@@ -7,6 +7,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import com.kabos.pokedex.R
@@ -17,17 +18,15 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class PokedexDetailFragment: DialogFragment() {
 
-    private val pokedexViewModel: PokedexViewModel by viewModels()
+    private val pokedexViewModel: PokedexViewModel by activityViewModels()
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val builder = AlertDialog.Builder(activity)
         val binding = DataBindingUtil.inflate<DialogPokedexDetailBinding>(
             LayoutInflater.from(activity), R.layout.dialog_pokedex_detail,
             null, false)
-        binding.pokemonData = pokedexViewModel.dialogPokemon
-
+        binding.pokedexVM = pokedexViewModel
         builder.setView(binding.root)
-        builder.setTitle("ポケモン図鑑")
         return builder.create()
     }
 
