@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModel
+import androidx.navigation.fragment.findNavController
 import com.kabos.pokedex.databinding.FragmentPokedexBinding
 import com.kabos.pokedex.ui.viewModel.PokedexViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -16,8 +17,9 @@ class PokedexFragment: Fragment(){
 
     private lateinit var binding: FragmentPokedexBinding
     private val pokedexViewModel: PokedexViewModel by viewModels()
-    private val pokedexAdapter: PokedexAdapter = PokedexAdapter { pokemon ->
-//        val action = PokedexFragmentDirection
+    private val pokedexAdapter: PokedexAdapter = PokedexAdapter { pokemonId ->
+        val action = PokedexFragmentDirections.actionNavigationPokedexToNavigationPokedexDetail(pokemonId)
+        findNavController().navigate(action)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {

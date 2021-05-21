@@ -15,7 +15,7 @@
             android:name="pokemonId"
             app:argType="integer"/>
         <action
-            android:id="@+id/action_navigation_pokedex_to_navigation_pokedex_detail2"
+            android:id="@+id/action_navigation_pokedex_to_navigation_pokedex_detail"
             app:destination="@id/navigation_pokedex_detail" />
     </fragment>
 
