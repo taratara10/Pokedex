@@ -18,7 +18,6 @@
             android:id="@+id/imageView4"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginTop="32dp"
             app:imageUrl="@{pokedexVM.dialogPokemon.sprite}"
             app:layout_constraintBottom_toTopOf="@+id/dialog_divider"
             app:layout_constraintEnd_toStartOf="@+id/guideline_center"
@@ -32,6 +31,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
             android:text="@{@string/pokemon_number(pokedexVM.dialogPokemon.id)}"
+            android:textSize="18sp"
             app:layout_constraintStart_toStartOf="@+id/guideline_center"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="No.001" />
@@ -42,7 +42,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@{pokedexVM.dialogPokemon.name}"
-            android:textSize="20sp"
+            android:textSize="24sp"
             app:layout_constraintStart_toEndOf="@id/guideline_center"
             app:layout_constraintTop_toBottomOf="@+id/tv_detail_number"
             tools:text="フシギダネ" />
@@ -53,6 +53,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
             android:text="@{pokedexVM.dialogPokemon.genera}"
+            android:textSize="18sp"
             app:layout_constraintStart_toEndOf="@id/guideline_center"
             app:layout_constraintTop_toBottomOf="@id/tv_detail_name"
             tools:text="たねポケモン" />
@@ -62,6 +63,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@{@string/pokemon_height(pokedexVM.dialogPokemon.height/10)}"
+            android:textSize="18sp"
             app:layout_constraintStart_toEndOf="@id/guideline_center"
             app:layout_constraintTop_toBottomOf="@id/tv_detail_genera"
             tools:text="たかさ　0.7m" />
@@ -71,6 +73,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@{@string/pokemon_weight(pokedexVM.dialogPokemon.weight/10)}"
+            android:textSize="18sp"
             app:layout_constraintStart_toEndOf="@id/guideline_center"
             app:layout_constraintTop_toBottomOf="@id/tv_detail_height"
             tools:text="おもさ　6.9kg" />
@@ -102,8 +105,10 @@
             android:id="@+id/tv_detail_flavor_text"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="80dp"
-            android:layout_marginEnd="80dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginBottom="16dp"
             android:text="@{pokedexVM.dialogPokemon.flavor_text}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -116,7 +121,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.6" />
+            app:layout_constraintGuide_percent="0.54" />
 
         <ImageView
             android:id="@+id/dialog_divider"

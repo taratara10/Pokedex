@@ -21,7 +21,6 @@
             android:id="@+id/adapter_pokemon_sprite"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
             android:background="@drawable/shape_rounded_corner"
             app:imageUrl="@{pokemonData.sprite}"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -46,9 +45,9 @@
             android:id="@+id/adapter_pokemon_flavor"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
+            android:layout_marginTop="8dp"
             android:text="@{pokemonData.flavor_text}"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:textSize="12sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/guideline2"
             app:layout_constraintTop_toBottomOf="@+id/adapter_pokemon_name"
@@ -81,6 +80,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.4" />
+            app:layout_constraintGuide_percent="0.36" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
