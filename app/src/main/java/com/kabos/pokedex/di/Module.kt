@@ -1,5 +1,8 @@
 package com.kabos.pokedex.di
 
+import android.widget.ImageView
+import androidx.databinding.BindingAdapter
+import com.bumptech.glide.Glide
 import com.kabos.pokedex.repository.PokeApiService
 import com.kabos.pokedex.repository.PokemonRepository
 import dagger.Module
@@ -29,4 +32,15 @@ object ApiModule {
     @Provides
     fun providePokeRepository(pokeApiService: PokeApiService) =
             PokemonRepository(pokeApiService)
+
+
+    @JvmStatic
+    @BindingAdapter("imageUrl")
+    fun loadImage(view: ImageView, imageUrl: String?) {
+        if (imageUrl != null) {
+            Glide.with(view.context)
+                .load(imageUrl)
+                .into(view)
+        }
+    }
 }

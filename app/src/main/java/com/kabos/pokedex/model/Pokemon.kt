@@ -8,7 +8,7 @@ data class Pokemon(
     val weight: Float,
     val height: Float,
     val flavor_text: String,
-    val sprites: String,
+    val sprite: String,
     val type_one: String,
     val type_two: String? = null
 )
