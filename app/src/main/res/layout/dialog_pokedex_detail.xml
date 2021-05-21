@@ -32,7 +32,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
-            android:text="@{pokemonData.id}"
+            android:text="@{@string/pokemon_number(pokemonData.id)}"
             app:layout_constraintStart_toStartOf="@+id/guideline_center"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="No.001" />

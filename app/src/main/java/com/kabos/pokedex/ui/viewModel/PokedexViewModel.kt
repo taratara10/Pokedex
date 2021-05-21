@@ -19,6 +19,7 @@ class PokedexViewModel @Inject constructor(private val repository: PokemonReposi
 
     //todo PokeMutableListの中に1~8のLiveDataMutableListを格納する
     var pokemonList:MutableLiveData<List<Pokemon>> = MutableLiveData()
+    var dialogPokemon: Pokemon? = null
 
     var pokemonListOne: MutableList<Pokemon> = mutableListOf() //Kanto
     var pokemonListTwo: MutableList<Pokemon> = mutableListOf()
@@ -42,9 +43,13 @@ class PokedexViewModel @Inject constructor(private val repository: PokemonReposi
 
     }
 
+    fun updateDialogPokemon(pokemon:Pokemon) {
+        dialogPokemon = pokemon
+    }
+
     fun getPokemonList()= viewModelScope.launch {
         //if (list.isEmpty()) -> forループで取得
-        for (id in pokemonNumber..pokemonNumber + 30) {
+        for (id in pokemonNumber..pokemonNumber + 5) {
             val pokemonInfo = getPokemonInfo(id)
             val pokemonSpecies = getPokemonSpecies(id)
             val pokemon = repository.mergePokemonData(

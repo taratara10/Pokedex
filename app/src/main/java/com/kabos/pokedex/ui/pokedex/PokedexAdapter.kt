@@ -9,16 +9,16 @@ import com.kabos.pokedex.databinding.AdapterPokedexBinding
 import com.kabos.pokedex.databinding.AdapterPokedexBinding.inflate
 import com.kabos.pokedex.model.Pokemon
 
-class PokedexAdapter(private val onClick: (Int) -> Unit)
+class PokedexAdapter(private val onClick: (Pokemon) -> Unit)
     :    androidx.recyclerview.widget.ListAdapter<Pokemon, PokedexAdapter.PokedexViewHolder>(DiffCallback) {
 
     class PokedexViewHolder(private val binding: AdapterPokedexBinding)
         : RecyclerView.ViewHolder(binding.root) {
-        fun bind(item: Pokemon, onClick: (Int) -> Unit){
+        fun bind(item: Pokemon, onClick: (Pokemon) -> Unit){
             binding.apply {
                 pokemonData = item
                 root.setOnClickListener {
-                    onClick(item.id)
+                    onClick(item)
                 }
                 executePendingBindings()
             }

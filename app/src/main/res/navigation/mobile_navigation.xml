@@ -11,23 +11,17 @@
         android:label="pokedex"
         tools:layout="@layout/fragment_pokedex" >
 
-        <argument
-            android:name="pokemonId"
-            app:argType="integer"/>
         <action
             android:id="@+id/action_navigation_pokedex_to_navigation_pokedex_detail"
             app:destination="@id/navigation_pokedex_detail" />
     </fragment>
 
-    <fragment
+    <dialog
         android:id="@+id/navigation_pokedex_detail"
         android:name="com.kabos.pokedex.ui.pokedex.PokedexDetailFragment"
         android:label="PokedexDetail"
         tools:layout="@layout/dialog_pokedex_detail">
-        <argument
-            android:name="pokemonId"
-            app:argType="integer"/>
-    </fragment>
+    </dialog>
 
     <fragment
         android:id="@+id/navigation_four_choices"
