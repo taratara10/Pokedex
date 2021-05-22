@@ -12,14 +12,22 @@
         android:layout_height="match_parent"
         tools:context=".ui.pokedex.PokedexFragment">
 
-        <Spinner
-            android:id="@+id/sp_pokedex"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/pokedex_region_select"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            app:layout_constraintEnd_toStartOf="@+id/guideline_end"
-            app:layout_constraintStart_toStartOf="@+id/guideline_begin"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:listitem="カントー" />
+            app:layout_constraintStart_toStartOf="@id/guideline_begin"
+            app:layout_constraintEnd_toEndOf="@id/guideline_end"
+            app:layout_constraintTop_toTopOf="parent">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="aaaaaaaaaaaaaaaaa"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:listitem="カントー▼"
+                />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_pokedex"
@@ -28,7 +36,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/guideline_end"
             app:layout_constraintStart_toStartOf="@id/guideline_begin"
-            app:layout_constraintTop_toBottomOf="@id/sp_pokedex"
+            app:layout_constraintTop_toBottomOf="@id/pokedex_region_select"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             tools:listitem="@layout/adapter_pokedex" />
 
