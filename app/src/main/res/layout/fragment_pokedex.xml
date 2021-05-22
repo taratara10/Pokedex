@@ -5,6 +5,9 @@
 
     <data>
         <variable
+            name="callback"
+            type="com.kabos.pokedex.ui.callback.PokedexCallback" />
+        <variable
             name="pokedexVM"
             type="com.kabos.pokedex.ui.viewModel.PokedexViewModel" />
     </data>
@@ -20,7 +23,8 @@
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="@id/guideline_begin"
             app:layout_constraintEnd_toEndOf="@id/guideline_end"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="parent"
+            android:onClick="@{() -> callback.navigateRegionFragment()}">
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

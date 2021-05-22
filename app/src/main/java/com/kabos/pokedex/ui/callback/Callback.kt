@@ -8,3 +8,8 @@ import dagger.hilt.android.AndroidEntryPoint
 interface RegionCallback {
     fun onClick(region: Region)
 }
+
+//pokedex
+interface PokedexCallback {
+    fun navigateRegionFragment()
+}

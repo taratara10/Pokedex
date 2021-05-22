@@ -9,6 +9,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.kabos.pokedex.R
 import com.kabos.pokedex.databinding.FragmentPokedexBinding
+import com.kabos.pokedex.ui.callback.PokedexCallback
 import com.kabos.pokedex.ui.viewModel.PokedexViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -42,6 +43,12 @@ class PokedexFragment: Fragment(){
             pokedexVM = pokedexViewModel
             rvPokedex.adapter = pokedexAdapter
             lifecycleOwner = this@PokedexFragment
+            callback = object : PokedexCallback {
+                override fun navigateRegionFragment() {
+                    val action = PokedexFragmentDirections.actionNavigationPokedexToNavigationRegionSelect(isBackStack = true)
+                    findNavController().navigate(action)
+                }
+            }
         }
 
         val action = PokedexFragmentDirections.actionNavigationPokedexToNavigationRegionSelect(true)
