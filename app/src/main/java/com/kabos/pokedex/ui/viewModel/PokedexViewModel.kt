@@ -1,6 +1,7 @@
 package com.kabos.pokedex.ui.viewModel
 
 import android.util.Log
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -21,7 +22,7 @@ class PokedexViewModel @Inject constructor(private val repository: PokemonReposi
     //todo PokeMutableListの中に1~8のLiveDataMutableListを格納する
     var pokemonList:MutableLiveData<List<Pokemon>> = MutableLiveData()
     var dialogPokemon: Pokemon? = null
-    var currentRegion: Region = Region.Kanto
+    var currentRegion: MutableLiveData<Region> = MutableLiveData(Region.Kanto)
 
     var pokemonListOne: MutableList<Pokemon> = mutableListOf() //Kanto
     var pokemonListTwo: MutableList<Pokemon> = mutableListOf()
@@ -46,7 +47,7 @@ class PokedexViewModel @Inject constructor(private val repository: PokemonReposi
     }
 
     fun updateRegion(region: Region) {
-        currentRegion = region
+        currentRegion.postValue(region)
     }
 
     fun updateDialogPokemon(pokemon:Pokemon) {

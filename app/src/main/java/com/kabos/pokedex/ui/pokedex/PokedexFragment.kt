@@ -34,6 +34,10 @@ class PokedexFragment: Fragment(){
             pokedexAdapter.submitList(list)
         })
 
+        pokedexViewModel.currentRegion.observe(viewLifecycleOwner, {
+            //todo region変更時にリストを更新する処理
+        })
+
         binding.apply {
             rvPokedex.adapter = pokedexAdapter
             lifecycleOwner = this@PokedexFragment
