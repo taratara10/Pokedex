@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.kabos.pokedex.model.Pokemon
 import com.kabos.pokedex.model.PokemonInfo
 import com.kabos.pokedex.model.PokemonSpecies
+import com.kabos.pokedex.model.Region
 import com.kabos.pokedex.repository.PokemonRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.*
@@ -20,6 +21,7 @@ class PokedexViewModel @Inject constructor(private val repository: PokemonReposi
     //todo PokeMutableListの中に1~8のLiveDataMutableListを格納する
     var pokemonList:MutableLiveData<List<Pokemon>> = MutableLiveData()
     var dialogPokemon: Pokemon? = null
+    var region: Region = Region.Kanto
 
     var pokemonListOne: MutableList<Pokemon> = mutableListOf() //Kanto
     var pokemonListTwo: MutableList<Pokemon> = mutableListOf()

@@ -4,7 +4,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-
+        <variable
+            name="region"
+            type="com.kabos.pokedex.model.Region" />
+        <variable
+            name="callback"
+            type="com.kabos.pokedex.ui.callback.RegionCallback" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -25,8 +30,6 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <!--  Kanto  -->
-
-
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/dialog_kanto"
             android:layout_width="160dp"
@@ -38,7 +41,8 @@
             app:layout_constraintEnd_toStartOf="@+id/guideline_end2"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/guideline_begin"
-            app:layout_constraintTop_toBottomOf="@+id/dialog_title">
+            app:layout_constraintTop_toBottomOf="@+id/dialog_title"
+            android:onClick="@{() -> callback.onClick(region.Kanto)}">
 
             <TextView
                 android:id="@+id/dialog_kanto_number"
