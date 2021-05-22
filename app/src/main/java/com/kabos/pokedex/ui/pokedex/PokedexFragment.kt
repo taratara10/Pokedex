@@ -43,5 +43,7 @@ class PokedexFragment: Fragment(){
             lifecycleOwner = this@PokedexFragment
         }
 
+        val action = PokedexFragmentDirections.actionNavigationPokedexToNavigationRegionSelect(true)
+
     }
 }
