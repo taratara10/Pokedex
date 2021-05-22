@@ -25,8 +25,6 @@ class DialogRegionSelectFragment: DialogFragment() {
 
     private lateinit var binding: DialogRegionSelectBinding
 
-    //viewmodel
-
     val pokedexViewModel: PokedexViewModel by activityViewModels()
     private val pokedexFragmentArgs: PokedexFragmentArgs by navArgs()
 
@@ -45,6 +43,7 @@ class DialogRegionSelectFragment: DialogFragment() {
                     findNavController().popBackStack()
                 }
                 //todo  Add buzzer and choices navigation
+                //isBackStack をfalseでリセットしないと、Fragment増えた時にバグりそう
 
             }
         }
