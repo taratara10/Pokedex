@@ -1,6 +1,6 @@
 package com.kabos.pokedex.model
 
-enum class Region(val start: Int, end: Int, name: String) {
+enum class Region(val start: Int, val end: Int, val regionName: String) {
     Kanto(1,151, "カントー"),//Red,Green
     Johto(152,251, "ジョウト"), //2 HGSS
     Hoenn(252,386,"ホウエン"), //3 Ruby,Sapphire

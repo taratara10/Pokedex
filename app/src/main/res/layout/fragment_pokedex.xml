@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+        <variable
+            name="pokedexVM"
+            type="com.kabos.pokedex.ui.viewModel.PokedexViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -20,12 +22,11 @@
             app:layout_constraintEnd_toEndOf="@id/guideline_end"
             app:layout_constraintTop_toTopOf="parent">
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="aaaaaaaaaaaaaaaaa"
+                android:text="@{pokedexVM.currentRegion.regionName}"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:listitem="カントー▼"
                 />
         </androidx.constraintlayout.widget.ConstraintLayout>
 

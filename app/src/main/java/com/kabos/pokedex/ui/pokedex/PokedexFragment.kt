@@ -39,6 +39,7 @@ class PokedexFragment: Fragment(){
         })
 
         binding.apply {
+            pokedexVM = pokedexViewModel
             rvPokedex.adapter = pokedexAdapter
             lifecycleOwner = this@PokedexFragment
         }
