@@ -21,7 +21,7 @@ class PokedexViewModel @Inject constructor(private val repository: PokemonReposi
     //todo PokeMutableListの中に1~8のLiveDataMutableListを格納する
     var pokemonList:MutableLiveData<List<Pokemon>> = MutableLiveData()
     var dialogPokemon: Pokemon? = null
-    var region: Region = Region.Kanto
+    var currentRegion: Region = Region.Kanto
 
     var pokemonListOne: MutableList<Pokemon> = mutableListOf() //Kanto
     var pokemonListTwo: MutableList<Pokemon> = mutableListOf()
@@ -43,6 +43,10 @@ class PokedexViewModel @Inject constructor(private val repository: PokemonReposi
     private fun selectCountry(){
         //when 1-> kanto とかで、MainLiveDataにセット
 
+    }
+
+    fun updateRegion(region: Region) {
+        currentRegion = region
     }
 
     fun updateDialogPokemon(pokemon:Pokemon) {
