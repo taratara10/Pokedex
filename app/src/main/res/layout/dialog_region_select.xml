@@ -486,7 +486,7 @@
                 app:layout_constraintEnd_toEndOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <!-- カロス -->
+        <!-- ガラル -->
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/dialog_galar"
             android:layout_width="0dp"
@@ -494,7 +494,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="16dp"
             android:background="@drawable/shape_rounded_corner"
-            android:onClick="@{() -> callback.onClick(region.Kalos)}"
+            android:onClick="@{() -> callback.onClick(region.Galar)}"
             app:layout_constraintDimensionRatio="w,"
             app:layout_constraintEnd_toStartOf="@+id/guideline_end"
             app:layout_constraintStart_toStartOf="@+id/guideline_end2"
@@ -505,7 +505,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="@{@string/region_number(region.Kalos.start,region.Kalos.end)}"
+                android:text="@{@string/region_number(region.Galar.start,region.Galar.end)}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -516,7 +516,7 @@
                 android:layout_width="98dp"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="@{region.Kalos.regionName}"
+                android:text="@{region.Galar.regionName}"
                 android:textSize="20sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
