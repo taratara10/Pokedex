@@ -33,8 +33,9 @@ class PokedexViewModel @Inject constructor(private val repository: PokemonReposi
     var pokemonListSeven: MutableList<Pokemon> = mutableListOf()
     var pokemonListEight: MutableList<Pokemon> = mutableListOf()
 
-    var pokemonNumber:Int = 1
-
+    var currentNumber:Int = 1
+    var startNumber:Int = 1
+    var endNumber: Int = 151
     //country毎にfetchしたやつをMutableListで保持する
 
     init {
@@ -47,6 +48,9 @@ class PokedexViewModel @Inject constructor(private val repository: PokemonReposi
         if (currentRegion.value == region) return
         else {
             currentRegion.postValue(region)
+            startNumber = region.start
+            endNumber = region.end
+            currentNumber = startNumber
             getPokemonList()
         }
     }
@@ -59,11 +63,10 @@ class PokedexViewModel @Inject constructor(private val repository: PokemonReposi
 
     fun getPokemonList()= viewModelScope.launch {
 
-        //regionからpokemonNumをセットする処理
 
 
         //if (list.isEmpty()) -> forループで取得
-        for (id in pokemonNumber..pokemonNumber + 5) {
+        for (id in currentNumber..currentNumber + 5) {
             val pokemonInfo = getPokemonInfo(id)
             val pokemonSpecies = getPokemonSpecies(id)
             val pokemon = repository.mergePokemonData(
@@ -73,7 +76,7 @@ class PokedexViewModel @Inject constructor(private val repository: PokemonReposi
 
             pokemonListOne.add(pokemon)
         }
-        pokemonNumber += 6
+        currentNumber += 6
         pokemonList.postValue(pokemonListOne)
     }
 
