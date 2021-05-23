@@ -68,13 +68,13 @@ class PokedexViewModel @Inject constructor(private val repository: PokemonReposi
                             pokemonInfo.await() as PokemonInfo,
                             pokemonSpecies.await() as PokemonSpecies
                             )
-            switchPokemonListByRegion(currentRegion.value!!).add(pokemon)
+            getListByRegion(currentRegion.value!!).add(pokemon)
             currentNumber += 1
         }
-        pokemonList.postValue(listKanto)
+        pokemonList.postValue(getListByRegion(currentRegion.value!!))
     }
 
-    suspend fun getPokemonInfo(id: Int): Deferred<Any?> = withContext(Dispatchers.IO) {
+    private suspend fun getPokemonInfo(id: Int): Deferred<Any?> = withContext(Dispatchers.IO) {
         async {
             try {
                 val request = repository.getPokemonInfoById(id)
@@ -85,7 +85,7 @@ class PokedexViewModel @Inject constructor(private val repository: PokemonReposi
         }
     }
 
-    suspend fun getPokemonSpecies(id: Int): Deferred<Any?> = withContext(Dispatchers.IO) {
+    private suspend fun getPokemonSpecies(id: Int): Deferred<Any?> = withContext(Dispatchers.IO) {
         async {
             try {
                 val request = repository.getPokemonSpeciesById(id)
@@ -96,7 +96,7 @@ class PokedexViewModel @Inject constructor(private val repository: PokemonReposi
         }
     }
 
-    private fun switchPokemonListByRegion(region: Region): MutableList<Pokemon> {
+    private fun getListByRegion(region: Region): MutableList<Pokemon> {
         return when(region){
             Region.Kanto -> listKanto
             Region.Johto -> listJohto
