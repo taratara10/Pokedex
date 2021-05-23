@@ -44,6 +44,7 @@ class PokedexViewModel @Inject constructor(private val repository: PokemonReposi
         //regionが異なる場合は、updateしてlistも更新する
         if (currentRegion.value == region) return
         else {
+            //todo stop getPokemonList()
             currentRegion.postValue(region)
             regionStartNumber = region.start
             regionEndNumber = region.end
@@ -57,7 +58,7 @@ class PokedexViewModel @Inject constructor(private val repository: PokemonReposi
     }
 
     fun getPokemonList()= viewModelScope.launch {
-
+        //todo save currentNum each region, also save recyclerView position
         //pokemonListがLiveDataで直接addできないので、一旦listRegionにaddして最後にpost
         for (i in 1..5) {
             if (currentNumber <= regionEndNumber){
