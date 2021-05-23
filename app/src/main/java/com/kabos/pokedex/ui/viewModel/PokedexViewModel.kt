@@ -1,7 +1,5 @@
 package com.kabos.pokedex.ui.viewModel
 
-import android.util.Log
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -12,7 +10,6 @@ import com.kabos.pokedex.model.Region
 import com.kabos.pokedex.repository.PokemonRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.*
-import retrofit2.Response
 import javax.inject.Inject
 
 @HiltViewModel
@@ -24,14 +21,14 @@ class PokedexViewModel @Inject constructor(private val repository: PokemonReposi
     var dialogPokemon: Pokemon? = null
     var currentRegion: MutableLiveData<Region> = MutableLiveData(Region.Kanto)
 
-    var pokemonListOne: MutableList<Pokemon> = mutableListOf() //Kanto
-    var pokemonListTwo: MutableList<Pokemon> = mutableListOf()
-    var pokemonListThree: MutableList<Pokemon> = mutableListOf()
-    var pokemonListFour: MutableList<Pokemon> = mutableListOf()
-    var pokemonListFive: MutableList<Pokemon> = mutableListOf()
-    var pokemonListSix: MutableList<Pokemon> = mutableListOf()
-    var pokemonListSeven: MutableList<Pokemon> = mutableListOf()
-    var pokemonListEight: MutableList<Pokemon> = mutableListOf()
+    var listKanto: MutableList<Pokemon> = mutableListOf()
+    var listJohto: MutableList<Pokemon> = mutableListOf()
+    var listHoenn: MutableList<Pokemon> = mutableListOf()
+    var listSinnoh: MutableList<Pokemon> = mutableListOf()
+    var listUnova: MutableList<Pokemon> = mutableListOf()
+    var listKalos: MutableList<Pokemon> = mutableListOf()
+    var listAlola: MutableList<Pokemon> = mutableListOf()
+    var listGalar: MutableList<Pokemon> = mutableListOf()
 
     var currentNumber:Int = 1
     var startNumber:Int = 1
@@ -63,21 +60,18 @@ class PokedexViewModel @Inject constructor(private val repository: PokemonReposi
 
     fun getPokemonList()= viewModelScope.launch {
 
-
-
         //if (list.isEmpty()) -> forループで取得
-        for (id in currentNumber..currentNumber + 5) {
-            val pokemonInfo = getPokemonInfo(id)
-            val pokemonSpecies = getPokemonSpecies(id)
+        for (i in 1..5) {
+            val pokemonInfo = getPokemonInfo(currentNumber)
+            val pokemonSpecies = getPokemonSpecies(currentNumber)
             val pokemon = repository.mergePokemonData(
                             pokemonInfo.await() as PokemonInfo,
                             pokemonSpecies.await() as PokemonSpecies
                             )
-
-            pokemonListOne.add(pokemon)
+            switchPokemonListByRegion(currentRegion.value!!).add(pokemon)
+            currentNumber += 1
         }
-        currentNumber += 6
-        pokemonList.postValue(pokemonListOne)
+        pokemonList.postValue(listKanto)
     }
 
     suspend fun getPokemonInfo(id: Int): Deferred<Any?> = withContext(Dispatchers.IO) {
@@ -99,6 +93,19 @@ class PokedexViewModel @Inject constructor(private val repository: PokemonReposi
             } catch (e: Exception) {
                 e.stackTrace
             }
+        }
+    }
+
+    private fun switchPokemonListByRegion(region: Region): MutableList<Pokemon> {
+        return when(region){
+            Region.Kanto -> listKanto
+            Region.Johto -> listJohto
+            Region.Hoenn -> listHoenn
+            Region.Sinnoh -> listSinnoh
+            Region.Unova -> listUnova
+            Region.Kalos -> listKalos
+            Region.Alola -> listAlola
+            Region.Galar -> listGalar
         }
     }
 

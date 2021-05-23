@@ -53,7 +53,7 @@ class PokedexFragment: Fragment(){
 
     }
 
-
+//todo diffUtilが更新されてない
     private fun setupRecyclerView() {
         binding.rvPokedex.apply {
             val layout = LinearLayoutManager(activity)
