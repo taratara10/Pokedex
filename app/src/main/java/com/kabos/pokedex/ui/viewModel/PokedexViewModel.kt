@@ -30,9 +30,9 @@ class PokedexViewModel @Inject constructor(private val repository: PokemonReposi
     var listAlola: MutableList<Pokemon> = mutableListOf()
     var listGalar: MutableList<Pokemon> = mutableListOf()
 
-    var currentNumber:Int = 1
-    var startNumber:Int = 1
-    var endNumber: Int = 151
+    var currentNumber:Int = 1 //表示されるポケモンの図鑑番号
+    var regionStartNumber:Int = 1
+    var regionEndNumber: Int = 151
     //country毎にfetchしたやつをMutableListで保持する
 
     init {
@@ -45,9 +45,9 @@ class PokedexViewModel @Inject constructor(private val repository: PokemonReposi
         if (currentRegion.value == region) return
         else {
             currentRegion.postValue(region)
-            startNumber = region.start
-            endNumber = region.end
-            currentNumber = startNumber
+            regionStartNumber = region.start
+            regionEndNumber = region.end
+            currentNumber = regionStartNumber
             getPokemonList()
         }
     }
@@ -56,20 +56,20 @@ class PokedexViewModel @Inject constructor(private val repository: PokemonReposi
         dialogPokemon = pokemon
     }
 
-
-
     fun getPokemonList()= viewModelScope.launch {
 
-        //if (list.isEmpty()) -> forループで取得
+        //pokemonListがLiveDataで直接addできないので、一旦listRegionにaddして最後にpost
         for (i in 1..5) {
-            val pokemonInfo = getPokemonInfo(currentNumber)
-            val pokemonSpecies = getPokemonSpecies(currentNumber)
-            val pokemon = repository.mergePokemonData(
-                            pokemonInfo.await() as PokemonInfo,
-                            pokemonSpecies.await() as PokemonSpecies
-                            )
-            getListByRegion(currentRegion.value!!).add(pokemon)
-            currentNumber += 1
+            if (currentNumber <= regionEndNumber){
+                val pokemonInfo = getPokemonInfo(currentNumber)
+                val pokemonSpecies = getPokemonSpecies(currentNumber)
+                val pokemon = repository.mergePokemonData(
+                        pokemonInfo.await() as PokemonInfo,
+                        pokemonSpecies.await() as PokemonSpecies
+                )
+                getListByRegion(currentRegion.value!!).add(pokemon)
+                currentNumber += 1
+            }
         }
         pokemonList.postValue(getListByRegion(currentRegion.value!!))
     }
