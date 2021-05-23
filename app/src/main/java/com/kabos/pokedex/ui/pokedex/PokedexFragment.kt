@@ -39,10 +39,6 @@ class PokedexFragment: Fragment(){
             pokedexAdapter.submitList(list)
         })
 
-        pokedexViewModel.currentRegion.observe(viewLifecycleOwner, {
-            //todo region変更時にリストを更新する処理
-        })
-
         binding.apply {
             setupRecyclerView()
             pokedexVM = pokedexViewModel
@@ -57,7 +53,8 @@ class PokedexFragment: Fragment(){
 
     }
 
-    fun setupRecyclerView() {
+
+    private fun setupRecyclerView() {
         binding.rvPokedex.apply {
             val layout = LinearLayoutManager(activity)
             adapter = pokedexAdapter

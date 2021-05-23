@@ -41,10 +41,6 @@ class PokedexViewModel @Inject constructor(private val repository: PokemonReposi
         getPokemonList()
     }
 
-    private fun selectCountry(){
-        //when 1-> kanto とかで、MainLiveDataにセット
-
-    }
 
     fun updateRegion(region: Region) {
         currentRegion.postValue(region)
@@ -66,6 +62,7 @@ class PokedexViewModel @Inject constructor(private val repository: PokemonReposi
 
             pokemonListOne.add(pokemon)
         }
+        pokemonNumber += 6
         pokemonList.postValue(pokemonListOne)
     }
 
