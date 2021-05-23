@@ -1,14 +1,19 @@
 package com.kabos.pokedex.ui.pokedex
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.kabos.pokedex.R
 import com.kabos.pokedex.databinding.FragmentPokedexBinding
+import com.kabos.pokedex.ui.callback.InfiniteScrollListener
+import com.kabos.pokedex.ui.callback.PokedexCallback
 import com.kabos.pokedex.ui.viewModel.PokedexViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -35,9 +40,34 @@ class PokedexFragment: Fragment(){
         })
 
         binding.apply {
-            rvPokedex.adapter = pokedexAdapter
+            setupRecyclerView()
+            pokedexVM = pokedexViewModel
             lifecycleOwner = this@PokedexFragment
+            callback = object : PokedexCallback {
+                override fun navigateRegionFragment() {
+                    val action = PokedexFragmentDirections.actionNavigationPokedexToNavigationRegionSelect(isBackStack = true)
+                    findNavController().navigate(action)
+                }
+            }
         }
 
     }
+
+//todo diffUtilが更新されてない
+    private fun setupRecyclerView() {
+        binding.rvPokedex.apply {
+            val layout = LinearLayoutManager(activity)
+            adapter = pokedexAdapter
+            layoutManager = layout
+            clearOnScrollListeners()
+            addOnScrollListener(InfiniteScrollListener(layout) {
+                pokedexViewModel.getPokemonList()//todo 実装によって修正
+            })
+        }
+    }
+
+
+
 }
+
+

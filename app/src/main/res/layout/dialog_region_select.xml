@@ -1,0 +1,585 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="region"
+            type="com.kabos.pokedex.model.Region" />
+        <variable
+            name="callback"
+            type="com.kabos.pokedex.ui.callback.RegionCallback" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/dialog_bg">
+
+        <TextView
+            android:id="@+id/dialog_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="ちほう　を　えらぶ"
+            android:textColor="@color/white"
+            android:textSize="25sp"
+            app:layout_constraintEnd_toStartOf="@id/guideline_end"
+            app:layout_constraintStart_toStartOf="@id/guideline_begin"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <!--  カントー  -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/dialog_kanto"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="36dp"
+            android:layout_marginRight="8dp"
+            android:background="@drawable/shape_rounded_corner"
+            android:onClick="@{() -> callback.onClick(region.Kanto)}"
+            app:layout_constraintDimensionRatio="w,"
+            app:layout_constraintEnd_toStartOf="@+id/guideline_end2"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/guideline_begin"
+            app:layout_constraintTop_toBottomOf="@+id/dialog_title">
+
+            <TextView
+                android:id="@+id/dialog_kanto_number"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@{@string/region_number(region.Kanto.start,region.Kanto.end)}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="No.001~151"/>
+
+            <TextView
+                android:id="@+id/dialog_kanto_title"
+                android:layout_width="98dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@{region.Kanto.regionName}"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/dialog_kanto_number"
+                tools:text="カントー"/>
+
+            <ImageView
+                android:id="@+id/iv_kanto"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:src="@drawable/_1"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/dialog_kanto_title" />
+
+            <ImageView
+                android:id="@+id/iv_kanto2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/_4"
+                app:layout_constraintBottom_toBottomOf="@+id/iv_kanto"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <ImageView
+                android:id="@+id/iv_kanto3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/_7"
+                app:layout_constraintBottom_toBottomOf="@+id/iv_kanto"
+                app:layout_constraintEnd_toEndOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <!-- ジョウト -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/dialog_johto"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="84dp"
+            android:background="@drawable/shape_rounded_corner"
+            android:onClick="@{() -> callback.onClick(region.Johto)}"
+            app:layout_constraintDimensionRatio="w,"
+            app:layout_constraintEnd_toStartOf="@+id/guideline_end"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/guideline_end2"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/dialog_johto_number"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@{@string/region_number(region.Johto.start,region.Johto.end)}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="No.001~151" />
+
+            <TextView
+                android:id="@+id/dialog_johto_title"
+                android:layout_width="98dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@{region.Johto.regionName}"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/dialog_johto_number"
+                tools:text="ジョウト" />
+
+            <ImageView
+                android:id="@+id/iv_johto"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:src="@drawable/_152"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/dialog_johto_title" />
+
+            <ImageView
+                android:id="@+id/iv_johto2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/_155"
+                app:layout_constraintBottom_toBottomOf="@+id/iv_johto"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <ImageView
+                android:id="@+id/iv_johto3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/_158"
+                app:layout_constraintBottom_toBottomOf="@+id/iv_johto"
+                app:layout_constraintEnd_toEndOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <!-- ホウエン -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/dialog_hoenn"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/shape_rounded_corner"
+            android:onClick="@{() -> callback.onClick(region.Hoenn)}"
+            app:layout_constraintDimensionRatio="w,"
+            app:layout_constraintEnd_toStartOf="@+id/guideline_end2"
+            app:layout_constraintStart_toStartOf="@+id/guideline_begin"
+            app:layout_constraintTop_toBottomOf="@+id/dialog_kanto">
+
+            <TextView
+                android:id="@+id/dialog_hoenn_number"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@{@string/region_number(region.Hoenn.start,region.Hoenn.end)}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="No.001~151" />
+
+            <TextView
+                android:id="@+id/dialog_hoenn_title"
+                android:layout_width="98dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@{region.Hoenn.regionName}"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/dialog_hoenn_number"
+                tools:text="ホウエン" />
+
+            <ImageView
+                android:id="@+id/iv_hoenn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:src="@drawable/_252"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/dialog_hoenn_title" />
+
+            <ImageView
+                android:id="@+id/iv_hoenn2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/_255"
+                app:layout_constraintBottom_toBottomOf="@+id/iv_hoenn"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <ImageView
+                android:id="@+id/iv_hoenn3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/_258"
+                app:layout_constraintBottom_toBottomOf="@+id/iv_hoenn"
+                app:layout_constraintEnd_toEndOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <!-- シンオウ -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/dialog_sinnoh"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/shape_rounded_corner"
+            android:onClick="@{() -> callback.onClick(region.Sinnoh)}"
+            app:layout_constraintDimensionRatio="w,"
+            app:layout_constraintEnd_toStartOf="@+id/guideline_end"
+            app:layout_constraintStart_toStartOf="@+id/guideline_end2"
+            app:layout_constraintTop_toBottomOf="@+id/dialog_johto">
+
+            <TextView
+                android:id="@+id/dialog_sinnoh_number"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@{@string/region_number(region.Sinnoh.start,region.Sinnoh.end)}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="No.001~151" />
+
+            <TextView
+                android:id="@+id/dialog_sinnoh_title"
+                android:layout_width="98dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@{region.Sinnoh.regionName}"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/dialog_sinnoh_number"
+                tools:text="シンオウ" />
+
+            <ImageView
+                android:id="@+id/iv_sinnoh"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:src="@drawable/_387"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/dialog_sinnoh_title" />
+
+            <ImageView
+                android:id="@+id/iv_sinnoh2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/_390"
+                app:layout_constraintBottom_toBottomOf="@+id/iv_sinnoh"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <ImageView
+                android:id="@+id/iv_sinnoh3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/_393"
+                app:layout_constraintBottom_toBottomOf="@+id/iv_sinnoh"
+                app:layout_constraintEnd_toEndOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <!-- イッシュ -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/dialog_unova"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/shape_rounded_corner"
+            android:onClick="@{() -> callback.onClick(region.Unova)}"
+            app:layout_constraintDimensionRatio="w,"
+            app:layout_constraintEnd_toStartOf="@+id/guideline_end2"
+            app:layout_constraintStart_toStartOf="@+id/guideline_begin"
+            app:layout_constraintTop_toBottomOf="@+id/dialog_hoenn">
+
+            <TextView
+                android:id="@+id/dialog_unova_number"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@{@string/region_number(region.Unova.start,region.Unova.end)}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="No.001~151" />
+
+            <TextView
+                android:id="@+id/dialog_unova_title"
+                android:layout_width="98dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@{region.Unova.regionName}"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/dialog_unova_number"
+                tools:text="イッシュ" />
+
+            <ImageView
+                android:id="@+id/iv_unova"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:src="@drawable/_495"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/dialog_unova_title" />
+
+            <ImageView
+                android:id="@+id/iv_unova2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/_498"
+                app:layout_constraintBottom_toBottomOf="@+id/iv_unova"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <ImageView
+                android:id="@+id/iv_unova3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/_501"
+                app:layout_constraintBottom_toBottomOf="@+id/iv_unova"
+                app:layout_constraintEnd_toEndOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <!-- カロス -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/dialog_kalos"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/shape_rounded_corner"
+            android:onClick="@{() -> callback.onClick(region.Kalos)}"
+            app:layout_constraintDimensionRatio="w,"
+            app:layout_constraintEnd_toStartOf="@+id/guideline_end"
+            app:layout_constraintStart_toStartOf="@+id/guideline_end2"
+            app:layout_constraintTop_toBottomOf="@+id/dialog_sinnoh">
+
+            <TextView
+                android:id="@+id/dialog_kalos_number"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@{@string/region_number(region.Kalos.start,region.Kalos.end)}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="No.001~151" />
+
+            <TextView
+                android:id="@+id/dialog_kalos_title"
+                android:layout_width="98dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@{region.Kalos.regionName}"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/dialog_kalos_number"
+                tools:text="カロス" />
+
+            <ImageView
+                android:id="@+id/iv_kalos"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:src="@drawable/_650"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/dialog_kalos_title" />
+
+            <ImageView
+                android:id="@+id/iv_kalos2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/_653"
+                app:layout_constraintBottom_toBottomOf="@+id/iv_kalos"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <ImageView
+                android:id="@+id/iv_kalos3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/_656"
+                app:layout_constraintBottom_toBottomOf="@+id/iv_kalos"
+                app:layout_constraintEnd_toEndOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <!-- イッシュ -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/dialog_alola"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/shape_rounded_corner"
+            android:onClick="@{() -> callback.onClick(region.Alola)}"
+            app:layout_constraintDimensionRatio="w,"
+            app:layout_constraintEnd_toStartOf="@+id/guideline_end2"
+            app:layout_constraintStart_toStartOf="@+id/guideline_begin"
+            app:layout_constraintTop_toBottomOf="@+id/dialog_unova">
+
+            <TextView
+                android:id="@+id/dialog_alola_number"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@{@string/region_number(region.Alola.start,region.Alola.end)}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="No.001~151" />
+
+            <TextView
+                android:id="@+id/dialog_alola_title"
+                android:layout_width="98dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@{region.Alola.regionName}"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/dialog_alola_number"
+                tools:text="アローラ" />
+
+            <ImageView
+                android:id="@+id/iv_alola"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:src="@drawable/_722"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/dialog_alola_title" />
+
+            <ImageView
+                android:id="@+id/iv_alola2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/_725"
+                app:layout_constraintBottom_toBottomOf="@+id/iv_alola"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <ImageView
+                android:id="@+id/iv_alola3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/_728"
+                app:layout_constraintBottom_toBottomOf="@+id/iv_alola"
+                app:layout_constraintEnd_toEndOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <!-- ガラル -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/dialog_galar"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/shape_rounded_corner"
+            android:onClick="@{() -> callback.onClick(region.Galar)}"
+            app:layout_constraintDimensionRatio="w,"
+            app:layout_constraintEnd_toStartOf="@+id/guideline_end"
+            app:layout_constraintStart_toStartOf="@+id/guideline_end2"
+            app:layout_constraintTop_toBottomOf="@+id/dialog_kalos">
+
+            <TextView
+                android:id="@+id/dialog_galar_number"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@{@string/region_number(region.Galar.start,region.Galar.end)}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="No.001~151" />
+
+            <TextView
+                android:id="@+id/dialog_galar_title"
+                android:layout_width="98dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@{region.Galar.regionName}"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/dialog_galar_number"
+                tools:text="ガラル" />
+
+            <ImageView
+                android:id="@+id/iv_galar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:src="@drawable/_810"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/dialog_galar_title" />
+
+            <ImageView
+                android:id="@+id/iv_galar2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/_813"
+                app:layout_constraintBottom_toBottomOf="@+id/iv_galar"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <ImageView
+                android:id="@+id/iv_galar3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/_816"
+                app:layout_constraintBottom_toBottomOf="@+id/iv_galar"
+                app:layout_constraintEnd_toEndOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+
+
+
+
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_begin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.1" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_end"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.9" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_end2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.5" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

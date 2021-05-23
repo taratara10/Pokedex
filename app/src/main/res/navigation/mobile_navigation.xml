@@ -5,15 +5,23 @@
     android:id="@+id/mobile_navigation"
     app:startDestination="@+id/navigation_pokedex">
 
+
     <fragment
         android:id="@+id/navigation_pokedex"
         android:name="com.kabos.pokedex.ui.pokedex.PokedexFragment"
         android:label="pokedex"
         tools:layout="@layout/fragment_pokedex" >
 
+        <argument
+            android:name="isBackStack"
+            app:argType="boolean"
+            android:defaultValue="false"/>
         <action
             android:id="@+id/action_navigation_pokedex_to_navigation_pokedex_detail"
             app:destination="@id/navigation_pokedex_detail" />
+        <action
+            android:id="@+id/action_navigation_pokedex_to_navigation_region_select"
+            app:destination="@id/navigation_region_select" />
     </fragment>
 
     <dialog
@@ -23,15 +31,35 @@
         tools:layout="@layout/dialog_pokedex_detail">
     </dialog>
 
+    <dialog
+        android:id="@+id/navigation_region_select"
+        android:name="com.kabos.pokedex.ui.DialogRegionSelectFragment"
+        android:label="RegionSelect"
+        tools:layout="@layout/dialog_region_select">
+
+        <argument
+            android:name="isBackStack"
+            app:argType="boolean"
+            android:defaultValue="false"/>
+    </dialog>
+
     <fragment
         android:id="@+id/navigation_four_choices"
         android:name="com.kabos.pokedex.ui.fourChoicesQuiz.FourChoicesMainFragment"
         android:label="FourChoices"
-        tools:layout="@layout/fragment_four_choices" />
+        tools:layout="@layout/fragment_four_choices" >
+        <action
+            android:id="@+id/action_navigation_four_choices_to_navigation_region_select"
+            app:destination="@id/navigation_region_select" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_buzzer"
         android:name="com.kabos.pokedex.ui.buzzerQuiz.BuzzerMainFragment"
         android:label="Buzzer"
-        tools:layout="@layout/fragment_buzzer" />
+        tools:layout="@layout/fragment_buzzer" >
+        <action
+            android:id="@+id/action_navigation_buzzer_to_navigation_region_select"
+            app:destination="@id/navigation_region_select" />
+    </fragment>
 </navigation>

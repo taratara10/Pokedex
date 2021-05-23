@@ -4,7 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+        <variable
+            name="callback"
+            type="com.kabos.pokedex.ui.callback.PokedexCallback" />
+        <variable
+            name="pokedexVM"
+            type="com.kabos.pokedex.ui.viewModel.PokedexViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -12,14 +17,22 @@
         android:layout_height="match_parent"
         tools:context=".ui.pokedex.PokedexFragment">
 
-        <Spinner
-            android:id="@+id/sp_pokedex"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/pokedex_region_select"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            app:layout_constraintEnd_toStartOf="@+id/guideline_end"
-            app:layout_constraintStart_toStartOf="@+id/guideline_begin"
+            app:layout_constraintStart_toStartOf="@id/guideline_begin"
+            app:layout_constraintEnd_toEndOf="@id/guideline_end"
             app:layout_constraintTop_toTopOf="parent"
-            tools:listitem="カントー" />
+            android:onClick="@{() -> callback.navigateRegionFragment()}">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@{pokedexVM.currentRegion.regionName}"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_pokedex"
@@ -28,7 +41,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/guideline_end"
             app:layout_constraintStart_toStartOf="@id/guideline_begin"
-            app:layout_constraintTop_toBottomOf="@id/sp_pokedex"
+            app:layout_constraintTop_toBottomOf="@id/pokedex_region_select"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             tools:listitem="@layout/adapter_pokedex" />
 
