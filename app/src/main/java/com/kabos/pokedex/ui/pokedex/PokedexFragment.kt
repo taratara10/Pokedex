@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.kabos.pokedex.R
 import com.kabos.pokedex.databinding.FragmentPokedexBinding
+import com.kabos.pokedex.ui.callback.InfiniteScrollListener
 import com.kabos.pokedex.ui.callback.PokedexCallback
 import com.kabos.pokedex.ui.viewModel.PokedexViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -43,8 +44,8 @@ class PokedexFragment: Fragment(){
         })
 
         binding.apply {
+            setupRecyclerView()
             pokedexVM = pokedexViewModel
-            rvPokedex.adapter = pokedexAdapter
             lifecycleOwner = this@PokedexFragment
             callback = object : PokedexCallback {
                 override fun navigateRegionFragment() {
@@ -54,9 +55,19 @@ class PokedexFragment: Fragment(){
             }
         }
 
-
     }
 
+    fun setupRecyclerView() {
+        binding.rvPokedex.apply {
+            val layout = LinearLayoutManager(activity)
+            adapter = pokedexAdapter
+            layoutManager = layout
+            clearOnScrollListeners()
+            addOnScrollListener(InfiniteScrollListener(layout) {
+                pokedexViewModel.getPokemonList()//todo 実装によって修正
+            })
+        }
+    }
 
 
 
