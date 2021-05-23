@@ -13,3 +13,4 @@ interface RegionCallback {
 interface PokedexCallback {
     fun navigateRegionFragment()
 }
+
