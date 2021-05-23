@@ -43,14 +43,25 @@ class PokedexViewModel @Inject constructor(private val repository: PokemonReposi
 
 
     fun updateRegion(region: Region) {
-        currentRegion.postValue(region)
+        //regionが異なる場合は、updateしてlistも更新する
+        if (currentRegion.value == region) return
+        else {
+            currentRegion.postValue(region)
+            getPokemonList()
+        }
     }
 
     fun updateDialogPokemon(pokemon:Pokemon) {
         dialogPokemon = pokemon
     }
 
+
+
     fun getPokemonList()= viewModelScope.launch {
+
+        //regionからpokemonNumをセットする処理
+
+
         //if (list.isEmpty()) -> forループで取得
         for (id in pokemonNumber..pokemonNumber + 5) {
             val pokemonInfo = getPokemonInfo(id)
