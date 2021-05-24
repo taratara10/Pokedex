@@ -33,7 +33,8 @@ class PokedexViewModel @Inject constructor(private val repository: PokemonReposi
     var currentNumber:Int = 1 //表示されるポケモンの図鑑番号
     var regionStartNumber:Int = 1
     var regionEndNumber: Int = 151
-    //country毎にfetchしたやつをMutableListで保持する
+
+    var isLoading: Boolean = false
 
     init {
         getPokemonList()
@@ -60,6 +61,7 @@ class PokedexViewModel @Inject constructor(private val repository: PokemonReposi
     fun getPokemonList()= viewModelScope.launch {
         //todo save currentNum each region, also save recyclerView position
         //pokemonListがLiveDataで直接addできないので、一旦listRegionにaddして最後にpost
+        //isLoadingをいい感じにする　if で条件チェックをmece
         for (i in 1..5) {
             if (currentNumber <= regionEndNumber){
                 val pokemonInfo = getPokemonInfo(currentNumber)
