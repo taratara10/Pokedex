@@ -36,7 +36,10 @@ class PokedexFragment: Fragment(){
         super.onViewCreated(view, savedInstanceState)
 
         pokedexViewModel.pokemonList.observe(viewLifecycleOwner, {list ->
-            pokedexAdapter.submitList(list)
+            //DiffUtil hasn't store old data, so it cannot compare and update UI.
+            //we should store old data instance.
+            val newList = list.toList()
+            pokedexAdapter.submitList(newList)
         })
 
         binding.apply {
