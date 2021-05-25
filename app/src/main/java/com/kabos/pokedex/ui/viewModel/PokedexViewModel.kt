@@ -1,5 +1,6 @@
 package com.kabos.pokedex.ui.viewModel
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -61,26 +62,26 @@ class PokedexViewModel @Inject constructor(private val repository: PokemonReposi
 
     fun getPokemonList()= viewModelScope.launch {
         //todo save currentNum each region, also save recyclerView position
-
         //check loading
         if (isLoading)return@launch else isLoading = true
-
-        for (i in 1..5) {
-            //updateRegion()でisLoading = falseになると中断
-            if (currentNumber <= regionEndNumber && isLoading == true){
-                val pokemonInfo = getPokemonInfo(currentNumber)
-                val pokemonSpecies = getPokemonSpecies(currentNumber)
-                val pokemon = repository.mergePokemonData(
-                        pokemonInfo.await() as PokemonInfo,
-                        pokemonSpecies.await() as PokemonSpecies
-                )
-                //pokemonListがLiveDataで直接addできないので、一旦listRegionにaddして最後にpost
-                getListByRegion(currentRegion.value!!).add(pokemon)
-                currentNumber += 1
-                //todo wait みたいな待ち合わせ処理
-            }
+            val list = async{
+                for (i in 1..5) {
+                    //updateRegion()でisLoading = falseになると中断
+                    if (currentNumber <= regionEndNumber && isLoading == true){
+                        val pokemonInfo = getPokemonInfo(currentNumber)
+                        val pokemonSpecies = getPokemonSpecies(currentNumber)
+                        val pokemon = repository.mergePokemonData(
+                                pokemonInfo.await() as PokemonInfo,
+                                pokemonSpecies.await() as PokemonSpecies
+                        )
+                        //pokemonListがLiveDataで直接addできないので、一旦listRegionにaddして最後にpost
+                        getListByRegion(currentRegion.value!!).add(pokemon)
+                        currentNumber += 1
+                    }
+                }
+                return@async getListByRegion(currentRegion.value!!)
         }
-        pokemonList.postValue(getListByRegion(currentRegion.value!!))
+        pokemonList.postValue(list.await())
         isLoading = false
     }
 
