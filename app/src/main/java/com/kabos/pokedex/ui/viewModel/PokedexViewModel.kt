@@ -17,9 +17,9 @@ class PokedexViewModel @Inject constructor(private val repository: PokemonReposi
     : ViewModel(){
 
     //todo PokeMutableListの中に1~8のLiveDataMutableListを格納する
-    var pokemonList:MutableLiveData<List<Pokemon>> = MutableLiveData()
+    val pokemonList:MutableLiveData<List<Pokemon>> = MutableLiveData()
     var dialogPokemon: Pokemon? = null
-    var currentRegion: MutableLiveData<Region> = MutableLiveData(Region.Kanto)
+    val currentRegion: MutableLiveData<Region> = MutableLiveData(Region.Kanto)
 
     var listKanto: MutableList<Pokemon> = mutableListOf()
     var listJohto: MutableList<Pokemon> = mutableListOf()
@@ -46,6 +46,7 @@ class PokedexViewModel @Inject constructor(private val repository: PokemonReposi
         if (currentRegion.value == region) return
         else {
             //todo stop getPokemonList()
+                isLoading = false
             currentRegion.postValue(region)
             regionStartNumber = region.start
             regionEndNumber = region.end
@@ -61,7 +62,9 @@ class PokedexViewModel @Inject constructor(private val repository: PokemonReposi
     fun getPokemonList()= viewModelScope.launch {
         //todo save currentNum each region, also save recyclerView position
         //pokemonListがLiveDataで直接addできないので、一旦listRegionにaddして最後にpost
-        //isLoadingをいい感じにする　if で条件チェックをmece
+        if (isLoading)return@launch
+        isLoading = true
+
         for (i in 1..5) {
             if (currentNumber <= regionEndNumber){
                 val pokemonInfo = getPokemonInfo(currentNumber)
@@ -72,9 +75,11 @@ class PokedexViewModel @Inject constructor(private val repository: PokemonReposi
                 )
                 getListByRegion(currentRegion.value!!).add(pokemon)
                 currentNumber += 1
+                //todo wait みたいな処理
             }
         }
         pokemonList.postValue(getListByRegion(currentRegion.value!!))
+        isLoading = false
     }
 
     private suspend fun getPokemonInfo(id: Int): Deferred<Any?> = withContext(Dispatchers.IO) {
