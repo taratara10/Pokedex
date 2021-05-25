@@ -61,21 +61,23 @@ class PokedexViewModel @Inject constructor(private val repository: PokemonReposi
 
     fun getPokemonList()= viewModelScope.launch {
         //todo save currentNum each region, also save recyclerView position
-        //pokemonListがLiveDataで直接addできないので、一旦listRegionにaddして最後にpost
-        if (isLoading)return@launch
-        isLoading = true
+
+        //check loading
+        if (isLoading)return@launch else isLoading = true
 
         for (i in 1..5) {
-            if (currentNumber <= regionEndNumber){
+            //updateRegion()でisLoading = falseになると中断
+            if (currentNumber <= regionEndNumber && isLoading == true){
                 val pokemonInfo = getPokemonInfo(currentNumber)
                 val pokemonSpecies = getPokemonSpecies(currentNumber)
                 val pokemon = repository.mergePokemonData(
                         pokemonInfo.await() as PokemonInfo,
                         pokemonSpecies.await() as PokemonSpecies
                 )
+                //pokemonListがLiveDataで直接addできないので、一旦listRegionにaddして最後にpost
                 getListByRegion(currentRegion.value!!).add(pokemon)
                 currentNumber += 1
-                //todo wait みたいな処理
+                //todo wait みたいな待ち合わせ処理
             }
         }
         pokemonList.postValue(getListByRegion(currentRegion.value!!))
