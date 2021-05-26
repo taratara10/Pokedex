@@ -38,6 +38,7 @@ class DialogRegionSelectFragment: DialogFragment() {
         binding.callback = object :RegionCallback {
             override fun onClick(region: Region) {
                 //check navigation
+                //todo 毎回isBackStackってリセットされるのか？　よしなに初期化処理書く
                 if (pokedexFragmentArgs.isBackStack) {
                     pokedexViewModel.updateRegion(region)
                     findNavController().popBackStack()

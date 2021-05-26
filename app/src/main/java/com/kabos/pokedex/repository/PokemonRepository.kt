@@ -1,9 +1,15 @@
 package com.kabos.pokedex.repository
 
+import android.content.ContentValues.TAG
+import android.content.Context
+import android.net.ConnectivityManager
+import android.net.NetworkInfo
+import android.util.Log
 import com.kabos.pokedex.model.Pokemon
 import com.kabos.pokedex.model.PokemonInfo
 import com.kabos.pokedex.model.PokemonSpecies
 import retrofit2.Response
+import java.io.File
 import javax.inject.Inject
 
 class PokemonRepository @Inject constructor(private val pokeApiService: PokeApiService){
@@ -44,5 +50,4 @@ class PokemonRepository @Inject constructor(private val pokeApiService: PokeApiS
             type_two = info.types[1].type.name
         )
     }
-
 }

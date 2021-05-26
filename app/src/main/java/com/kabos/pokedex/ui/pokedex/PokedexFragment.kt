@@ -36,7 +36,9 @@ class PokedexFragment: Fragment(){
         super.onViewCreated(view, savedInstanceState)
 
         pokedexViewModel.pokemonList.observe(viewLifecycleOwner, {list ->
-            pokedexAdapter.submitList(list)
+            //DiffUtil hasn't store old data, so it cannot compare and update UI. we should store old data instance.
+            val newList = list.toList()
+            pokedexAdapter.submitList(newList)
         })
 
         binding.apply {
@@ -53,7 +55,6 @@ class PokedexFragment: Fragment(){
 
     }
 
-//todo diffUtilが更新されてない
     private fun setupRecyclerView() {
         binding.rvPokedex.apply {
             val layout = LinearLayoutManager(activity)
@@ -61,7 +62,7 @@ class PokedexFragment: Fragment(){
             layoutManager = layout
             clearOnScrollListeners()
             addOnScrollListener(InfiniteScrollListener(layout) {
-                pokedexViewModel.getPokemonList()//todo 実装によって修正
+                pokedexViewModel.getPokemonList()
             })
         }
     }
