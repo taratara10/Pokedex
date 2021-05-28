@@ -1,9 +1,13 @@
 package com.kabos.pokedex.di
 
+import android.app.Application
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
+import androidx.room.Room
 import com.bumptech.glide.Glide
+import com.kabos.pokedex.model.Pokemon
 import com.kabos.pokedex.repository.PokeApiService
+import com.kabos.pokedex.repository.PokemonDatabase
 import com.kabos.pokedex.repository.PokemonRepository
 import dagger.Module
 import dagger.Provides
@@ -27,6 +31,13 @@ object ApiModule {
                     .addConverterFactory(MoshiConverterFactory.create())
                     .build()
                     .create(PokeApiService::class.java)
+
+    @Singleton
+    @Provides
+    fun provideDatabase(app: Application): PokemonDatabase =
+            Room.databaseBuilder(app, PokemonDatabase::class.java, "pokemon_database")
+                    .fallbackToDestructiveMigration()
+                    .build()
 
     @Singleton
     @Provides

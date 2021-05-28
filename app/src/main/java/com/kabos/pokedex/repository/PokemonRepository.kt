@@ -12,7 +12,13 @@ import retrofit2.Response
 import java.io.File
 import javax.inject.Inject
 
-class PokemonRepository @Inject constructor(private val pokeApiService: PokeApiService){
+class PokemonRepository @Inject constructor(
+        private val pokeApiService: PokeApiService,
+        private val pokemonDb: PokemonDatabase){
+
+    private val pokemonDao = pokemonDb.pokemonDao()
+
+
 
     suspend fun getPokemonInfoById(id: Int):Response<PokemonInfo> =
         pokeApiService.getPokemonInfoById(id)
