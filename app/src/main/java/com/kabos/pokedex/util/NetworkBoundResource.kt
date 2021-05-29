@@ -1,38 +1,40 @@
 package com.kabos.pokedex.util
 
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.channelFlow
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.first
-import kotlinx.coroutines.launch
+import androidx.lifecycle.MutableLiveData
+import kotlinx.coroutines.coroutineScope
 
 
-inline fun <ResultType, RequestType> networkBoundResource(
-        crossinline query: () -> Flow<ResultType>,
-        crossinline fetch: suspend () -> RequestType,
-        crossinline saveFetchResult: suspend (RequestType) -> Unit,
-        crossinline shouldFetch: (ResultType) -> Boolean = { true },
-        crossinline onFetchSuccess: () -> Unit = { },
-        crossinline onFetchFailed: (Throwable) -> Unit = { }
-) = channelFlow {
-    val data = query().first()
+abstract class NetworkBoundResource<ResultType, RequestType> () {
+    //LiveData that represents the resource, implemented in the base class
+    val result: MutableLiveData<Resource<ResultType>> = MutableLiveData()
 
-    if (shouldFetch(data)) {
-        val loading = launch {
-            query().collect { send(Resource.Loading(it)) }
+    abstract suspend fun queryFromDb(): ResultType
+
+    abstract suspend fun fetchFromNetwork(): RequestType
+
+    abstract suspend fun saveFetchResult(fetchFromNetwork: RequestType): (RequestType) -> Unit
+
+    abstract fun shouldFetch(data: ResultType?): Boolean
+
+    abstract fun onFetchFailed(t: Throwable)
+
+
+    suspend fun execute() = coroutineScope {
+        val data = queryFromDb()
+        //Loadingってなぜいるの？？？わからん
+        //result.postValue(Resource.Loading(data))
+
+        if (shouldFetch(data)) {
+            try {
+                saveFetchResult(fetchFromNetwork())
+                result.postValue(Resource.Success(queryFromDb()))
+            } catch(t: Throwable) {
+                onFetchFailed(t)
+                result.postValue(Resource.Error(t, queryFromDb()))
+            }
+        } else {
+            result.postValue(Resource.Success(data))
         }
-
-        try {
-            saveFetchResult(fetch())
-            onFetchSuccess()
-            loading.cancel()
-            query().collect { send(Resource.Success(it)) }
-        } catch (t: Throwable) {
-            onFetchFailed(t)
-            loading.cancel()
-            query().collect { send(Resource.Error(t, it)) }
-        }
-    } else {
-        query().collect { send(Resource.Success(it)) }
     }
+
 }
