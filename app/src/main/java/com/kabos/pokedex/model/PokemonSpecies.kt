@@ -20,7 +20,7 @@ data class Name(
 data class FlavorTextEntry(
     val flavor_text: String,
     val language: Language,
-    val version: Version //x, sword
+    //val version: Version //x, sword
 )
 
 //ja-Hrkt
@@ -31,9 +31,10 @@ data class Language(
 //〇〇ポケモン
 data class Genera(
     val genus: String,
-    val language: LanguageX
+    val language: LanguageX?
 )
 
+//todo languageと統合したい
 data class LanguageX(
     val name: String,
     val url: String

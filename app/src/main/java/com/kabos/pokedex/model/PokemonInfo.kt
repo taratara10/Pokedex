@@ -18,8 +18,8 @@ data class Sprites (
     val front_shiny: String?
 )
 data class Types(
-    val slot: Int,
-    val type: Type
+    val type: Type,
+    val slot: Int?
 )
 
 data class Type(
