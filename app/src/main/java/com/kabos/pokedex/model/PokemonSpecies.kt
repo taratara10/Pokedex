@@ -1,13 +1,15 @@
 package com.kabos.pokedex.model
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 
+@Entity(tableName = "pokemon_species")
 data class PokemonSpecies(
-    val id: Int,
-    val names: List<Name>,
-    val flavor_text_entries: List<FlavorTextEntry>,
-    val genera: List<Genera>,
+        @PrimaryKey val id: Int,
+        val names: List<Name>,
+        val flavor_text_entries: List<FlavorTextEntry>,
+        val genera: List<Genera>,
 )
-
 
 //フシギダネ
 data class Name(
@@ -25,7 +27,6 @@ data class FlavorTextEntry(
 data class Language(
     val name: String
 )
-
 
 //〇〇ポケモン
 data class Genera(

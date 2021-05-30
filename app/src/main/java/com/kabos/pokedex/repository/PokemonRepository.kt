@@ -21,8 +21,13 @@ class PokemonRepository @Inject constructor(
 
     private val pokemonDao = pokemonDb.pokemonDao()
 
-    suspend fun getPokemonInfoById(id: Int):Response<PokemonInfo> =
-        pokeApiService.getPokemonInfoById(id)
+    suspend fun getPokemonInfoById(id: Int):Resource<Response<PokemonInfo>> =
+            object :NetworkBoundResource<PokemonInfo, Response<PokemonInfo>>{
+                override suspend fun queryFromDb(): PokemonInfo {
+                    pokemonDao.getPokemonById(id)
+                }
+            }
+
 
     suspend fun getPokemonSpeciesById(id: Int): Response<PokemonSpecies> =
         pokeApiService.getPokemonSpeciesById(id)
