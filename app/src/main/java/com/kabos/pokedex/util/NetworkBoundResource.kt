@@ -3,10 +3,9 @@ package com.kabos.pokedex.util
 import androidx.lifecycle.MutableLiveData
 import kotlinx.coroutines.coroutineScope
 
-
 abstract class NetworkBoundResource<ResultType, RequestType> () {
     //LiveData that represents the resource, implemented in the base class
-    val result: MutableLiveData<Resource<ResultType>> = MutableLiveData()
+    var result: Resource<ResultType>? = null
 
     abstract suspend fun queryFromDb(): ResultType
 
@@ -24,16 +23,16 @@ abstract class NetworkBoundResource<ResultType, RequestType> () {
         //Loadingってなぜいるの？？？わからん
         //result.postValue(Resource.Loading(data))
 
-        if (shouldFetch(data)) {
+        result = if (shouldFetch(data)) {
             try {
                 saveFetchResult(fetchFromNetwork())
-                result.postValue(Resource.Success(queryFromDb()))
+                Resource.Success(queryFromDb())
             } catch(t: Throwable) {
                 onFetchFailed(t)
-                result.postValue(Resource.Error(t, queryFromDb()))
+                Resource.Error(t, queryFromDb())
             }
         } else {
-            result.postValue(Resource.Success(data))
+            Resource.Success(data)
         }
     }
 

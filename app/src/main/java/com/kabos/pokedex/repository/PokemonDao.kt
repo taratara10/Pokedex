@@ -6,6 +6,6 @@ import com.kabos.pokedex.model.Pokemon
 
 @Dao
 interface PokemonDao {
-    @Query("SELECT * FROM pokemon WHERE id = :id")
+    @Query("SELECT * FROM pokemons WHERE id = :id")
     suspend fun getPokemonById(id:Int): Pokemon
 }

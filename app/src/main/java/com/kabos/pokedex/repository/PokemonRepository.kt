@@ -5,9 +5,12 @@ import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkInfo
 import android.util.Log
+import androidx.lifecycle.LiveData
 import com.kabos.pokedex.model.Pokemon
 import com.kabos.pokedex.model.PokemonInfo
 import com.kabos.pokedex.model.PokemonSpecies
+import com.kabos.pokedex.util.NetworkBoundResource
+import com.kabos.pokedex.util.Resource
 import retrofit2.Response
 import java.io.File
 import javax.inject.Inject
@@ -17,8 +20,6 @@ class PokemonRepository @Inject constructor(
         private val pokemonDb: PokemonDatabase){
 
     private val pokemonDao = pokemonDb.pokemonDao()
-
-
 
     suspend fun getPokemonInfoById(id: Int):Response<PokemonInfo> =
         pokeApiService.getPokemonInfoById(id)
