@@ -1,18 +1,13 @@
 package com.kabos.pokedex.repository
 
-import android.content.ContentValues.TAG
-import android.content.Context
-import android.net.ConnectivityManager
-import android.net.NetworkInfo
-import android.util.Log
-import androidx.lifecycle.LiveData
 import com.kabos.pokedex.model.Pokemon
 import com.kabos.pokedex.model.PokemonInfo
 import com.kabos.pokedex.model.PokemonSpecies
 import com.kabos.pokedex.util.NetworkBoundResource
 import com.kabos.pokedex.util.Resource
+import retrofit2.HttpException
 import retrofit2.Response
-import java.io.File
+import java.io.IOException
 import javax.inject.Inject
 
 class PokemonRepository @Inject constructor(
@@ -21,16 +16,50 @@ class PokemonRepository @Inject constructor(
 
     private val pokemonDao = pokemonDb.pokemonDao()
 
-    suspend fun getPokemonInfoById(id: Int):Resource<Response<PokemonInfo>> =
-            object :NetworkBoundResource<PokemonInfo, Response<PokemonInfo>>{
-                override suspend fun queryFromDb(): PokemonInfo {
-                    pokemonDao.getPokemonById(id)
-                }
+    suspend fun getPokemonInfoById(
+                id: Int,
+                onFetchFailed: (Throwable) -> Unit
+            ): Resource<PokemonInfo>? {
+        return object : NetworkBoundResource<PokemonInfo, Response<PokemonInfo>>() {
+            override suspend fun queryFromDb(): PokemonInfo =
+                pokemonDao.getPokemonInfoById(id)
+
+            override suspend fun fetchFromNetwork(): Response<PokemonInfo> =
+                pokeApiService.getPokemonInfoById(id)
+
+            override suspend fun saveFetchResult(fetchData: Response<PokemonInfo>) {
+                fetchData.body()?.let { pokemonDao.insertPokemonInfo(it) }
             }
 
+            override fun onFetchFailed(t: Throwable) {
+                if (t !is HttpException && t !is IOException) throw t
+                onFetchFailed(t)
+            }
+        }.result
+    }
 
-    suspend fun getPokemonSpeciesById(id: Int): Response<PokemonSpecies> =
-        pokeApiService.getPokemonSpeciesById(id)
+
+    suspend fun getPokemonSpeciesById(
+            id: Int,
+            onFetchFailed: (Throwable) -> Unit
+    ): Resource<PokemonSpecies>? {
+        return object : NetworkBoundResource<PokemonSpecies, Response<PokemonSpecies>>() {
+            override suspend fun queryFromDb(): PokemonSpecies =
+                    pokemonDao.getPokemonSpeciesById(id)
+
+            override suspend fun fetchFromNetwork(): Response<PokemonSpecies> =
+                    pokeApiService.getPokemonSpeciesById(id)
+
+            override suspend fun saveFetchResult(fetchData: Response<PokemonSpecies>) {
+                fetchData.body()?.let { pokemonDao.insertPokemonSpecies(it) }
+            }
+
+            override fun onFetchFailed(t: Throwable) {
+                if (t !is HttpException && t !is IOException) throw t
+                onFetchFailed(t)
+            }
+        }.result
+    }
 
     fun mergePokemonData(info: PokemonInfo, species: PokemonSpecies): Pokemon {
         val typeSize = info.types.size

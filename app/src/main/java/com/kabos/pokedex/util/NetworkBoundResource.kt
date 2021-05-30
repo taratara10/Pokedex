@@ -11,9 +11,7 @@ abstract class NetworkBoundResource<ResultType, RequestType> () {
 
     abstract suspend fun fetchFromNetwork(): RequestType
 
-    abstract suspend fun saveFetchResult(fetchFromNetwork: RequestType): (RequestType) -> Unit
-
-    abstract fun shouldFetch(data: ResultType?): Boolean
+    abstract suspend fun saveFetchResult(fetchData: RequestType)
 
     abstract fun onFetchFailed(t: Throwable)
 
@@ -23,7 +21,7 @@ abstract class NetworkBoundResource<ResultType, RequestType> () {
         //Loadingってなぜいるの？？？わからん
         //result.postValue(Resource.Loading(data))
 
-        result = if (shouldFetch(data)) {
+        result = if (data == null) {
             try {
                 saveFetchResult(fetchFromNetwork())
                 Resource.Success(queryFromDb())
