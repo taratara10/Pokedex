@@ -41,8 +41,8 @@ object ApiModule {
 
     @Singleton
     @Provides
-    fun providePokeRepository(pokeApiService: PokeApiService) =
-            PokemonRepository(pokeApiService)
+    fun providePokeRepository(pokeApiService: PokeApiService, pokemonDb: PokemonDatabase): PokemonRepository =
+            PokemonRepository(pokeApiService, pokemonDb)
 
 
     @JvmStatic
