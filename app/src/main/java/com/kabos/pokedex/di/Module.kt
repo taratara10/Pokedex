@@ -9,6 +9,7 @@ import com.kabos.pokedex.model.Pokemon
 import com.kabos.pokedex.repository.PokeApiService
 import com.kabos.pokedex.repository.PokemonDatabase
 import com.kabos.pokedex.repository.PokemonRepository
+import com.squareup.moshi.Moshi
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

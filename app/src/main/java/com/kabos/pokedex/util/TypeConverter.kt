@@ -2,6 +2,9 @@ package com.kabos.pokedex.util
 
 import androidx.room.TypeConverter
 import com.kabos.pokedex.model.*
+import com.squareup.moshi.JsonAdapter
+import com.squareup.moshi.Moshi
+import com.squareup.moshi.Types.newParameterizedType
 
 class SpritesConverter {
     @TypeConverter
@@ -16,79 +19,71 @@ class SpritesConverter {
 }
 
 class TypesConverter {
+    private val moshi = Moshi.Builder().build()
+    val type = newParameterizedType(List::class.java,Types::class.java)
+    val listAdapter: JsonAdapter<List<Types>> = moshi.adapter(type)
+
     @TypeConverter
-    fun fromString(value: String?): Types? {
-        return value?.let { Types(Type(it), null) }
+    fun fromString(value: String?): List<Types>? {
+        return value?.let { listAdapter.fromJson(value) }
     }
 
     @TypeConverter
-    fun nameToString(data: Types?): String? {
-        return data?.toString()
-    }
-}
-
-class TypeConverter {
-    @TypeConverter
-    fun fromString(value: String?): Type? {
-        return value?.let { Type(it) }
-    }
-
-    @TypeConverter
-    fun typeToString(data: Type?): String? {
-        return data?.name
+    fun nameToString(data: List<Types>?): String? {
+        return listAdapter.toJson(data)
     }
 }
 
 
 class NameConverter {
+    private val moshi = Moshi.Builder().build()
+    val type = newParameterizedType(List::class.java,Name::class.java)
+    val listAdapter: JsonAdapter<List<Name>> = moshi.adapter(type)
+
     @TypeConverter
-    fun fromString(value: String?): Name? {
-        return value?.let { Name(it) }
+    fun fromString(value: String?): List<Name>? {
+        return value?.let { listAdapter.fromJson(value) }
     }
 
     @TypeConverter
-    fun nameToString(data: Name?): String? {
-        return data?.name
+    fun nameToString(data: List<Name>?): String? {
+        return listAdapter.toJson(data)
     }
 }
 
 class FlavorTextEntryConverter {
+    private val moshi = Moshi.Builder().build()
+    val type = newParameterizedType(List::class.java,FlavorTextEntry::class.java)
+    val listAdapter: JsonAdapter<List<FlavorTextEntry>> = moshi.adapter(type)
+
     @TypeConverter
-    fun fromString(value: String?): FlavorTextEntry? {
-        return value?.let { FlavorTextEntry(value, Language(value)) }
+    fun fromString(value: String?): List<FlavorTextEntry>? {
+        return value?.let { listAdapter.fromJson(value) }
     }
 
     @TypeConverter
-    fun nameToString(data: FlavorTextEntry?): String? {
-        return data?.toString()
+    fun nameToString(data: List<FlavorTextEntry>?): String? {
+        return listAdapter.toJson(data)
     }
 }
 
 
 class GeneraConverter {
+    private val moshi = Moshi.Builder().build()
+    private val type = newParameterizedType(List::class.java,Genera::class.java)
+    private val listAdapter: JsonAdapter<List<Genera>> = moshi.adapter(type)
     @TypeConverter
-    fun fromString(value: String?): Genera? {
-        return value?.let { Genera(it,null) }
+    fun fromString(value: String?): List<Genera>? {
+        return value?.let { listAdapter.fromJson(value) }
     }
 
     @TypeConverter
-    fun generaToString(data: Genera?): String? {
-        return data?.genus
-    }
-}
-
-
-class LanguageConverter {
-    @TypeConverter
-    fun fromString(value: String?): Language? {
-        return value?.let { Language(it) }
-    }
-
-    @TypeConverter
-    fun languageToString(data: Language?): String? {
-        return data?.name
+    fun generaToString(data: List<Genera>?): String? {
+        return listAdapter.toJson(data)
     }
 }
+
+
 
 
 

@@ -15,11 +15,9 @@ import com.kabos.pokedex.util.*
         version = 1)
 @TypeConverters(SpritesConverter::class,
         TypesConverter::class,
-        TypeConverter::class,
         NameConverter::class,
         FlavorTextEntryConverter::class,
-        GeneraConverter::class,
-        LanguageConverter::class)
+        GeneraConverter::class)
 abstract class PokemonDatabase: RoomDatabase() {
     abstract fun pokemonDao(): PokemonDao
 }
