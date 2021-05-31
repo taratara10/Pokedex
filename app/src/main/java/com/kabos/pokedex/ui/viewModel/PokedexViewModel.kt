@@ -69,15 +69,19 @@ class PokedexViewModel @Inject constructor(private val repository: PokemonReposi
                 for (i in 1..5) {
                     //updateRegion()でisLoading = falseになると中断
                     if (currentNumber <= regionEndNumber && isLoading == true){
-                        val pokemonInfo = getPokemonInfo(currentNumber)
-                        val pokemonSpecies = getPokemonSpecies(currentNumber)
-                        val pokemon = repository.mergePokemonData(
-                                pokemonInfo.await() as PokemonInfo,
-                                pokemonSpecies.await() as PokemonSpecies
-                        )
-                        //pokemonListがLiveDataで直接addできないので、一旦listRegionにaddして最後にpost
-                        getListByRegion(currentRegion.value!!).add(pokemon)
-                        currentNumber += 1
+                        val pokemonInfo = getPokemonInfo(currentNumber).await()
+                        val pokemonSpecies = getPokemonSpecies(currentNumber).await()
+
+                        if (pokemonInfo != null && pokemonSpecies != null) {
+                            val pokemon = repository.mergePokemonData(
+                                    pokemonInfo as PokemonInfo,
+                                    pokemonSpecies as PokemonSpecies
+                            )
+                            //pokemonListがLiveDataで直接addできないので、一旦listRegionにaddして最後にpost
+                            getListByRegion(currentRegion.value!!).add(pokemon)
+
+                        }
+                       currentNumber += 1
                     }
                 }
                 return@async getListByRegion(currentRegion.value!!)
@@ -92,7 +96,7 @@ class PokedexViewModel @Inject constructor(private val repository: PokemonReposi
                     id = id,
                     onFetchFailed = { t ->
                         t.stackTrace //todo もっとなんかsnackBarとかで表示させたい
-                    })
+                    })?.data
         }
     }
 
@@ -102,7 +106,7 @@ class PokedexViewModel @Inject constructor(private val repository: PokemonReposi
                     id = id,
                     onFetchFailed = { t ->
                         t.stackTrace //todo もっとなんかsnackBarとかで表示させたい
-                    })
+                    })?.data
         }
     }
 
