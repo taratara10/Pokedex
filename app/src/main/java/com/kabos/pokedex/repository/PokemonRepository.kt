@@ -20,7 +20,7 @@ class PokemonRepository @Inject constructor(
                 id: Int,
                 onFetchFailed: (Throwable) -> Unit
             ): Resource<PokemonInfo>? {
-        return object : NetworkBoundResource<PokemonInfo, Response<PokemonInfo>>() {
+        val pokemonInfoData = object : NetworkBoundResource<PokemonInfo, Response<PokemonInfo>>() {
             override suspend fun queryFromDb(): PokemonInfo =
                 pokemonDao.getPokemonInfoById(id)
 
@@ -35,7 +35,9 @@ class PokemonRepository @Inject constructor(
                 if (t !is HttpException && t !is IOException) throw t
                 onFetchFailed(t)
             }
-        }.result
+        }
+        pokemonInfoData.execute()
+        return pokemonInfoData.result
     }
 
 
@@ -43,7 +45,7 @@ class PokemonRepository @Inject constructor(
             id: Int,
             onFetchFailed: (Throwable) -> Unit
     ): Resource<PokemonSpecies>? {
-        return object : NetworkBoundResource<PokemonSpecies, Response<PokemonSpecies>>() {
+        val pokemonSpeciesData =  object : NetworkBoundResource<PokemonSpecies, Response<PokemonSpecies>>() {
             override suspend fun queryFromDb(): PokemonSpecies =
                     pokemonDao.getPokemonSpeciesById(id)
 
@@ -58,7 +60,9 @@ class PokemonRepository @Inject constructor(
                 if (t !is HttpException && t !is IOException) throw t
                 onFetchFailed(t)
             }
-        }.result
+        }
+        pokemonSpeciesData.execute()
+        return pokemonSpeciesData.result
     }
 
     fun mergePokemonData(info: PokemonInfo, species: PokemonSpecies): Pokemon {
