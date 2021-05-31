@@ -65,27 +65,29 @@ class PokedexViewModel @Inject constructor(private val repository: PokemonReposi
         //todo save currentNum each region, also save recyclerView position
         //check loading
         if (isLoading)return@launch else isLoading = true
-            val list = async{
-                for (i in 1..5) {
-                    //updateRegion()でisLoading = falseになると中断
-                    if (currentNumber <= regionEndNumber && isLoading == true){
-                        val pokemonInfo = getPokemonInfo(currentNumber).await()
-                        val pokemonSpecies = getPokemonSpecies(currentNumber).await()
 
-                        if (pokemonInfo != null && pokemonSpecies != null) {
-                            val pokemon = repository.mergePokemonData(
-                                    pokemonInfo as PokemonInfo,
-                                    pokemonSpecies as PokemonSpecies
-                            )
-                            //pokemonListがLiveDataで直接addできないので、一旦listRegionにaddして最後にpost
-                            getListByRegion(currentRegion.value!!).add(pokemon)
+        //Get 5 Pokemon and add currentRegionList
+        val list = async{
+            for (i in 1..5) {
+                val isNotContain: Boolean = getListByRegion(currentRegion.value!!).none { it.id == currentNumber }
 
-                        }
-                       currentNumber += 1
+                if (currentNumber <= regionEndNumber && isLoading && isNotContain) {
+                    val pokemonInfo = getPokemonInfo(currentNumber).await()
+                    val pokemonSpecies = getPokemonSpecies(currentNumber).await()
+                    if (pokemonInfo != null && pokemonSpecies != null) {
+                        val pokemon = repository.mergePokemonData(
+                                pokemonInfo as PokemonInfo,
+                                pokemonSpecies as PokemonSpecies
+                        )
+                        getListByRegion(currentRegion.value!!).add(pokemon)
                     }
-                }
-                return@async getListByRegion(currentRegion.value!!)
+                }//end if
+                currentNumber += 1
+            }//end for
+            return@async getListByRegion(currentRegion.value!!)
         }
+
+        //update pokemonList through currentRegionList
         pokemonList.postValue(list.await())
         isLoading = false
     }
