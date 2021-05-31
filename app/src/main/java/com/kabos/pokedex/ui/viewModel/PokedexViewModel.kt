@@ -1,6 +1,7 @@
 package com.kabos.pokedex.ui.viewModel
 
 import android.util.Log
+import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -64,46 +65,50 @@ class PokedexViewModel @Inject constructor(private val repository: PokemonReposi
         //todo save currentNum each region, also save recyclerView position
         //check loading
         if (isLoading)return@launch else isLoading = true
-            val list = async{
-                for (i in 1..5) {
-                    //updateRegion()でisLoading = falseになると中断
-                    if (currentNumber <= regionEndNumber && isLoading == true){
-                        val pokemonInfo = getPokemonInfo(currentNumber)
-                        val pokemonSpecies = getPokemonSpecies(currentNumber)
+
+        //Get 5 Pokemon and add currentRegionList
+        val list = async{
+            for (i in 1..5) {
+                val isNotContain: Boolean = getListByRegion(currentRegion.value!!).none { it.id == currentNumber }
+
+                if (currentNumber <= regionEndNumber && isLoading && isNotContain) {
+                    val pokemonInfo = getPokemonInfo(currentNumber).await()
+                    val pokemonSpecies = getPokemonSpecies(currentNumber).await()
+                    if (pokemonInfo != null && pokemonSpecies != null) {
                         val pokemon = repository.mergePokemonData(
-                                pokemonInfo.await() as PokemonInfo,
-                                pokemonSpecies.await() as PokemonSpecies
+                                pokemonInfo as PokemonInfo,
+                                pokemonSpecies as PokemonSpecies
                         )
-                        //pokemonListがLiveDataで直接addできないので、一旦listRegionにaddして最後にpost
                         getListByRegion(currentRegion.value!!).add(pokemon)
-                        currentNumber += 1
                     }
-                }
-                return@async getListByRegion(currentRegion.value!!)
+                }//end if
+                currentNumber += 1
+            }//end for
+            return@async getListByRegion(currentRegion.value!!)
         }
+
+        //update pokemonList through currentRegionList
         pokemonList.postValue(list.await())
         isLoading = false
     }
 
     private suspend fun getPokemonInfo(id: Int): Deferred<Any?> = withContext(Dispatchers.IO) {
         async {
-            try {
-                val request = repository.getPokemonInfoById(id)
-                if (request.isSuccessful) request.body() else null //todo null怖い
-            } catch (e: Exception) {
-                e.stackTrace
-            }
+            repository.getPokemonInfoById(
+                    id = id,
+                    onFetchFailed = { t ->
+                        t.stackTrace //todo もっとなんかsnackBarとかで表示させたい
+                    })?.data
         }
     }
 
     private suspend fun getPokemonSpecies(id: Int): Deferred<Any?> = withContext(Dispatchers.IO) {
         async {
-            try {
-                val request = repository.getPokemonSpeciesById(id)
-                if (request.isSuccessful) request.body() else null //todo null怖い
-            } catch (e: Exception) {
-                e.stackTrace
-            }
+            repository.getPokemonSpeciesById(
+                    id = id,
+                    onFetchFailed = { t ->
+                        t.stackTrace //todo もっとなんかsnackBarとかで表示させたい
+                    })?.data
         }
     }
 

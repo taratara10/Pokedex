@@ -1,14 +1,16 @@
 package com.kabos.pokedex.model
 
-import java.net.Proxy
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 
+@Entity(tableName = "pokemon_info")
 data class PokemonInfo (
-    val id: Int,
-    val name: String,
-    val weight: Float,
-    val height: Float,
-    val sprites: Sprites,
-    val types: List<Types>
+        @PrimaryKey val id: Int,
+        val name: String,
+        val weight: Float,
+        val height: Float,
+        val sprites: Sprites,
+        val types: List<Types>
 )
 
 data class Sprites (
@@ -16,8 +18,8 @@ data class Sprites (
     val front_shiny: String?
 )
 data class Types(
-    val slot: Int,
-    val type: Type
+    val type: Type,
+    val slot: Int?
 )
 
 data class Type(
