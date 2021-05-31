@@ -1,6 +1,7 @@
 package com.kabos.pokedex.ui.viewModel
 
 import android.util.Log
+import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -87,23 +88,21 @@ class PokedexViewModel @Inject constructor(private val repository: PokemonReposi
 
     private suspend fun getPokemonInfo(id: Int): Deferred<Any?> = withContext(Dispatchers.IO) {
         async {
-            try {
-                val request = repository.getPokemonInfoById(id)
-                if (request.isSuccessful) request.body() else null //todo null怖い
-            } catch (e: Exception) {
-                e.stackTrace
-            }
+            repository.getPokemonInfoById(
+                    id = id,
+                    onFetchFailed = { t ->
+                        t.stackTrace //todo もっとなんかsnackBarとかで表示させたい
+                    })
         }
     }
 
     private suspend fun getPokemonSpecies(id: Int): Deferred<Any?> = withContext(Dispatchers.IO) {
         async {
-            try {
-                val request = repository.getPokemonSpeciesById(id)
-                if (request.isSuccessful) request.body() else null //todo null怖い
-            } catch (e: Exception) {
-                e.stackTrace
-            }
+            repository.getPokemonSpeciesById(
+                    id = id,
+                    onFetchFailed = { t ->
+                        t.stackTrace //todo もっとなんかsnackBarとかで表示させたい
+                    })
         }
     }
 
