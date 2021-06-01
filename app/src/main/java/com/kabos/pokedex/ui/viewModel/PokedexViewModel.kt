@@ -32,6 +32,15 @@ class PokedexViewModel @Inject constructor(private val repository: PokemonReposi
     var listAlola: MutableList<Pokemon> = mutableListOf()
     var listGalar: MutableList<Pokemon> = mutableListOf()
 
+    var positionKanto: Int = Region.Kanto.start
+    var positionJohto: Int = Region.Johto.start
+    var positionHoenn: Int = Region.Hoenn.start
+    var positionSinnoh: Int = Region.Sinnoh.start
+    var positionUnova: Int = Region.Unova.start
+    var positionKalos: Int = Region.Kanto.start
+    var positionAlola: Int = Region.Alola.start
+    var positionGalar: Int = Region.Galar.start
+
     var currentNumber:Int = 1 //表示されるポケモンの図鑑番号
     var regionStartNumber:Int = 1
     var regionEndNumber: Int = 151
@@ -125,4 +134,28 @@ class PokedexViewModel @Inject constructor(private val repository: PokemonReposi
         }
     }
 
+    private fun getPositionByRegion(region: Region): Int {
+        return when(region){
+            Region.Kanto -> positionKanto
+            Region.Johto -> positionJohto
+            Region.Hoenn -> positionHoenn
+            Region.Sinnoh -> positionSinnoh
+            Region.Unova -> positionUnova
+            Region.Kalos -> positionKalos
+            Region.Alola -> positionAlola
+            Region.Galar -> positionGalar
+        }
+    }
+    private fun updatePosition(region: Region) {
+        when(region){
+            Region.Kanto -> positionKanto += 1
+            Region.Johto -> positionJohto += 1
+            Region.Hoenn -> positionHoenn += 1
+            Region.Sinnoh -> positionSinnoh += 1
+            Region.Unova -> positionUnova += 1
+            Region.Kalos -> positionKalos += 1
+            Region.Alola -> positionAlola += 1
+            Region.Galar -> positionGalar += 1
+        }
+    }
 }
