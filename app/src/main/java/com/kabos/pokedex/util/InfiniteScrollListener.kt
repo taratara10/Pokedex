@@ -1,4 +1,4 @@
-package com.kabos.pokedex.ui.callback
+package com.kabos.pokedex.util
 
 import android.util.Log
 import androidx.recyclerview.widget.LinearLayoutManager

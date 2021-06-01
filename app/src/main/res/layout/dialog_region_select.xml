@@ -9,7 +9,7 @@
             type="com.kabos.pokedex.model.Region" />
         <variable
             name="callback"
-            type="com.kabos.pokedex.ui.callback.RegionCallback" />
+            type="com.kabos.pokedex.util.RegionCallback" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

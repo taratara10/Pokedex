@@ -1,4 +1,4 @@
-package com.kabos.pokedex.ui.callback
+package com.kabos.pokedex.util
 
 import com.kabos.pokedex.model.Region
 import com.kabos.pokedex.ui.viewModel.PokedexViewModel
