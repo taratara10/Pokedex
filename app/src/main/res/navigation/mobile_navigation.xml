@@ -47,7 +47,7 @@
         android:id="@+id/navigation_four_choices"
         android:name="com.kabos.pokedex.ui.fourChoicesQuiz.FourChoicesMainFragment"
         android:label="FourChoices"
-        tools:layout="@layout/fragment_four_choices" >
+        tools:layout="@layout/fragment_four_choices_main" >
         <action
             android:id="@+id/action_navigation_four_choices_to_navigation_region_select"
             app:destination="@id/navigation_region_select" />
@@ -57,7 +57,7 @@
         android:id="@+id/navigation_buzzer"
         android:name="com.kabos.pokedex.ui.buzzerQuiz.BuzzerMainFragment"
         android:label="Buzzer"
-        tools:layout="@layout/fragment_buzzer" >
+        tools:layout="@layout/fragment_buzzer_main" >
         <action
             android:id="@+id/action_navigation_buzzer_to_navigation_region_select"
             app:destination="@id/navigation_region_select" />
