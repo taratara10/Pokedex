@@ -32,6 +32,15 @@ class PokedexViewModel @Inject constructor(private val repository: PokemonReposi
     var listAlola: MutableList<Pokemon> = mutableListOf()
     var listGalar: MutableList<Pokemon> = mutableListOf()
 
+    var positionKanto: Int = Region.Kanto.start
+    var positionJohto: Int = Region.Johto.start
+    var positionHoenn: Int = Region.Hoenn.start
+    var positionSinnoh: Int = Region.Sinnoh.start
+    var positionUnova: Int = Region.Unova.start
+    var positionKalos: Int = Region.Kanto.start
+    var positionAlola: Int = Region.Alola.start
+    var positionGalar: Int = Region.Galar.start
+
     var currentNumber:Int = 1 //表示されるポケモンの図鑑番号
     var regionStartNumber:Int = 1
     var regionEndNumber: Int = 151
@@ -47,12 +56,11 @@ class PokedexViewModel @Inject constructor(private val repository: PokemonReposi
         //regionが異なる場合は、updateしてlistも更新する
         if (currentRegion.value == region) return
         else {
-            //todo stop getPokemonList()
-                isLoading = false
+            isLoading = false
             currentRegion.postValue(region)
             regionStartNumber = region.start
             regionEndNumber = region.end
-            currentNumber = regionStartNumber
+            currentNumber = getPositionByRegion(region)
             getPokemonList()
         }
     }
@@ -62,31 +70,25 @@ class PokedexViewModel @Inject constructor(private val repository: PokemonReposi
     }
 
     fun getPokemonList()= viewModelScope.launch {
-        //todo save currentNum each region, also save recyclerView position
         //check loading
         if (isLoading)return@launch else isLoading = true
 
         //Get 5 Pokemon and add currentRegionList
         val list = async{
-            for (i in 1..5) {
-                val isNotContain: Boolean = getListByRegion(currentRegion.value!!).none { it.id == currentNumber }
-
-                if (currentNumber <= regionEndNumber && isLoading && isNotContain) {
-                    val pokemonInfo = getPokemonInfo(currentNumber).await()
-                    val pokemonSpecies = getPokemonSpecies(currentNumber).await()
-                    if (pokemonInfo != null && pokemonSpecies != null) {
-                        val pokemon = repository.mergePokemonData(
-                                pokemonInfo as PokemonInfo,
-                                pokemonSpecies as PokemonSpecies
-                        )
-                        getListByRegion(currentRegion.value!!).add(pokemon)
-                    }
-                }//end if
-                currentNumber += 1
-            }//end for
+            if (currentNumber <= regionEndNumber && isLoading) {
+                val pokemonInfo = getPokemonInfo(currentNumber).await()
+                val pokemonSpecies = getPokemonSpecies(currentNumber).await()
+                if (pokemonInfo != null && pokemonSpecies != null) {
+                    val pokemon = repository.mergePokemonData(
+                            pokemonInfo as PokemonInfo,
+                            pokemonSpecies as PokemonSpecies)
+                    getListByRegion(currentRegion.value!!).add(pokemon)
+                }
+            }
+            currentNumber += 1
+            updatePosition(currentRegion.value!!)
             return@async getListByRegion(currentRegion.value!!)
         }
-
         //update pokemonList through currentRegionList
         pokemonList.postValue(list.await())
         isLoading = false
@@ -125,4 +127,28 @@ class PokedexViewModel @Inject constructor(private val repository: PokemonReposi
         }
     }
 
+    private fun getPositionByRegion(region: Region): Int {
+        return when(region){
+            Region.Kanto -> positionKanto
+            Region.Johto -> positionJohto
+            Region.Hoenn -> positionHoenn
+            Region.Sinnoh -> positionSinnoh
+            Region.Unova -> positionUnova
+            Region.Kalos -> positionKalos
+            Region.Alola -> positionAlola
+            Region.Galar -> positionGalar
+        }
+    }
+    private fun updatePosition(region: Region) {
+        when(region){
+            Region.Kanto -> positionKanto += 1
+            Region.Johto -> positionJohto += 1
+            Region.Hoenn -> positionHoenn += 1
+            Region.Sinnoh -> positionSinnoh += 1
+            Region.Unova -> positionUnova += 1
+            Region.Kalos -> positionKalos += 1
+            Region.Alola -> positionAlola += 1
+            Region.Galar -> positionGalar += 1
+        }
+    }
 }
