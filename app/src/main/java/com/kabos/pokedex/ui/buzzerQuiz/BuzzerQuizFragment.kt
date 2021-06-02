@@ -1,4 +1,8 @@
 package com.kabos.pokedex.ui.buzzerQuiz
 
-class BuzzerQuizFragment {
+import androidx.fragment.app.Fragment
+import dagger.hilt.android.AndroidEntryPoint
+
+@AndroidEntryPoint
+class BuzzerQuizFragment: Fragment() {
 }
