@@ -33,11 +33,11 @@ class BuzzerMainFragment: Fragment() {
                     findNavController().navigate(action)
                 }
 
-                override fun updateQuizNumber() {
-                    TODO("Not yet implemented")
+                override fun updateQuestionsNumber() {
+                    buzzerViewModel.updateQuestionsNumber()
                 }
 
-                override fun updatePlayerNumber() {
+                override fun updatePlayersNumber() {
                     TODO("Not yet implemented")
                 }
 

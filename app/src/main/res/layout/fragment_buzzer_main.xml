@@ -80,10 +80,11 @@
                 android:orientation="horizontal"
                 app:layout_constraintEnd_toStartOf="@+id/guideline_end2"
                 app:layout_constraintStart_toStartOf="@+id/guideline_begin2"
-                app:layout_constraintTop_toBottomOf="@+id/tv_question_number_title">
+                app:layout_constraintTop_toBottomOf="@+id/tv_question_number_title"
+                android:checkedButton="@={buzzerVM.questionsNumRadioChecked}">
 
                 <RadioButton
-                    android:id="@+id/rb_buzzer_quiz_number_one"
+                    android:id="@+id/rb_buzzer_questions_number_one"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -91,7 +92,7 @@
                     app:layout_constraintStart_toStartOf="parent" />
 
                 <RadioButton
-                    android:id="@+id/rb_buzzer_quiz_number_two"
+                    android:id="@+id/rb_buzzer_questions_number_two"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -99,7 +100,7 @@
                     app:layout_constraintStart_toStartOf="parent" />
 
                 <RadioButton
-                    android:id="@+id/rb_buzzer_quiz_number_three"
+                    android:id="@+id/rb_buzzer_questions_number_three"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"

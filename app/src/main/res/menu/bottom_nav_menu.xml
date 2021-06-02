@@ -12,7 +12,7 @@
         android:title="４たく" />
 
     <item
-        android:id="@+id/navigation_buzzer"
+        android:id="@+id/navigation_buzzer_main"
         android:icon="@drawable/ic_notifications_black_24dp"
         android:title="クイズ" />
 
