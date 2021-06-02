@@ -7,6 +7,7 @@ import com.kabos.pokedex.R
 import com.kabos.pokedex.model.Pokemon
 import com.kabos.pokedex.model.Region
 import com.kabos.pokedex.repository.PokemonRepository
+import com.kabos.pokedex.util.QuestionsRadio
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
@@ -19,16 +20,13 @@ class BuzzerViewModel @Inject constructor(private val repository: PokemonReposit
     var currentProgress: Int = 1
     var questionsNum: MutableLiveData<Int> = MutableLiveData(10)
 
-    var questionsNumRadioChecked:MutableLiveData<Int> = MutableLiveData(R.id.rb_buzzer_quiz_number_two)
+    var questionsNumRadioChecked = MutableLiveData(QuestionsRadio.secound)
 
 
     fun updateQuestionsNumber() {
-        Log.d("buzzerrr","${questionsNumRadioChecked.value}")
+        Log.d("buzzerrr","${questionsNumRadioChecked.value?.name}")
+
     }
-
-
-
-
 
 
 
