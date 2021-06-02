@@ -49,7 +49,7 @@ class BuzzerMainFragment: Fragment() {
         }
     }
 
-    fun setupNumberPicker(numberPicker: NumberPicker) {
+    private fun setupNumberPicker(numberPicker: NumberPicker) {
         numberPicker.apply {
             minValue = 2
             maxValue = 6

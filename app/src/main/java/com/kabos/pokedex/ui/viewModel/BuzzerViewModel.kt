@@ -32,7 +32,9 @@ class BuzzerViewModel @Inject constructor(private val repository: PokemonReposit
         playerNumber.postValue(number)
     }
 
-
+    fun isDisplayPlayerImage(id: Int): Boolean {
+        return id <= playerNumber.value!!
+    }
 
 
 
