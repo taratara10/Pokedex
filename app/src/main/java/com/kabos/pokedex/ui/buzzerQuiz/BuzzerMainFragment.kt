@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import com.kabos.pokedex.databinding.FragmentBuzzerMainBinding
 import com.kabos.pokedex.ui.viewModel.BuzzerViewModel
 import com.kabos.pokedex.util.BuzzerQuizCallback
@@ -27,7 +28,9 @@ class BuzzerMainFragment: Fragment() {
             buzzerVM = buzzerViewModel
             callback = object: BuzzerQuizCallback {
                 override fun navigateRegionFragment() {
-                    TODO("Not yet implemented")
+                    val action = BuzzerMainFragmentDirections
+                            .actionNavigationBuzzerMainToNavigationRegionSelect(isBackStack = true)
+                    findNavController().navigate(action)
                 }
 
                 override fun updateQuizNumber() {
