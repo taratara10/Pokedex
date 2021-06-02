@@ -23,7 +23,7 @@ fun typeToButtonId(radioType: QuestionsRadio): Int {
 }
 
 
-enum class QuestionsRadio(number: Int){
+enum class QuestionsRadio(val number: Int){
     first(5),
     secound(10),
     third(15)

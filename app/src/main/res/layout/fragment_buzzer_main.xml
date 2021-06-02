@@ -82,7 +82,7 @@
                 app:layout_constraintEnd_toStartOf="@+id/guideline_end2"
                 app:layout_constraintStart_toStartOf="@+id/guideline_begin2"
                 app:layout_constraintTop_toBottomOf="@+id/tv_question_number_title"
-                android:checkedButton="@={RadioTypeConverter.typeToButtonId(buzzerVM.questionsNumRadioChecked)}">
+                android:checkedButton="@={RadioTypeConverter.typeToButtonId(buzzerVM.questionsRadioChecked)}">
 
                 <RadioButton
                     android:id="@+id/rb_buzzer_questions_number_first"
@@ -90,6 +90,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="５問"
+                    android:onClick="@{() -> callback.updateQuestionsNumber()}"
                     app:layout_constraintStart_toStartOf="parent" />
 
                 <RadioButton
@@ -98,6 +99,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="１０問"
+                    android:onClick="@{() -> callback.updateQuestionsNumber()}"
                     app:layout_constraintStart_toStartOf="parent" />
 
                 <RadioButton
@@ -106,6 +108,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="１５問"
+                    android:onClick="@{() -> callback.updateQuestionsNumber()}"
                     app:layout_constraintStart_toStartOf="parent" />
             </RadioGroup>
 

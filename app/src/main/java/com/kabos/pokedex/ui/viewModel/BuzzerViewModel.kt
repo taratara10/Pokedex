@@ -18,14 +18,13 @@ class BuzzerViewModel @Inject constructor(private val repository: PokemonReposit
     var currentRegion: MutableLiveData<Region> = MutableLiveData(Region.Kanto)
     var currentPokemon: Pokemon? = null
     var currentProgress: Int = 1
-    var questionsNum: MutableLiveData<Int> = MutableLiveData(10)
+    var questionsNumber: Int = 10
 
-    var questionsNumRadioChecked = MutableLiveData(QuestionsRadio.secound)
+    var questionsRadioChecked = MutableLiveData(QuestionsRadio.secound)
 
 
     fun updateQuestionsNumber() {
-        Log.d("buzzerrr","${questionsNumRadioChecked.value?.name}")
-
+        questionsNumber = questionsRadioChecked.value?.number!!
     }
 
 

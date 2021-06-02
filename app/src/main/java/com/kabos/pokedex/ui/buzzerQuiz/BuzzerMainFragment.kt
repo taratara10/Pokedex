@@ -42,7 +42,6 @@ class BuzzerMainFragment: Fragment() {
                 }
 
             }
-            btnStart.setOnClickListener { buzzerViewModel.updateQuestionsNumber() }
         }
     }
 }
