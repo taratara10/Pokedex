@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.kabos.pokedex.databinding.FragmentBuzzerMainBinding
 import com.kabos.pokedex.ui.viewModel.BuzzerViewModel
+import com.kabos.pokedex.util.BuzzerQuizCallback
 
 class BuzzerMainFragment: Fragment() {
 
@@ -21,5 +22,23 @@ class BuzzerMainFragment: Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        binding.apply {
+            buzzerVM = buzzerViewModel
+            callback = object: BuzzerQuizCallback {
+                override fun navigateRegionFragment() {
+                    TODO("Not yet implemented")
+                }
+
+                override fun updateQuizNumber() {
+                    TODO("Not yet implemented")
+                }
+
+                override fun updatePlayerNumber() {
+                    TODO("Not yet implemented")
+                }
+
+            }
+        }
     }
 }
