@@ -20,20 +20,19 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_marginBottom="60dp"
-            android:layout_marginTop="60dp"
             android:background="@drawable/shape_rounded_corner"
             app:layout_constraintEnd_toStartOf="@+id/guideline_end"
-            app:layout_constraintStart_toEndOf="@id/guideline_begin">
+            app:layout_constraintStart_toEndOf="@id/guideline_begin"
+            tools:layout_editor_absoluteY="60dp">
 
             <TextView
                 android:id="@+id/tv_buzzer_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
+                android:gravity="center"
                 android:text="ずかんの　せつめいから　\n ポケモンの　なまえを　あてよう"
                 android:textSize="20sp"
-                android:gravity="center"
                 app:layout_constraintEnd_toEndOf="@id/guideline_end2"
                 app:layout_constraintStart_toStartOf="@id/guideline_begin2"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -42,8 +41,8 @@
                 android:id="@+id/tv_buzzer_region_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="・しゅつだいはんい"
                 android:layout_marginTop="24dp"
+                android:text="・しゅつだいはんい"
                 app:layout_constraintStart_toStartOf="@+id/guideline_begin2"
                 app:layout_constraintTop_toBottomOf="@id/tv_buzzer_title" />
 
@@ -51,46 +50,46 @@
                 android:id="@+id/buzzer_region_select"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                app:layout_constraintStart_toStartOf="@id/guideline_begin2"
+                android:onClick="@{() -> callback.navigateRegionFragment()}"
                 app:layout_constraintEnd_toEndOf="@id/guideline_end2"
-                app:layout_constraintTop_toBottomOf="@id/tv_buzzer_region_title"
-                android:onClick="@{() -> callback.navigateRegionFragment()}">
+                app:layout_constraintStart_toStartOf="@id/guideline_begin2"
+                app:layout_constraintTop_toBottomOf="@id/tv_buzzer_region_title">
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@{buzzerVM.currentRegion.regionName}"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    tools:text="カントー"
-                    />
+                    tools:text="カントー" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <TextView
                 android:id="@+id/tv_question_number_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="・もんだいすう"
                 android:layout_marginTop="24dp"
-                app:layout_constraintTop_toBottomOf="@id/buzzer_region_select"
-                app:layout_constraintStart_toStartOf="@id/guideline_begin2"/>
+                android:text="・もんだいすう"
+                app:layout_constraintStart_toStartOf="@id/guideline_begin2"
+                app:layout_constraintTop_toBottomOf="@id/buzzer_region_select" />
 
             <RadioGroup
                 android:id="@+id/buzzer_radio_group"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:checkedButton="@={RadioTypeConverter.typeToButtonId(buzzerVM.questionsRadioChecked)}"
                 android:orientation="horizontal"
                 app:layout_constraintEnd_toStartOf="@+id/guideline_end2"
                 app:layout_constraintStart_toStartOf="@+id/guideline_begin2"
-                app:layout_constraintTop_toBottomOf="@+id/tv_question_number_title"
-                android:checkedButton="@={RadioTypeConverter.typeToButtonId(buzzerVM.questionsRadioChecked)}">
+                app:layout_constraintTop_toBottomOf="@+id/tv_question_number_title">
 
                 <RadioButton
                     android:id="@+id/rb_buzzer_questions_number_first"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="５問"
                     android:onClick="@{() -> callback.updateQuestionsNumber()}"
+                    android:text="５問"
                     app:layout_constraintStart_toStartOf="parent" />
 
                 <RadioButton
@@ -98,8 +97,8 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="１０問"
                     android:onClick="@{() -> callback.updateQuestionsNumber()}"
+                    android:text="１０問"
                     app:layout_constraintStart_toStartOf="parent" />
 
                 <RadioButton
@@ -107,8 +106,8 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="１５問"
                     android:onClick="@{() -> callback.updateQuestionsNumber()}"
+                    android:text="１５問"
                     app:layout_constraintStart_toStartOf="parent" />
             </RadioGroup>
 
@@ -117,16 +116,18 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="・さんかにんずう"
-                android:layout_marginTop="24dp"
-                app:layout_constraintTop_toBottomOf="@id/buzzer_radio_group"
-                app:layout_constraintStart_toStartOf="@id/guideline_begin2"/>
+                app:layout_constraintBottom_toBottomOf="@+id/np_buzzer_player"
+                app:layout_constraintStart_toStartOf="@id/guideline_begin2"
+                app:layout_constraintTop_toTopOf="@+id/np_buzzer_player" />
 
-            <Spinner
+
+            <NumberPicker
+                android:id="@+id/np_buzzer_player"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintBottom_toBottomOf="@+id/tv_buzzer_player_number_title"
                 app:layout_constraintEnd_toStartOf="@+id/guideline_end2"
-                app:layout_constraintStart_toEndOf="@+id/tv_buzzer_player_number_title" />
+                app:layout_constraintStart_toEndOf="@+id/tv_buzzer_player_number_title"
+                app:layout_constraintTop_toBottomOf="@+id/buzzer_radio_group" />
 
             <Button
                 android:id="@+id/btn_start"

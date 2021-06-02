@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.NumberPicker
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
@@ -42,6 +43,12 @@ class BuzzerMainFragment: Fragment() {
                 }
 
             }
+            npBuzzerPlayer.apply {
+                minValue = 2
+                maxValue = 6
+                wrapSelectorWheel = false
+            }
         }
     }
+
 }

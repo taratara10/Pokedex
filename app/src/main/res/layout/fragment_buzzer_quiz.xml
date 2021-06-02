@@ -29,7 +29,7 @@
             android:id="@+id/tv_buzzer_progress_count"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{@string/progress_count(buzzerVM.currentProgress,buzzerVM.questionsNum)}"
+            android:text="@{@string/progress_count(buzzerVM.currentProgress,buzzerVM.questionsNumber)}"
             app:layout_constraintBottom_toBottomOf="@+id/progressBar"
             app:layout_constraintEnd_toStartOf="@+id/guideline_end"
             app:layout_constraintHorizontal_bias="1.0"
