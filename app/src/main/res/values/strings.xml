@@ -5,4 +5,5 @@
     <string name="pokemon_number">#%03d</string>
     <string name="region_number">No.%03d~%03d</string>
     <string name="hint_one">たかさ： %.1f m \nおもさ： %.1f kg </string>
+    <string name="progress_count">%1d/$1d</string>
 </resources>

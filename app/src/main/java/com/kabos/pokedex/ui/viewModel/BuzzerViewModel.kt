@@ -12,6 +12,8 @@ import javax.inject.Inject
 class BuzzerViewModel @Inject constructor(private val repository: PokemonRepository)
     : ViewModel(){
 
-    val currentRegion: MutableLiveData<Region> = MutableLiveData(Region.Kanto)
-    val currentPokemon: Pokemon? = null
+    var currentRegion: MutableLiveData<Region> = MutableLiveData(Region.Kanto)
+    var currentPokemon: Pokemon? = null
+    var currentProgress: Int = 1
+    var questionsNum: Int = 10
 }
