@@ -19,6 +19,7 @@ class BuzzerViewModel @Inject constructor(private val repository: PokemonReposit
     var currentPokemon: Pokemon? = null
     var currentProgress: Int = 1
     var questionsNumber: Int = 10
+    var playerNumber = MutableLiveData(2)
 
     var questionsRadioChecked = MutableLiveData(QuestionsRadio.secound)
 
@@ -27,7 +28,9 @@ class BuzzerViewModel @Inject constructor(private val repository: PokemonReposit
         questionsNumber = questionsRadioChecked.value?.number!!
     }
 
-
+    fun updatePlayerNumber(number: Int) {
+        playerNumber.postValue(number)
+    }
 
 
 

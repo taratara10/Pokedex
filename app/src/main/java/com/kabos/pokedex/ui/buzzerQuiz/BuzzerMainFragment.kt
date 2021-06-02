@@ -17,6 +17,23 @@ class BuzzerMainFragment: Fragment() {
     private lateinit var binding: FragmentBuzzerMainBinding
     private val buzzerViewModel: BuzzerViewModel by activityViewModels()
 
+    private val buzzerQuizCallback = object: BuzzerQuizCallback {
+        override fun navigateRegionFragment() {
+            val action = BuzzerMainFragmentDirections
+                    .actionNavigationBuzzerMainToNavigationRegionSelect(isBackStack = true)
+            findNavController().navigate(action)
+        }
+
+        override fun updateQuestionsNumber() {
+            buzzerViewModel.updateQuestionsNumber()
+        }
+
+        override fun updatePlayersNumber() {
+            TODO("Not yet implemented")
+        }
+
+    }
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = FragmentBuzzerMainBinding.inflate(inflater, container, false)
         return binding.root
@@ -27,26 +44,18 @@ class BuzzerMainFragment: Fragment() {
 
         binding.apply {
             buzzerVM = buzzerViewModel
-            callback = object: BuzzerQuizCallback {
-                override fun navigateRegionFragment() {
-                    val action = BuzzerMainFragmentDirections
-                            .actionNavigationBuzzerMainToNavigationRegionSelect(isBackStack = true)
-                    findNavController().navigate(action)
-                }
+            callback = buzzerQuizCallback
+            setupNumberPicker(npBuzzerPlayer)
+        }
+    }
 
-                override fun updateQuestionsNumber() {
-                    buzzerViewModel.updateQuestionsNumber()
-                }
-
-                override fun updatePlayersNumber() {
-                    TODO("Not yet implemented")
-                }
-
-            }
-            npBuzzerPlayer.apply {
-                minValue = 2
-                maxValue = 6
-                wrapSelectorWheel = false
+    fun setupNumberPicker(numberPicker: NumberPicker) {
+        numberPicker.apply {
+            minValue = 2
+            maxValue = 6
+            wrapSelectorWheel = false
+            setOnValueChangedListener { _, _, newVal ->
+                buzzerViewModel.updatePlayerNumber(newVal)
             }
         }
     }
