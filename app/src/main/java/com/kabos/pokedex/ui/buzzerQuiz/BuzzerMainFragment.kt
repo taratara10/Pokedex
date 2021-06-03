@@ -12,21 +12,18 @@ import androidx.navigation.fragment.findNavController
 import com.kabos.pokedex.databinding.FragmentBuzzerMainBinding
 import com.kabos.pokedex.ui.viewModel.BuzzerViewModel
 import com.kabos.pokedex.util.BuzzerQuizCallback
+import com.kabos.pokedex.util.NavigateRegionCallback
 
 class BuzzerMainFragment: Fragment() {
 
     private lateinit var binding: FragmentBuzzerMainBinding
     private val buzzerViewModel: BuzzerViewModel by activityViewModels()
 
-    private val buzzerQuizCallback = object: BuzzerQuizCallback {
+    private val navigateRegionCallback = object: NavigateRegionCallback {
         override fun navigateRegionFragment() {
             val action = BuzzerMainFragmentDirections
                     .actionNavigationBuzzerMainToNavigationRegionSelect(isBackStack = true)
             findNavController().navigate(action)
-        }
-
-        override fun updateQuestionsNumber() {
-            buzzerViewModel.updateQuestionsNumber()
         }
     }
 
@@ -40,7 +37,7 @@ class BuzzerMainFragment: Fragment() {
 
         binding.apply {
             buzzerVM = buzzerViewModel
-            callback = buzzerQuizCallback
+            callback = navigateRegionCallback
             setupNumberPicker(npBuzzerPlayer)
         }
     }

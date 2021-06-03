@@ -9,7 +9,7 @@
             type="com.kabos.pokedex.ui.viewModel.BuzzerViewModel" />
         <variable
             name="callback"
-            type="com.kabos.pokedex.util.BuzzerQuizCallback" />
+            type="com.kabos.pokedex.util.NavigateRegionCallback" />
         <import type="com.kabos.pokedex.util.RadioTypeConverter" />
     </data>
 
@@ -88,7 +88,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:onClick="@{() -> callback.updateQuestionsNumber()}"
+                    android:onClick="@{() -> buzzerVM.updateQuestionsNumber()}"
                     android:text="５問"
                     app:layout_constraintStart_toStartOf="parent" />
 
@@ -97,7 +97,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:onClick="@{() -> callback.updateQuestionsNumber()}"
+                    android:onClick="@{() -> buzzerVM.updateQuestionsNumber()}"
                     android:text="１０問"
                     app:layout_constraintStart_toStartOf="parent" />
 
@@ -106,7 +106,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:onClick="@{() -> callback.updateQuestionsNumber()}"
+                    android:onClick="@{() -> buzzerVM.updateQuestionsNumber()}"
                     android:text="１５問"
                     app:layout_constraintStart_toStartOf="parent" />
             </RadioGroup>
@@ -186,8 +186,9 @@
                 android:id="@+id/iv_player_ball3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="7dp"
+                android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
+                android:visibility="gone"
                 app:layout_constraintStart_toEndOf="@+id/iv_player_ball2"
                 app:layout_constraintTop_toBottomOf="@+id/tv_buzzer_player_number_title"
                 app:srcCompat="@drawable/hyper" />
@@ -198,6 +199,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
+                android:visibility="gone"
                 app:layout_constraintStart_toStartOf="@+id/guideline_begin2"
                 app:layout_constraintTop_toBottomOf="@+id/iv_player_ball"
                 app:srcCompat="@drawable/master_ball" />
@@ -208,6 +210,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:layout_marginStart="8dp"
+                android:visibility="gone"
                 app:layout_constraintStart_toEndOf="@+id/iv_player_ball4"
                 app:layout_constraintTop_toBottomOf="@+id/iv_player_ball"
                 app:srcCompat="@drawable/timer_ball" />
@@ -218,6 +221,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:layout_marginStart="8dp"
+                android:visibility="gone"
                 app:layout_constraintStart_toEndOf="@+id/iv_player_ball5"
                 app:layout_constraintTop_toBottomOf="@+id/iv_player_ball"
                 app:srcCompat="@drawable/quick_ball" />

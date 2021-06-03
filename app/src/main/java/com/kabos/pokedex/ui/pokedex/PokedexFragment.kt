@@ -13,6 +13,7 @@ import com.kabos.pokedex.databinding.FragmentPokedexBinding
 import com.kabos.pokedex.util.InfiniteScrollListener
 import com.kabos.pokedex.util.PokedexCallback
 import com.kabos.pokedex.ui.viewModel.PokedexViewModel
+import com.kabos.pokedex.util.NavigateRegionCallback
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -24,6 +25,13 @@ class PokedexFragment: Fragment(){
         pokedexViewModel.updateDialogPokemon(pokemon)
         if (pokedexViewModel.dialogPokemon != null) findNavController().navigate(R.id.action_navigation_pokedex_to_navigation_pokedex_detail)
     }
+    private val navigateRegionCallback = object : NavigateRegionCallback {
+        override fun navigateRegionFragment() {
+            val action = PokedexFragmentDirections.actionNavigationPokedexToNavigationRegionSelect(isBackStack = true)
+            findNavController().navigate(action)
+        }
+    }
+
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = FragmentPokedexBinding.inflate(inflater, container, false)
@@ -32,25 +40,18 @@ class PokedexFragment: Fragment(){
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.apply {
+            setupRecyclerView()
+            pokedexVM = pokedexViewModel
+            lifecycleOwner = this@PokedexFragment
+            callback = navigateRegionCallback
+        }
 
         pokedexViewModel.pokemonList.observe(viewLifecycleOwner, {list ->
             //DiffUtil hasn't store old data, so it cannot compare and update UI. we should store old data instance.
             val newList = list.toList()
             pokedexAdapter.submitList(newList)
         })
-
-        binding.apply {
-            setupRecyclerView()
-            pokedexVM = pokedexViewModel
-            lifecycleOwner = this@PokedexFragment
-            callback = object : PokedexCallback {
-                override fun navigateRegionFragment() {
-                    val action = PokedexFragmentDirections.actionNavigationPokedexToNavigationRegionSelect(isBackStack = true)
-                    findNavController().navigate(action)
-                }
-            }
-        }
-
     }
 
     private fun setupRecyclerView() {

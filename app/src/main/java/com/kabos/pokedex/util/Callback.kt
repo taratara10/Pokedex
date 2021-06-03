@@ -9,13 +9,6 @@ interface RegionCallback {
     fun onClick(region: Region)
 }
 
-//pokedex
-interface PokedexCallback {
+interface NavigateRegionCallback {
     fun navigateRegionFragment()
-}
-
-//BuzzerQuiz
-interface BuzzerQuizCallback {
-    fun navigateRegionFragment()
-    fun updateQuestionsNumber()
 }
