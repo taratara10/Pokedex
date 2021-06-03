@@ -162,8 +162,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="せいかい　した　ひと"
-            tools:layout_editor_absoluteX="134dp"
-            tools:layout_editor_absoluteY="531dp" />
+            app:layout_constraintBottom_toTopOf="@+id/button"
+            app:layout_constraintEnd_toStartOf="@+id/guideline_end" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
