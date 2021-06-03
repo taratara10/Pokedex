@@ -68,13 +68,17 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
+
                 <TextView
                     android:id="@+id/tv_hint_one"
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:layout_constraintTop_toTopOf="parent"
+                    android:layout_marginStart="8dp"
+                    android:text="ヒント１　たかさ・おもさ"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
-                    android:text="ヒント１　たかさ・おもさ" />
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <net.cachapa.expandablelayout.ExpandableLayout
                     android:id="@+id/el_hint_one"
@@ -100,7 +104,8 @@
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
+                            app:layout_constraintTop_toTopOf="parent"
+                            tools:text="aaaaaaaaaaaaaaaaaaaaaaaaa"/>
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -119,54 +124,11 @@
             android:id="@+id/correct_answer"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="@id/button">
+            tools:layout_editor_absoluteY="688dp">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
-
-                <TextView
-                    android:id="@+id/tv_correct_answer"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="せいかい　した　ひと"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    android:layout_marginStart="8dp"/>
-
-
-                <RadioGroup
-                    android:id="@+id/buzzer_radio_group"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/tv_correct_answer">
-
-                    <RadioButton
-                        android:id="@+id/rb_buzzer_quiz_number_one"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="５問"
-                        app:layout_constraintStart_toStartOf="parent" />
-
-                    <RadioButton
-                        android:id="@+id/rb_buzzer_quiz_number_two"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="１０問"
-                        app:layout_constraintStart_toStartOf="parent" />
-
-                    <RadioButton
-                        android:id="@+id/rb_buzzer_quiz_number_three"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="１５問"
-                        app:layout_constraintStart_toStartOf="parent" />
-                </RadioGroup>
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -194,6 +156,14 @@
             android:text="Button"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/guideline_end" />
+
+        <TextView
+            android:id="@+id/tv_correct_answer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="せいかい　した　ひと"
+            tools:layout_editor_absoluteX="134dp"
+            tools:layout_editor_absoluteY="531dp" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

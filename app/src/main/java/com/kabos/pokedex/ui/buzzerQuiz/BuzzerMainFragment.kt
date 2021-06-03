@@ -9,9 +9,9 @@ import android.widget.NumberPicker
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
+import com.kabos.pokedex.R
 import com.kabos.pokedex.databinding.FragmentBuzzerMainBinding
 import com.kabos.pokedex.ui.viewModel.BuzzerViewModel
-import com.kabos.pokedex.util.BuzzerQuizCallback
 import com.kabos.pokedex.util.NavigateRegionCallback
 
 class BuzzerMainFragment: Fragment() {
@@ -39,6 +39,7 @@ class BuzzerMainFragment: Fragment() {
             buzzerVM = buzzerViewModel
             callback = navigateRegionCallback
             setupNumberPicker(npBuzzerPlayer)
+            btnBuzzerStart.setOnClickListener { findNavController().navigate(R.id.action_navigation_buzzer_main_to_navigation_buzzer_quiz) }
         }
     }
 
