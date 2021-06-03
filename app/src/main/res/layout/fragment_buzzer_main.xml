@@ -160,7 +160,6 @@
                 app:layout_constraintBottom_toBottomOf="@+id/np_buzzer_player"
                 app:layout_constraintEnd_toEndOf="@id/guideline_end2"
                 app:layout_constraintStart_toEndOf="@+id/np_buzzer_player"
-                app:layout_constraintStart_toEndtOf="@id/np_buzzer_player"
                 app:layout_constraintTop_toTopOf="@+id/np_buzzer_player" />
 
             <ImageView
@@ -172,6 +171,26 @@
                 app:layout_constraintStart_toStartOf="@+id/guideline_begin2"
                 app:layout_constraintTop_toBottomOf="@+id/tv_buzzer_player_number_title"
                 app:srcCompat="@drawable/poke_ball" />
+
+            <ImageView
+                android:id="@+id/iv_player_ball2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                app:layout_constraintStart_toEndOf="@+id/iv_player_ball"
+                app:layout_constraintTop_toBottomOf="@+id/tv_buzzer_player_number_title"
+                app:srcCompat="@drawable/resource_super" />
+
+            <ImageView
+                android:id="@+id/iv_player_ball3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="7dp"
+                android:layout_marginTop="8dp"
+                app:layout_constraintStart_toEndOf="@+id/iv_player_ball2"
+                app:layout_constraintTop_toBottomOf="@+id/tv_buzzer_player_number_title"
+                app:srcCompat="@drawable/hyper" />
 
             <ImageView
                 android:id="@+id/iv_player_ball4"
@@ -203,25 +222,6 @@
                 app:layout_constraintTop_toBottomOf="@+id/iv_player_ball"
                 app:srcCompat="@drawable/quick_ball" />
 
-            <ImageView
-                android:id="@+id/iv_player_ball2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                app:layout_constraintStart_toEndOf="@+id/iv_player_ball"
-                app:layout_constraintTop_toBottomOf="@+id/tv_buzzer_player_number_title"
-                app:srcCompat="@drawable/resource_super" />
-
-            <ImageView
-                android:id="@+id/iv_player_ball3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="7dp"
-                android:layout_marginTop="8dp"
-                app:layout_constraintStart_toEndOf="@+id/iv_player_ball2"
-                app:layout_constraintTop_toBottomOf="@+id/tv_buzzer_player_number_title"
-                app:srcCompat="@drawable/hyper" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

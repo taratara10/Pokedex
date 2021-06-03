@@ -1,6 +1,7 @@
 package com.kabos.pokedex.ui.viewModel
 
 import android.util.Log
+import android.view.View
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.kabos.pokedex.R
@@ -19,7 +20,7 @@ class BuzzerViewModel @Inject constructor(private val repository: PokemonReposit
     var currentPokemon: Pokemon? = null
     var currentProgress: Int = 1
     var questionsNumber: Int = 10
-    var playerNumber = MutableLiveData(2)
+    var playerNumber:Int = 2
 
     var questionsRadioChecked = MutableLiveData(QuestionsRadio.secound)
 
@@ -28,12 +29,8 @@ class BuzzerViewModel @Inject constructor(private val repository: PokemonReposit
         questionsNumber = questionsRadioChecked.value?.number!!
     }
 
-    fun updatePlayerNumber(number: Int) {
-        playerNumber.postValue(number)
-    }
-
-    fun isDisplayPlayerImage(id: Int): Boolean {
-        return id <= playerNumber.value!!
+    fun isDisplayPlayerImage(id: Int): Int {
+        return if (id <= playerNumber) View.VISIBLE else View.GONE
     }
 
 

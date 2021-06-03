@@ -1,6 +1,7 @@
 package com.kabos.pokedex.ui.buzzerQuiz
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -27,11 +28,6 @@ class BuzzerMainFragment: Fragment() {
         override fun updateQuestionsNumber() {
             buzzerViewModel.updateQuestionsNumber()
         }
-
-        override fun updatePlayersNumber() {
-            TODO("Not yet implemented")
-        }
-
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -55,9 +51,16 @@ class BuzzerMainFragment: Fragment() {
             maxValue = 6
             wrapSelectorWheel = false
             setOnValueChangedListener { _, _, newVal ->
-                buzzerViewModel.updatePlayerNumber(newVal)
+                buzzerViewModel.playerNumber = newVal
+                binding.apply {
+                    ivPlayerBall3.visibility = buzzerViewModel.isDisplayPlayerImage(3)
+                    ivPlayerBall4.visibility = buzzerViewModel.isDisplayPlayerImage(4)
+                    ivPlayerBall5.visibility = buzzerViewModel.isDisplayPlayerImage(5)
+                    ivPlayerBall6.visibility = buzzerViewModel.isDisplayPlayerImage(6)
+                }
             }
         }
     }
+
 
 }

@@ -18,5 +18,4 @@ interface PokedexCallback {
 interface BuzzerQuizCallback {
     fun navigateRegionFragment()
     fun updateQuestionsNumber()
-    fun updatePlayersNumber()
 }
