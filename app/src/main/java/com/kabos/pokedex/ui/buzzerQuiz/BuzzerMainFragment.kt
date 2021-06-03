@@ -11,7 +11,6 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.kabos.pokedex.databinding.FragmentBuzzerMainBinding
 import com.kabos.pokedex.ui.viewModel.BuzzerViewModel
-import com.kabos.pokedex.util.BuzzerQuizCallback
 import com.kabos.pokedex.util.NavigateRegionCallback
 
 class BuzzerMainFragment: Fragment() {

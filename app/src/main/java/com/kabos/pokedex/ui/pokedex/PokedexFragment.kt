@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.kabos.pokedex.R
 import com.kabos.pokedex.databinding.FragmentPokedexBinding
 import com.kabos.pokedex.util.InfiniteScrollListener
-import com.kabos.pokedex.util.PokedexCallback
 import com.kabos.pokedex.ui.viewModel.PokedexViewModel
 import com.kabos.pokedex.util.NavigateRegionCallback
 import dagger.hilt.android.AndroidEntryPoint
