@@ -48,7 +48,7 @@ class BuzzerMainFragment: Fragment() {
             maxValue = 6
             wrapSelectorWheel = false
             setOnValueChangedListener { _, _, newVal ->
-                buzzerViewModel.playerNumber = newVal
+                buzzerViewModel.numberOfPlayer = newVal
                 binding.apply {
                     ivPlayerBall3.visibility = buzzerViewModel.isDisplayPlayerImage(3)
                     ivPlayerBall4.visibility = buzzerViewModel.isDisplayPlayerImage(4)
