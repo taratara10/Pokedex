@@ -41,30 +41,19 @@ class BuzzerViewModel @Inject constructor(private val repository: PokemonReposit
 
     //previousPokemon -> currentPokemon
 
-    fun generateQuestionIdList() {
+    private fun generateQuestionIdList() {
         val range = mutableListOf<Int>() //Regionの範囲
-        val taken = mutableListOf<Int>() //完成品　ランダムに選択した要素を持たせる
-
-        //regionのList<Int>を生成
         for (i in currentRegion.start..currentRegion.end) {
             range.add(i)
         }
-
-        repeat(numberOfQuestion){
-            //rangeの範囲で要素をランダムに取得してtakenに持たせる
-            val rangeSize = range.size
-            val index = Random.nextInt(rangeSize)
-            taken += range[index]
-
-            //全部shuffle()は無駄なので、末尾とindexを置換する
-            val lastIndex = rangeSize -1
-            val lastElement = range.removeAt(lastIndex) //末尾を削除する
-            if (index < lastIndex) range[index] = lastElement //indexが末尾でなければ置換する
-        }
-        questionIdList = taken as ArrayList<Int>
+        range.shuffle()
+        questionIdList = range.take(numberOfQuestion) as ArrayList<Int>
     }
 
+    fun startQuestion(){
+        generateQuestionIdList()
 
+    }
 
 
 
