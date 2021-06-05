@@ -10,6 +10,7 @@ import com.kabos.pokedex.model.Pokemon
 import com.kabos.pokedex.model.Region
 import com.kabos.pokedex.repository.PokemonRepository
 import com.kabos.pokedex.util.QuestionsRadio
+import com.kabos.pokedex.util.RegionCallback
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -43,6 +44,7 @@ class BuzzerViewModel @Inject constructor(private val repository: PokemonReposit
     var playerFiveChecked: Boolean = false
     var playerSixChecked: Boolean = false
     var isAnswered :Boolean = false
+    var goResultFragment = MutableLiveData(false)
 
     var buttonText = MutableLiveData(R.string.next_btn)
 
@@ -76,6 +78,7 @@ class BuzzerViewModel @Inject constructor(private val repository: PokemonReposit
     fun startQuestion(){
         generateQuestionIdList()
         getPokemon(questionIdList.first())
+        goResultFragment.postValue(false)
     }
 
     fun setupNextQuestion(){
@@ -83,14 +86,19 @@ class BuzzerViewModel @Inject constructor(private val repository: PokemonReposit
         countPlayerScore()
         currentProgress ++
         getPokemon(questionIdList[currentProgress - 1])
+        //最終問題ならbuttonTextを差し替え
         if (currentProgress == numberOfQuestion) buttonText.postValue(R.string.finish_btn)
     }
 
     fun atLastQuestion(){
         countPlayerScore()
+        goResultFragment.postValue(true)
+
+
     }
 
     //checkboxをclickでnext判定
+    //todo viewのcheckBox.onClickにセット
     fun isAnswered() {
         isAnswered = playerOneChecked ||
                 playerTwoChecked ||

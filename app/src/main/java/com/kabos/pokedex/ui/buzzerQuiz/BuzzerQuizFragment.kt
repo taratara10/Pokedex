@@ -6,6 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
+import com.kabos.pokedex.R
 import com.kabos.pokedex.databinding.FragmentBuzzerQuizBinding
 import com.kabos.pokedex.ui.viewModel.BuzzerViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -27,6 +29,9 @@ class BuzzerQuizFragment: Fragment() {
             buzzerVM = buzzerViewModel
         }
 
+        buzzerViewModel.goResultFragment.observe(viewLifecycleOwner,{goResult ->
+            if (goResult) findNavController().navigate(R.id.action_navigation_buzzer_quiz_to_navigation_buzzer_result)
+        })
 
 
     }
