@@ -260,7 +260,174 @@
                 </androidx.cardview.widget.CardView>
 
                 <!--   correct answer     -->
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/card_player"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    app:layout_constraintEnd_toEndOf="@id/guideline_end"
+                    app:layout_constraintStart_toStartOf="@id/guideline_begin"
+                    app:layout_constraintTop_toBottomOf="@id/card_answer">
 
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <TextView
+                            android:id="@+id/tv_answer_player"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="せいかい　した　ひと"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <!-- player one -->
+                        <CheckBox
+                            android:id="@+id/cb_player_one"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:button="@null"
+                            android:drawableEnd="?android:attr/listChoiceIndicatorMultiple"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/tv_answer_player" />
+
+                        <ImageView
+                            android:id="@+id/iv_player_one"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintBottom_toBottomOf="@+id/cb_player_one"
+                            app:layout_constraintStart_toEndOf="@id/cb_player_one"
+                            app:layout_constraintTop_toTopOf="@+id/cb_player_one"
+                            app:srcCompat="@drawable/poke_ball" />
+
+                        <!-- player two -->
+                        <CheckBox
+                            android:id="@+id/cb_player_two"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="16dp"
+                            android:button="@null"
+                            android:drawableEnd="?android:attr/listChoiceIndicatorMultiple"
+                            app:layout_constraintStart_toEndOf="@id/iv_player_one"
+                            app:layout_constraintTop_toBottomOf="@id/tv_answer_player" />
+
+                        <ImageView
+                            android:id="@+id/iv_player_two"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintBottom_toBottomOf="@+id/cb_player_one"
+                            app:layout_constraintStart_toEndOf="@id/cb_player_two"
+                            app:layout_constraintTop_toTopOf="@+id/cb_player_one"
+                            app:srcCompat="@drawable/resource_super" />
+
+                        <!-- player three -->
+                        <CheckBox
+                            android:id="@+id/cb_player_three"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:visibility="gone"
+                            android:layout_marginStart="16dp"
+                            android:button="@null"
+                            android:drawableEnd="?android:attr/listChoiceIndicatorMultiple"
+                            app:layout_constraintStart_toEndOf="@id/iv_player_two"
+                            app:layout_constraintTop_toBottomOf="@id/tv_answer_player" />
+
+                        <ImageView
+                            android:id="@+id/iv_player_three"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:visibility="gone"
+                            app:layout_constraintBottom_toBottomOf="@+id/cb_player_one"
+                            app:layout_constraintStart_toEndOf="@id/cb_player_three"
+                            app:layout_constraintTop_toTopOf="@+id/cb_player_one"
+                            app:srcCompat="@drawable/hyper" />
+
+                        <!-- player three -->
+                        <CheckBox
+                            android:id="@+id/cb_player_four"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="16dp"
+                            android:visibility="gone"
+                            android:button="@null"
+                            android:drawableEnd="?android:attr/listChoiceIndicatorMultiple"
+                            app:layout_constraintStart_toEndOf="@id/iv_player_three"
+                            app:layout_constraintTop_toBottomOf="@id/tv_answer_player" />
+
+                        <ImageView
+                            android:id="@+id/iv_player_four"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:visibility="gone"
+                            app:layout_constraintBottom_toBottomOf="@+id/cb_player_one"
+                            app:layout_constraintStart_toEndOf="@id/cb_player_four"
+                            app:layout_constraintTop_toTopOf="@+id/cb_player_one"
+                            app:srcCompat="@drawable/master_ball" />
+
+                        <!-- なし　-->
+                        <CheckBox
+                            android:id="@+id/cb_player_none"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text=""
+                            android:button="@null"
+                            android:drawableEnd="?android:attr/listChoiceIndicatorMultiple"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/cb_player_one" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="なし"
+                            app:layout_constraintStart_toEndOf="@+id/cb_player_none"
+                            app:layout_constraintTop_toTopOf="@id/cb_player_none"
+                            app:layout_constraintBottom_toBottomOf="@+id/cb_player_none"/>
+
+                        <!-- player three -->
+                        <CheckBox
+                            android:id="@+id/cb_player_five"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:visibility="gone"
+                            android:button="@null"
+                            android:drawableEnd="?android:attr/listChoiceIndicatorMultiple"
+                            app:layout_constraintStart_toStartOf="@+id/cb_player_three"
+                            app:layout_constraintTop_toBottomOf="@id/cb_player_three" />
+
+                        <ImageView
+                            android:id="@+id/iv_player_five"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:visibility="gone"
+                            app:layout_constraintBottom_toBottomOf="@+id/cb_player_five"
+                            app:layout_constraintStart_toEndOf="@id/cb_player_five"
+                            app:layout_constraintTop_toTopOf="@+id/cb_player_five"
+                            app:srcCompat="@drawable/timer_ball" />
+
+
+                        <!-- player three -->
+                        <CheckBox
+                            android:id="@+id/cb_player_six"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:visibility="gone"
+                            android:button="@null"
+                            android:drawableEnd="?android:attr/listChoiceIndicatorMultiple"
+                            app:layout_constraintStart_toStartOf="@+id/cb_player_four"
+                            app:layout_constraintTop_toBottomOf="@id/cb_player_four" />
+
+                        <ImageView
+                            android:id="@+id/iv_player_six"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:visibility="gone"
+                            app:layout_constraintBottom_toBottomOf="@+id/cb_player_six"
+                            app:layout_constraintStart_toEndOf="@id/cb_player_six"
+                            app:layout_constraintTop_toTopOf="@+id/cb_player_six"
+                            app:srcCompat="@drawable/quick_ball" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                </androidx.cardview.widget.CardView>
 
                 <androidx.constraintlayout.widget.Guideline
                     android:id="@+id/guideline_begin"
@@ -283,20 +450,10 @@
                     android:layout_marginBottom="24dp"
                     android:text="@{buzzerVM.buttonText}"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/guideline_end" />
+                    app:layout_constraintEnd_toStartOf="@+id/guideline_end"
+                    app:layout_constraintTop_toBottomOf="@+id/card_player" />
 
-                <androidx.cardview.widget.CardView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content">
 
-                    <TextView
-                        android:id="@+id/tv_correct_answer"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="せいかい　した　ひと"
-                        app:layout_constraintBottom_toTopOf="@+id/btn_buzzer_next"
-                        app:layout_constraintEnd_toStartOf="@+id/guideline_end" />
-                </androidx.cardview.widget.CardView>
 
 
 
