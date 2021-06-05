@@ -95,29 +95,167 @@
 
                 </net.cachapa.expandablelayout.ExpandableLayout>
             </androidx.constraintlayout.widget.ConstraintLayout>
-
         </androidx.cardview.widget.CardView>
 
         <!--   hint two     -->
-
-        <!--   hint three    -->
-
-        <!--    answer    -->
-
-        <!--   correct answer     -->
         <androidx.cardview.widget.CardView
-            android:id="@+id/correct_answer"
+            android:id="@+id/card_hint_two"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            tools:layout_editor_absoluteY="688dp">
-
+            android:layout_marginTop="24dp"
+            app:layout_constraintEnd_toEndOf="@id/guideline_end"
+            app:layout_constraintStart_toStartOf="@id/guideline_begin"
+            app:layout_constraintTop_toBottomOf="@id/card_hint_one">
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:layout_marginStart="16dp" >
 
+                <TextView
+                    android:id="@+id/tv_hint_two"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="ヒント２　タイプ"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
+                <net.cachapa.expandablelayout.ExpandableLayout
+                    android:id="@+id/el_hint_two"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:el_duration="1000"
+                    app:el_expanded="false"
+                    app:layout_constraintTop_toBottomOf="@id/tv_hint_two"
+                    app:layout_constraintStart_toStartOf="@id/tv_hint_two">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=""/>
+
+                </net.cachapa.expandablelayout.ExpandableLayout>
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>
+
+        <!--   hint three    -->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card_hint_three"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            app:layout_constraintEnd_toEndOf="@id/guideline_end"
+            app:layout_constraintStart_toStartOf="@id/guideline_begin"
+            app:layout_constraintTop_toBottomOf="@id/card_hint_two">
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:layout_marginStart="16dp" >
+
+                <TextView
+                    android:id="@+id/tv_hint_three"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="ヒント３　ぶんるい"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <net.cachapa.expandablelayout.ExpandableLayout
+                    android:id="@+id/el_hint_three"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:el_duration="1000"
+                    app:el_expanded="false"
+                    app:layout_constraintTop_toBottomOf="@id/tv_hint_three"
+                    app:layout_constraintStart_toStartOf="@id/tv_hint_three">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@{buzzerVM.currentPokemon.genera}"/>
+
+                </net.cachapa.expandablelayout.ExpandableLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!--    answer    -->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card_answer"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            app:layout_constraintEnd_toEndOf="@id/guideline_end"
+            app:layout_constraintStart_toStartOf="@id/guideline_begin"
+            app:layout_constraintTop_toBottomOf="@id/card_hint_three"
+            app:cardBackgroundColor="@color/red_500">
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:layout_marginStart="16dp" >
+
+                <TextView
+                    android:id="@+id/tv_answer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="こたえ"
+                    android:textSize="20dp"
+                    android:textColor="@color/white"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <net.cachapa.expandablelayout.ExpandableLayout
+                    android:id="@+id/el_answer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:el_duration="1000"
+                    app:el_expanded="false"
+                    app:layout_constraintTop_toBottomOf="@id/tv_answer"
+                    app:layout_constraintStart_toStartOf="@id/tv_answer">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+                        <ImageView
+                            android:id="@+id/answer_pokemon_sprite"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="8dp"
+                            android:background="@drawable/shape_rounded_corner"
+                            app:imageUrl="@{buzzerVM.currentPokemon.sprite}"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintEnd_toEndOf="@id/guideline_center"
+                            app:layout_constraintTop_toTopOf="parent" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@{buzzerVM.currentPokemon.name}"
+                            android:textColor="@color/white"
+                            android:textSize="24dp"
+                            app:layout_constraintStart_toEndOf="@id/guideline_center"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"/>
+                        <androidx.constraintlayout.widget.Guideline
+                            android:id="@+id/guideline_center"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            app:layout_constraintGuide_percent="0.5" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </net.cachapa.expandablelayout.ExpandableLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!--   correct answer     -->
+
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline_begin"
