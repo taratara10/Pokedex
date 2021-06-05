@@ -27,6 +27,7 @@ class BuzzerQuizFragment: Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding.apply {
             buzzerVM = buzzerViewModel
+            cardHintOne.setOnClickListener { elHintOne.toggle() }
         }
 
         buzzerViewModel.goResultFragment.observe(viewLifecycleOwner,{goResult ->

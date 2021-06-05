@@ -4,7 +4,7 @@
     <string name="pokemon_weight">おもさ： %.1f kg </string>
     <string name="pokemon_number">#%03d</string>
     <string name="region_number">No.%03d~%03d</string>
-    <string name="hint_one">たかさ： %.1f m \nおもさ： %.1f kg </string>
+    <string name="hint_one">　　　　　たかさ：%.1f m \n　　　　　おもさ：%.1f kg </string>
     <string name="progress_count">%1d/%1d</string>
     <string name="next_btn">つぎへ</string>
     <string name="finish_btn">けっかはっぴょう</string>
