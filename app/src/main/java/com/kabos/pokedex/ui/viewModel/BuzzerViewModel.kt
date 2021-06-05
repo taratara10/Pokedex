@@ -27,6 +27,7 @@ class BuzzerViewModel @Inject constructor(private val repository: PokemonReposit
     var numberOfPlayer:Int = 2
 
     var questionIdList = arrayListOf<Int>()
+    val isLastQuestion = MutableLiveData(false)
 
     var playerOneScore: Int = 0
     var playerTwoScore: Int = 0
@@ -42,6 +43,8 @@ class BuzzerViewModel @Inject constructor(private val repository: PokemonReposit
     var playerFiveChecked: Boolean = false
     var playerSixChecked: Boolean = false
     var isAnswered :Boolean = false
+
+    var buttonText = MutableLiveData(R.string.next_btn)
 
     var questionsRadioChecked = MutableLiveData(QuestionsRadio.secound)
 
@@ -75,14 +78,16 @@ class BuzzerViewModel @Inject constructor(private val repository: PokemonReposit
         getPokemon(questionIdList.first())
     }
 
-    //名前を動詞にする
-    fun nextQuestion(){
+    fun setupNextQuestion(){
         if (!isAnswered) return
         countPlayerScore()
         currentProgress ++
         getPokemon(questionIdList[currentProgress - 1])
+        if (currentProgress == numberOfQuestion) buttonText.postValue(R.string.finish_btn)
+    }
 
-
+    fun atLastQuestion(){
+        countPlayerScore()
     }
 
     //checkboxをclickでnext判定

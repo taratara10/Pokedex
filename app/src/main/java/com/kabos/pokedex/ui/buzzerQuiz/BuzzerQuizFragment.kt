@@ -26,6 +26,9 @@ class BuzzerQuizFragment: Fragment() {
         binding.apply {
             buzzerVM = buzzerViewModel
         }
+
+
+
     }
 
 
