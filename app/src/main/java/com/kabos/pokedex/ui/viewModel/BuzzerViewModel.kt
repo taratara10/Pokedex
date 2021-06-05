@@ -7,12 +7,14 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.kabos.pokedex.R
 import com.kabos.pokedex.model.Pokemon
+import com.kabos.pokedex.model.PokemonInfo
+import com.kabos.pokedex.model.PokemonSpecies
 import com.kabos.pokedex.model.Region
 import com.kabos.pokedex.repository.PokemonRepository
 import com.kabos.pokedex.util.QuestionsRadio
 import com.kabos.pokedex.util.RegionCallback
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 import javax.inject.Inject
 import kotlin.random.Random
 
@@ -20,7 +22,7 @@ import kotlin.random.Random
 class BuzzerViewModel @Inject constructor(private val repository: PokemonRepository)
     : ViewModel(){
 
-    lateinit var currentPokemon: MutableLiveData<Pokemon>
+    var currentPokemon: MutableLiveData<Pokemon>? = null
 //    lateinit var nextPokemon: Pokemon
     var currentRegion: Region = Region.Kanto
     var currentProgress: Int = 1
@@ -136,9 +138,34 @@ class BuzzerViewModel @Inject constructor(private val repository: PokemonReposit
     }
 
     private fun getPokemon(id: Int) = viewModelScope.launch{
-        //currentPokemon.postValue()
+        val pokemon = async {
+            repository.mergePokemonData(
+                    getPokemonInfo(id).await() as PokemonInfo,
+                    getPokemonSpecies(id).await() as PokemonSpecies
+            )
+        }
+        currentPokemon?.postValue(pokemon.await())
     }
 
+    private suspend fun getPokemonInfo(id: Int): Deferred<Any?> = withContext(Dispatchers.IO) {
+        async {
+            repository.getPokemonInfoById(
+                    id = id,
+                    onFetchFailed = { t ->
+                        t.stackTrace //todo もっとなんかsnackBarとかで表示させたい
+                    })?.data
+        }
+    }
+
+    private suspend fun getPokemonSpecies(id: Int): Deferred<Any?> = withContext(Dispatchers.IO) {
+        async {
+            repository.getPokemonSpeciesById(
+                    id = id,
+                    onFetchFailed = { t ->
+                        t.stackTrace //todo もっとなんかsnackBarとかで表示させたい
+                    })?.data
+        }
+    }
 
 
 
