@@ -22,7 +22,7 @@ import kotlin.random.Random
 class BuzzerViewModel @Inject constructor(private val repository: PokemonRepository)
     : ViewModel(){
 
-    var currentPokemon: MutableLiveData<Pokemon>? = null
+    var currentPokemon: MutableLiveData<Pokemon> = MutableLiveData()
 //    lateinit var nextPokemon: Pokemon
     var currentRegion: Region = Region.Kanto
     var currentProgress: Int = 1
@@ -81,6 +81,7 @@ class BuzzerViewModel @Inject constructor(private val repository: PokemonReposit
         generateQuestionIdList()
         getPokemon(questionIdList.first())
         goResultFragment.postValue(false)
+        Log.d("startQuestion","${questionIdList.first()}/${currentPokemon.value}")
     }
 
     fun setupNextQuestion(){
@@ -139,12 +140,11 @@ class BuzzerViewModel @Inject constructor(private val repository: PokemonReposit
 
     private fun getPokemon(id: Int) = viewModelScope.launch{
         val pokemon = async {
-            repository.mergePokemonData(
+            return@async repository.mergePokemonData(
                     getPokemonInfo(id).await() as PokemonInfo,
-                    getPokemonSpecies(id).await() as PokemonSpecies
-            )
+                    getPokemonSpecies(id).await() as PokemonSpecies)
         }
-        currentPokemon?.postValue(pokemon.await())
+        currentPokemon.postValue(pokemon.await())
     }
 
     private suspend fun getPokemonInfo(id: Int): Deferred<Any?> = withContext(Dispatchers.IO) {
