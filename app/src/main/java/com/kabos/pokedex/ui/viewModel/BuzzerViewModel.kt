@@ -28,12 +28,12 @@ class BuzzerViewModel @Inject constructor(private val repository: PokemonReposit
 
     var questionIdList = arrayListOf<Int>()
 
-    var playerOne: Int = 0
-    var playerTwo: Int = 0
-    var playerThree: Int = 0
-    var playerFour: Int = 0
-    var playerFive: Int = 0
-    var playerSix: Int = 0
+    var playerOneScore: Int = 0
+    var playerTwoScore: Int = 0
+    var playerThreeScore: Int = 0
+    var playerFourScore: Int = 0
+    var playerFiveScore: Int = 0
+    var playerSixScore: Int = 0
 
     var playerOneChecked: Boolean = false
     var playerTwoChecked: Boolean = false
@@ -78,6 +78,9 @@ class BuzzerViewModel @Inject constructor(private val repository: PokemonReposit
     //名前を動詞にする
     fun nextQuestion(){
         if (!isAnswered) return
+        countPlayerScore()
+        currentProgress ++
+        getPokemon(questionIdList[currentProgress - 1])
 
 
     }
@@ -90,6 +93,33 @@ class BuzzerViewModel @Inject constructor(private val repository: PokemonReposit
                 playerFourChecked ||
                 playerFiveChecked ||
                 playerSixChecked
+    }
+
+    private fun countPlayerScore(){
+        if (playerOneChecked) {
+            playerOneScore ++
+            playerOneChecked = false
+        }
+        if (playerTwoChecked) {
+            playerTwoScore ++
+            playerThreeChecked = false
+        }
+        if (playerThreeChecked) {
+            playerThreeScore ++
+            playerThreeChecked = false
+        }
+        if (playerFourChecked) {
+            playerFourScore ++
+            playerFiveChecked = false
+        }
+        if (playerFiveChecked) {
+            playerFiveScore ++
+            playerFiveChecked = false
+        }
+        if (playerSixChecked) {
+            playerSixScore ++
+            playerSixChecked = false
+        }
     }
 
     private fun getPokemon(id: Int) = viewModelScope.launch{
