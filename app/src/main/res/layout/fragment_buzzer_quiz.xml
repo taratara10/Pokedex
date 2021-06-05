@@ -66,6 +66,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="24dp"
+                    android:onClick="@{() -> elHintOne.toggle()}"
                     app:layout_constraintEnd_toEndOf="@id/guideline_end"
                     app:layout_constraintStart_toStartOf="@id/guideline_begin"
                     app:layout_constraintTop_toBottomOf="@id/question">
@@ -108,6 +109,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="24dp"
+                    android:onClick="@{() -> elHintTwo.toggle()}"
                     app:layout_constraintEnd_toEndOf="@id/guideline_end"
                     app:layout_constraintStart_toStartOf="@id/guideline_begin"
                     app:layout_constraintTop_toBottomOf="@id/card_hint_one">
@@ -150,6 +152,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="24dp"
+                    android:onClick="@{() -> elHintThree.toggle()}"
                     app:layout_constraintEnd_toEndOf="@id/guideline_end"
                     app:layout_constraintStart_toStartOf="@id/guideline_begin"
                     app:layout_constraintTop_toBottomOf="@id/card_hint_two">
@@ -192,6 +195,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="24dp"
+                    android:onClick="@{() -> elAnswer.toggle()}"
                     app:layout_constraintEnd_toEndOf="@id/guideline_end"
                     app:layout_constraintStart_toStartOf="@id/guideline_begin"
                     app:layout_constraintTop_toBottomOf="@id/card_hint_three"
