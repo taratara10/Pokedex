@@ -45,6 +45,7 @@ class BuzzerViewModel @Inject constructor(private val repository: PokemonReposit
     var playerFourChecked: Boolean = false
     var playerFiveChecked: Boolean = false
     var playerSixChecked: Boolean = false
+    var playerNoneChecked: Boolean = false
     var isAnswered :Boolean = false
     var goResultFragment = MutableLiveData(false)
 
@@ -84,7 +85,7 @@ class BuzzerViewModel @Inject constructor(private val repository: PokemonReposit
     }
 
     fun setupNextQuestion(){
-        Log.d("setupNext","launch setupNextQuestion ${isAnswered}/")
+        Log.d("setupNext","launch setupNextQuestion /playerOne${playerOneChecked}/")
         if (!isAnswered) return
         countPlayerScore()
         currentProgress ++
@@ -101,7 +102,6 @@ class BuzzerViewModel @Inject constructor(private val repository: PokemonReposit
     }
 
     //checkboxをclickでnext判定
-    //todo viewのcheckBox.onClickにセット
     //todo btn alphaを調節
     fun isAnswered() {
         isAnswered = playerOneChecked ||
