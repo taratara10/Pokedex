@@ -38,7 +38,10 @@ class BuzzerMainFragment: Fragment() {
             buzzerVM = buzzerViewModel
             callback = navigateRegionCallback
             setupNumberPicker(npBuzzerPlayer)
-            btnBuzzerStart.setOnClickListener { findNavController().navigate(R.id.action_navigation_buzzer_main_to_navigation_buzzer_quiz) }
+            btnBuzzerStart.setOnClickListener {
+                buzzerViewModel.startQuestion()
+                findNavController().navigate(R.id.action_navigation_buzzer_main_to_navigation_buzzer_quiz)
+            }
         }
     }
 

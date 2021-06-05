@@ -73,7 +73,7 @@ class PokedexViewModel @Inject constructor(private val repository: PokemonReposi
         //check loading
         if (isLoading)return@launch else isLoading = true
 
-        //Get 5 Pokemon and add currentRegionList
+        //Get pokemon after add currentRegionList
         val list = async{
             if (currentNumber <= regionEndNumber && isLoading) {
                 val pokemonInfo = getPokemonInfo(currentNumber).await()
