@@ -63,7 +63,6 @@ class BuzzerViewModel @Inject constructor(private val repository: PokemonReposit
 
 
 
-    //fun createRandomIdList():List<Int>
 
     //previousPokemon -> currentPokemon
 
@@ -95,13 +94,14 @@ class BuzzerViewModel @Inject constructor(private val repository: PokemonReposit
 
     fun atLastQuestion(){
         countPlayerScore()
+        //buzzerQuizFragmentに通知を送って、navigationをFragmentで処理
         goResultFragment.postValue(true)
-
 
     }
 
     //checkboxをclickでnext判定
     //todo viewのcheckBox.onClickにセット
+    //todo btn alphaを調節
     fun isAnswered() {
         isAnswered = playerOneChecked ||
                 playerTwoChecked ||

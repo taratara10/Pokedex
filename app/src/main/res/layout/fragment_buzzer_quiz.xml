@@ -287,6 +287,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:button="@null"
+                            android:onClick="@{() -> buzzerVM.isAnswered()}"
                             android:drawableEnd="?android:attr/listChoiceIndicatorMultiple"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@id/tv_answer_player" />
@@ -307,6 +308,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="16dp"
                             android:button="@null"
+                            android:onClick="@{() -> buzzerVM.isAnswered()}"
                             android:drawableEnd="?android:attr/listChoiceIndicatorMultiple"
                             app:layout_constraintStart_toEndOf="@id/iv_player_one"
                             app:layout_constraintTop_toBottomOf="@id/tv_answer_player" />
@@ -326,6 +328,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:visibility="gone"
+                            android:onClick="@{() -> buzzerVM.isAnswered()}"
                             android:layout_marginStart="16dp"
                             android:button="@null"
                             android:drawableEnd="?android:attr/listChoiceIndicatorMultiple"
@@ -350,6 +353,7 @@
                             android:layout_marginStart="16dp"
                             android:visibility="gone"
                             android:button="@null"
+                            android:onClick="@{() -> buzzerVM.isAnswered()}"
                             android:drawableEnd="?android:attr/listChoiceIndicatorMultiple"
                             app:layout_constraintStart_toEndOf="@id/iv_player_three"
                             app:layout_constraintTop_toBottomOf="@id/tv_answer_player" />
@@ -369,7 +373,7 @@
                             android:id="@+id/cb_player_none"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text=""
+                            android:onClick="@{() -> buzzerVM.isAnswered()}"
                             android:button="@null"
                             android:drawableEnd="?android:attr/listChoiceIndicatorMultiple"
                             app:layout_constraintStart_toStartOf="parent"
@@ -382,13 +386,14 @@
                             app:layout_constraintTop_toTopOf="@id/cb_player_none"
                             app:layout_constraintBottom_toBottomOf="@+id/cb_player_none"/>
 
-                        <!-- player three -->
+                        <!-- player five -->
                         <CheckBox
                             android:id="@+id/cb_player_five"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:visibility="gone"
                             android:button="@null"
+                            android:onClick="@{() -> buzzerVM.isAnswered()}"
                             android:drawableEnd="?android:attr/listChoiceIndicatorMultiple"
                             app:layout_constraintStart_toStartOf="@+id/cb_player_three"
                             app:layout_constraintTop_toBottomOf="@id/cb_player_three" />
@@ -404,13 +409,14 @@
                             app:srcCompat="@drawable/timer_ball" />
 
 
-                        <!-- player three -->
+                        <!-- player six -->
                         <CheckBox
                             android:id="@+id/cb_player_six"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:visibility="gone"
                             android:button="@null"
+                            android:onClick="@{() -> buzzerVM.isAnswered()}"
                             android:drawableEnd="?android:attr/listChoiceIndicatorMultiple"
                             app:layout_constraintStart_toStartOf="@+id/cb_player_four"
                             app:layout_constraintTop_toBottomOf="@id/cb_player_four" />
@@ -449,9 +455,11 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="24dp"
                     android:text="@{buzzerVM.buttonText}"
+                    android:onClick="@{() -> buzzerVM.setupNextQuestion()}"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/guideline_end"
-                    app:layout_constraintTop_toBottomOf="@+id/card_player" />
+                    app:layout_constraintTop_toBottomOf="@+id/card_player"
+                    android:alpha="0.3"/>
 
 
 

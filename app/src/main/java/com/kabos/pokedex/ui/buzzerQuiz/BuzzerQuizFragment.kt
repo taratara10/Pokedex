@@ -41,6 +41,7 @@ class BuzzerQuizFragment: Fragment() {
             cardHintTwo.setOnClickListener { elHintTwo.toggle() }
             cardHintThree.setOnClickListener { elHintThree.toggle() }
             cardAnswer.setOnClickListener { elAnswer.toggle() }
+
         }
 
         buzzerViewModel.goResultFragment.observe(viewLifecycleOwner,{goResult ->
