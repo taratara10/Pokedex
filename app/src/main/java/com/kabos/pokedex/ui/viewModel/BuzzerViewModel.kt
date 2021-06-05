@@ -84,10 +84,11 @@ class BuzzerViewModel @Inject constructor(private val repository: PokemonReposit
     }
 
     fun setupNextQuestion(){
+        Log.d("setupNext","launch setupNextQuestion ${isAnswered}/")
         if (!isAnswered) return
         countPlayerScore()
         currentProgress ++
-        getPokemon(questionIdList[currentProgress - 1])
+        getPokemon(questionIdList[currentProgress + 1])
         //最終問題ならbuttonTextを差し替え
         if (currentProgress == numberOfQuestion) buttonText.postValue(R.string.finish_btn)
     }
@@ -109,6 +110,7 @@ class BuzzerViewModel @Inject constructor(private val repository: PokemonReposit
                 playerFourChecked ||
                 playerFiveChecked ||
                 playerSixChecked
+        Log.d("isAnswerefd","isAnswered launch ${isAnswered}")
     }
 
     private fun countPlayerScore(){

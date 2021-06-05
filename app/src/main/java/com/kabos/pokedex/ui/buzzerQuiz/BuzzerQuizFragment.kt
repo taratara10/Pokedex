@@ -27,15 +27,7 @@ class BuzzerQuizFragment: Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding.apply {
             buzzerVM = buzzerViewModel
-            cbPlayerThree.visibility = buzzerViewModel.isDisplayPlayerImage(3)
-            cbPlayerFour.visibility = buzzerViewModel.isDisplayPlayerImage(4)
-            cbPlayerFive.visibility = buzzerViewModel.isDisplayPlayerImage(5)
-            cbPlayerSix.visibility = buzzerViewModel.isDisplayPlayerImage(6)
-
-            ivPlayerThree.visibility = buzzerViewModel.isDisplayPlayerImage(3)
-            ivPlayerFour.visibility = buzzerViewModel.isDisplayPlayerImage(4)
-            ivPlayerFive.visibility = buzzerViewModel.isDisplayPlayerImage(5)
-            ivPlayerSix.visibility = buzzerViewModel.isDisplayPlayerImage(6)
+            lifecycleOwner = this@BuzzerQuizFragment
 
             cardHintOne.setOnClickListener { elHintOne.toggle() }
             cardHintTwo.setOnClickListener { elHintTwo.toggle() }
