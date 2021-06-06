@@ -38,13 +38,13 @@ class BuzzerViewModel @Inject constructor(private val repository: PokemonReposit
     var playerFiveScore: Int = 0
     var playerSixScore: Int = 0
 
-    var playerOneChecked: Boolean = false
-    var playerTwoChecked: Boolean = false
-    var playerThreeChecked: Boolean = false
-    var playerFourChecked: Boolean = false
-    var playerFiveChecked: Boolean = false
-    var playerSixChecked: Boolean = false
-    var playerNoneChecked: Boolean = false
+    var playerOneChecked = MutableLiveData(false)
+    var playerTwoChecked = MutableLiveData(false)
+    var playerThreeChecked = MutableLiveData(false)
+    var playerFourChecked = MutableLiveData(false)
+    var playerFiveChecked = MutableLiveData(false)
+    var playerSixChecked = MutableLiveData(false)
+    var playerNoneChecked = MutableLiveData(false)
     var isAnswered :Boolean = false
     var goResultFragment = MutableLiveData(false)
 
@@ -92,6 +92,7 @@ class BuzzerViewModel @Inject constructor(private val repository: PokemonReposit
     }
 
     fun setupNextQuestion(){
+        //checkboxが空ならreturn
         if (!isAnswered) return
 
         countPlayerScore()
@@ -101,6 +102,7 @@ class BuzzerViewModel @Inject constructor(private val repository: PokemonReposit
         if (currentProgress.value == numberOfQuestion) {
             buttonText.postValue(R.string.finish_btn)
         }
+        Log.d("setup", "1:${playerOneScore}/2:${playerTwoScore}")
     }
 
     fun atLastQuestion(){
@@ -119,39 +121,39 @@ class BuzzerViewModel @Inject constructor(private val repository: PokemonReposit
     //checkboxをclickでnext判定
     //todo btn alphaを調節
     fun isAnsweredAnyPlayer(){
-        isAnswered = playerOneChecked
-                || playerTwoChecked
-                || playerThreeChecked
-                || playerFourChecked
-                || playerFiveChecked
-                || playerSixChecked
-                || playerNoneChecked
+        isAnswered = playerOneChecked.value!!
+                || playerTwoChecked.value!!
+                || playerThreeChecked.value!!
+                || playerFourChecked.value!!
+                || playerFiveChecked.value!!
+                || playerSixChecked.value!!
+                || playerNoneChecked.value!!
     }
 
     private fun countPlayerScore(){
-        if (playerOneChecked) {
+        if (playerOneChecked.value!!) {
             playerOneScore ++
-            playerOneChecked = false
+            playerOneChecked.postValue(false)
         }
-        if (playerTwoChecked) {
+        if (playerTwoChecked.value!!) {
             playerTwoScore ++
-            playerThreeChecked = false
+            playerThreeChecked.postValue(false)
         }
-        if (playerThreeChecked) {
+        if (playerThreeChecked.value!!) {
             playerThreeScore ++
-            playerThreeChecked = false
+            playerThreeChecked.postValue(false)
         }
-        if (playerFourChecked) {
+        if (playerFourChecked.value!!) {
             playerFourScore ++
-            playerFiveChecked = false
+            playerFiveChecked.postValue(false)
         }
-        if (playerFiveChecked) {
+        if (playerFiveChecked.value!!) {
             playerFiveScore ++
-            playerFiveChecked = false
+            playerFiveChecked.postValue(false)
         }
-        if (playerSixChecked) {
+        if (playerSixChecked.value!!) {
             playerSixScore ++
-            playerSixChecked = false
+            playerSixChecked.postValue(false)
         }
     }
 
