@@ -23,9 +23,8 @@ class BuzzerViewModel @Inject constructor(private val repository: PokemonReposit
     : ViewModel(){
 
     var currentPokemon: MutableLiveData<Pokemon> = MutableLiveData()
-//    lateinit var nextPokemon: Pokemon
     var currentRegion: Region = Region.Kanto
-    var currentProgress: Int = 1
+    var currentProgress = MutableLiveData(1)
     var numberOfQuestion: Int = 10
     var numberOfPlayer:Int = 2
 
@@ -84,14 +83,24 @@ class BuzzerViewModel @Inject constructor(private val repository: PokemonReposit
         Log.d("startQuestion","${questionIdList.first()}/${currentPokemon.value}")
     }
 
+    fun callNext(){
+        if (currentProgress.value != numberOfQuestion) {
+            setupNextQuestion()
+        } else {
+            atLastQuestion()
+        }
+    }
+
     fun setupNextQuestion(){
-        Log.d("setupNext","launch setupNextQuestion /playerOne${playerOneChecked}/")
         if (!isAnswered) return
+
         countPlayerScore()
-        currentProgress ++
-        getPokemon(questionIdList[currentProgress + 1])
+        incrementCurrentProgress()
+        getPokemon(questionIdList[currentProgress.value as Int -1])
         //最終問題ならbuttonTextを差し替え
-        if (currentProgress == numberOfQuestion) buttonText.postValue(R.string.finish_btn)
+        if (currentProgress.value == numberOfQuestion) {
+            buttonText.postValue(R.string.finish_btn)
+        }
     }
 
     fun atLastQuestion(){
@@ -99,6 +108,12 @@ class BuzzerViewModel @Inject constructor(private val repository: PokemonReposit
         //buzzerQuizFragmentに通知を送って、navigationをFragmentで処理
         goResultFragment.postValue(true)
 
+    }
+
+    private fun incrementCurrentProgress() {
+        currentProgress.value?.let { i ->
+            if (i < numberOfQuestion) currentProgress.value = i + 1
+        }
     }
 
     //checkboxをclickでnext判定
