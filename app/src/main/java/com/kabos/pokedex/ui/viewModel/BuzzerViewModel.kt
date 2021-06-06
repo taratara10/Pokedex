@@ -2,6 +2,7 @@ package com.kabos.pokedex.ui.viewModel
 
 import android.util.Log
 import android.view.View
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -29,14 +30,10 @@ class BuzzerViewModel @Inject constructor(private val repository: PokemonReposit
     var numberOfPlayer:Int = 2
 
     var questionIdList = arrayListOf<Int>()
-    val isLastQuestion = MutableLiveData(false)
 
-    var playerOneScore: Int = 0
-    var playerTwoScore: Int = 0
-    var playerThreeScore: Int = 0
-    var playerFourScore: Int = 0
-    var playerFiveScore: Int = 0
-    var playerSixScore: Int = 0
+    //6人分のスコア
+    var playerScoreList = mutableListOf(0f, 0f, 0f, 0f, 0f, 0f)
+
 
     var playerOneChecked = MutableLiveData(false)
     var playerTwoChecked = MutableLiveData(false)
@@ -102,7 +99,6 @@ class BuzzerViewModel @Inject constructor(private val repository: PokemonReposit
         if (currentProgress.value == numberOfQuestion) {
             buttonText.postValue(R.string.finish_btn)
         }
-        Log.d("setup", "1:${playerOneScore}/2:${playerTwoScore}")
     }
 
     fun atLastQuestion(){
@@ -132,27 +128,27 @@ class BuzzerViewModel @Inject constructor(private val repository: PokemonReposit
 
     private fun countPlayerScore(){
         if (playerOneChecked.value!!) {
-            playerOneScore ++
+            playerScoreList[0] ++
             playerOneChecked.postValue(false)
         }
         if (playerTwoChecked.value!!) {
-            playerTwoScore ++
+            playerScoreList[1] ++
             playerTwoChecked.postValue(false)
         }
         if (playerThreeChecked.value!!) {
-            playerThreeScore ++
+            playerScoreList[2] ++
             playerThreeChecked.postValue(false)
         }
         if (playerFourChecked.value!!) {
-            playerFourScore ++
+            playerScoreList[3] ++
             playerFourChecked.postValue(false)
         }
         if (playerFiveChecked.value!!) {
-            playerFiveScore ++
+            playerScoreList[4] ++
             playerFiveChecked.postValue(false)
         }
         if (playerSixChecked.value!!) {
-            playerSixScore ++
+            playerScoreList[5] ++
             playerSixChecked.postValue(false)
         }
         if (playerNoneChecked.value!!){
