@@ -103,14 +103,14 @@ class BuzzerViewModel @Inject constructor(private val repository: PokemonReposit
 
     //checkboxをclickでnext判定
     //todo btn alphaを調節
-    fun isAnswered() {
-        isAnswered = playerOneChecked ||
-                playerTwoChecked ||
-                playerThreeChecked ||
-                playerFourChecked ||
-                playerFiveChecked ||
-                playerSixChecked
-        Log.d("isAnswerefd","isAnswered launch ${isAnswered}")
+    fun isAnsweredAnyPlayer(){
+        isAnswered = playerOneChecked
+                || playerTwoChecked
+                || playerThreeChecked
+                || playerFourChecked
+                || playerFiveChecked
+                || playerSixChecked
+                || playerNoneChecked
     }
 
     private fun countPlayerScore(){
