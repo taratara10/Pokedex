@@ -137,7 +137,7 @@ class BuzzerViewModel @Inject constructor(private val repository: PokemonReposit
         }
         if (playerTwoChecked.value!!) {
             playerTwoScore ++
-            playerThreeChecked.postValue(false)
+            playerTwoChecked.postValue(false)
         }
         if (playerThreeChecked.value!!) {
             playerThreeScore ++
@@ -145,7 +145,7 @@ class BuzzerViewModel @Inject constructor(private val repository: PokemonReposit
         }
         if (playerFourChecked.value!!) {
             playerFourScore ++
-            playerFiveChecked.postValue(false)
+            playerFourChecked.postValue(false)
         }
         if (playerFiveChecked.value!!) {
             playerFiveScore ++
@@ -154,6 +154,9 @@ class BuzzerViewModel @Inject constructor(private val repository: PokemonReposit
         if (playerSixChecked.value!!) {
             playerSixScore ++
             playerSixChecked.postValue(false)
+        }
+        if (playerNoneChecked.value!!){
+            playerNoneChecked.postValue(false)
         }
     }
 
