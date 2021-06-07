@@ -70,10 +70,10 @@ class BuzzerViewModel @Inject constructor(private val repository: PokemonReposit
      *   btnBuzzerNext click listener
      */
     fun startQuestion(){
+        currentProgress.postValue(1)
         generateQuestionIdList()
         getPokemon(questionIdList.first())
         goResultFragment.postValue(false)
-        Log.d("startQuestion","${questionIdList.first()}/${currentPokemon.value}")
     }
 
     fun setupNextQuestion(){
