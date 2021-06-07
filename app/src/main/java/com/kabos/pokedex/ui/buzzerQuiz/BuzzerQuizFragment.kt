@@ -36,6 +36,17 @@ class BuzzerQuizFragment: Fragment() {
             if (goResult) findNavController().navigate(R.id.action_navigation_buzzer_quiz_to_navigation_buzzer_result)
         })
 
+        buzzerViewModel.isCollapseCardView.observe(viewLifecycleOwner, { isCollapse ->
+            if (isCollapse){
+                binding.apply {
+                    elHintOne.collapse(false)
+                    elHintTwo.collapse(false)
+                    elHintThree.collapse(false)
+                    elAnswer.collapse(false)
+                }
+            }
+        })
+
 
     }
 

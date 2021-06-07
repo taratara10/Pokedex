@@ -16,6 +16,7 @@ import com.kabos.pokedex.util.QuestionsRadio
 import com.kabos.pokedex.util.RegionCallback
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.*
+import net.cachapa.expandablelayout.ExpandableLayout
 import javax.inject.Inject
 import kotlin.random.Random
 
@@ -34,7 +35,7 @@ class BuzzerViewModel @Inject constructor(private val repository: PokemonReposit
     //6人分のスコア
     var playerScoreList = mutableListOf(0f, 0f, 0f, 0f, 0f, 0f)
 
-
+    //LiveData<MutableList>にしてもいいんだけど、処理が面倒なので個別の変数で運用する
     var playerOneChecked = MutableLiveData(false)
     var playerTwoChecked = MutableLiveData(false)
     var playerThreeChecked = MutableLiveData(false)
@@ -47,21 +48,13 @@ class BuzzerViewModel @Inject constructor(private val repository: PokemonReposit
 
     var buttonText = MutableLiveData(R.string.next_btn)
 
+    var isCollapseCardView = MutableLiveData(false)
     var questionsRadioChecked = MutableLiveData(QuestionsRadio.secound)
 
 
-    fun updateQuestionsNumber() {
-        numberOfQuestion = questionsRadioChecked.value?.number!!
-    }
-
-    fun isDisplayPlayerImage(id: Int): Int {
-        return if (id <= numberOfPlayer) View.VISIBLE else View.GONE
-    }
 
 
 
-
-    //previousPokemon -> currentPokemon
 
     private fun generateQuestionIdList() {
         val range = mutableListOf<Int>() //Regionの範囲
@@ -73,6 +66,9 @@ class BuzzerViewModel @Inject constructor(private val repository: PokemonReposit
     }
 
 
+    /**
+     *   btnBuzzerNext click listener
+     */
     fun startQuestion(){
         generateQuestionIdList()
         getPokemon(questionIdList.first())
@@ -80,18 +76,20 @@ class BuzzerViewModel @Inject constructor(private val repository: PokemonReposit
         Log.d("startQuestion","${questionIdList.first()}/${currentPokemon.value}")
     }
 
-    fun callNext(){
+    fun setupNextQuestion(){
         if (currentProgress.value != numberOfQuestion) {
-            setupNextQuestion()
+            updateQuestion()
         } else {
-            atLastQuestion()
+            navigateResultFragment()
         }
     }
 
-    fun setupNextQuestion(){
+    private fun updateQuestion(){
         //checkboxが空ならreturn
         if (!isAnswered) return
 
+        //fragment側で検知してcardを閉じる
+        isCollapseCardView.postValue(true)
         countPlayerScore()
         incrementCurrentProgress()
         getPokemon(questionIdList[currentProgress.value as Int -1])
@@ -101,7 +99,7 @@ class BuzzerViewModel @Inject constructor(private val repository: PokemonReposit
         }
     }
 
-    fun atLastQuestion(){
+    private fun navigateResultFragment(){
         countPlayerScore()
         //buzzerQuizFragmentに通知を送って、navigationをFragmentで処理
         goResultFragment.postValue(true)
@@ -114,6 +112,16 @@ class BuzzerViewModel @Inject constructor(private val repository: PokemonReposit
         }
     }
 
+    /**
+     * layout callback
+     */
+    fun updateQuestionsNumber() {
+        numberOfQuestion = questionsRadioChecked.value?.number!!
+    }
+
+    fun isDisplayPlayerImage(id: Int): Int {
+        return if (id <= numberOfPlayer) View.VISIBLE else View.GONE
+    }
     //checkboxをclickでnext判定
     //todo btn alphaを調節
     fun isAnsweredAnyPlayer(){
@@ -156,6 +164,9 @@ class BuzzerViewModel @Inject constructor(private val repository: PokemonReposit
         }
     }
 
+    /**
+     * getPokemon
+     */
     private fun getPokemon(id: Int) = viewModelScope.launch{
         val pokemon = async {
             return@async repository.mergePokemonData(
