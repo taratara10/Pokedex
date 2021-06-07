@@ -19,7 +19,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
                 <ProgressBar
-                    android:id="@+id/progressBar"
+                    android:id="@+id/buzzerProgressBar"
                     style="?android:attr/progressBarStyleHorizontal"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -34,11 +34,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@{@string/progress_count(buzzerVM.currentProgress,buzzerVM.numberOfQuestion)}"
-                    app:layout_constraintBottom_toBottomOf="@+id/progressBar"
+                    app:layout_constraintBottom_toBottomOf="@+id/buzzerProgressBar"
                     app:layout_constraintEnd_toStartOf="@+id/guideline_end"
                     app:layout_constraintHorizontal_bias="1.0"
                     app:layout_constraintStart_toEndOf="@+id/guideline_begin"
-                    app:layout_constraintTop_toTopOf="@+id/progressBar"
+                    app:layout_constraintTop_toTopOf="@+id/buzzerProgressBar"
                     tools:text="1/10" />
 
                 <!--    question    -->
@@ -48,7 +48,7 @@
                     android:layout_height="wrap_content"
                     app:layout_constraintEnd_toEndOf="@id/guideline_end"
                     app:layout_constraintStart_toStartOf="@id/guideline_begin"
-                    app:layout_constraintTop_toBottomOf="@+id/progressBar"
+                    app:layout_constraintTop_toBottomOf="@+id/buzzerProgressBar"
                     android:layout_marginTop="16dp">
 
                     <TextView

@@ -49,7 +49,7 @@ class BuzzerViewModel @Inject constructor(private val repository: PokemonReposit
     var buttonText = MutableLiveData(R.string.next_btn)
 
     var isCollapseCardView = MutableLiveData(false)
-    var questionsRadioChecked = MutableLiveData(QuestionsRadio.secound)
+    var isCheckedNumberOfQuestionRadio = MutableLiveData(QuestionsRadio.secound)
 
 
 
@@ -115,8 +115,9 @@ class BuzzerViewModel @Inject constructor(private val repository: PokemonReposit
     /**
      * layout callback
      */
-    fun updateQuestionsNumber() {
-        numberOfQuestion = questionsRadioChecked.value?.number!!
+    //buzzer main fragment
+    fun updateNumberOfQuestion() {
+        numberOfQuestion = isCheckedNumberOfQuestionRadio.value?.number!!
     }
 
     fun isDisplayPlayerImage(id: Int): Int {
