@@ -58,7 +58,6 @@ class BuzzerResultFragment: Fragment() {
                     BarEntry(xData[xData.size - 1 - i], yData[i])
             )
         }
-        Log.d("taggg","${entryList}")
         //BarDataSetのリスト
         val barDataSets = mutableListOf<IBarDataSet>()
         //②DataSetにデータ格納
@@ -83,20 +82,16 @@ class BuzzerResultFragment: Fragment() {
         barChart.data = barData
         //⑥Chartのフォーマット指定
         barChart.apply {
-            xAxis.apply {
-                isEnabled = false
-                textColor = Color.BLACK
-            }
+            xAxis.isEnabled = false
             axisRight.isEnabled = false
+            axisLeft.isEnabled = false
             axisLeft.axisMinimum = 0f
             axisLeft.textSize = 18f
             description.isEnabled = false
+            legend.isEnabled = false
             setScaleEnabled(false)
             setTouchEnabled(false)
             setPinchZoom(false)
-
-
-
         }
         //⑦barChart更新
         barChart.invalidate()
