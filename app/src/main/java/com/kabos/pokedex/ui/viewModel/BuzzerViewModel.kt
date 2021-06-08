@@ -32,7 +32,7 @@ class BuzzerViewModel @Inject constructor(private val repository: PokemonReposit
 
     var questionIdList = arrayListOf<Int>()
 
-    //6人分のスコア
+    //6人分のスコア [0]が不正解
     var playerScoreList = mutableListOf(0f, 0f, 0f, 0f, 0f, 0f)
 
     //LiveData<MutableList>にしてもいいんだけど、処理が面倒なので個別の変数で運用する

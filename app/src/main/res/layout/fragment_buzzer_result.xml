@@ -11,80 +11,254 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@drawable/happyacid">
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cardView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="24dp"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toBottomOf="@+id/textView">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:layout_margin="24dp">
 
-
+<!--            130が2player    30dp + 50dp * player-->
                 <com.github.mikephil.charting.charts.HorizontalBarChart
                     android:id="@+id/bar_chart"
                     android:layout_width="0dp"
-                    android:layout_height="0dp"
+                    android:layout_height="230dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="@id/guideline_begin"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toBottomOf="@+id/tv_buzzer_result_title" />
 
                 <TextView
-                    android:id="@+id/textView"
+                    android:id="@+id/tv_buzzer_result_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="じゅんい"
-                    android:layout_marginTop="20dp"
-                    app:layout_constraintEnd_toStartOf="@+id/guideline_begin"
+                    android:text="@{@string/result_title(buzzerVM.numberOfQuestion)}"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="とくてん（５もん）"/>
+
+            <!--    one   -->
+                <TextView
+                    android:id="@+id/tv_result_player_one"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{@string/ranking(buzzerVM.playerScoreList[1])}"
+                    app:layout_constraintBottom_toBottomOf="@+id/iv_result_player_one"
+                    app:layout_constraintEnd_toStartOf="@+id/iv_result_player_one"
+                    app:layout_constraintTop_toTopOf="@+id/iv_result_player_one"
+                    tools:text="1位"/>
 
                 <ImageView
                     android:id="@+id/iv_result_player_one"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
                     app:layout_constraintEnd_toStartOf="@+id/guideline_begin"
-                    app:layout_constraintTop_toBottomOf="@+id/textView"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_buzzer_result_title"
                     app:srcCompat="@drawable/poke_ball" />
+
+                <ImageView
+                    android:id="@+id/iv_result_player_one_king"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/tv_result_player_one"
+                    app:layout_constraintEnd_toStartOf="@+id/tv_result_player_one"
+                    app:layout_constraintTop_toTopOf="@+id/tv_result_player_one"
+                    app:srcCompat="@drawable/kingsrock" />
+
+                <!--    two   -->
+                <TextView
+                    android:id="@+id/tv_result_player_two"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{@string/ranking(buzzerVM.playerScoreList[2])}"
+                    app:layout_constraintBottom_toBottomOf="@+id/iv_result_player_two"
+                    app:layout_constraintEnd_toStartOf="@+id/iv_result_player_two"
+                    app:layout_constraintTop_toTopOf="@+id/iv_result_player_two"
+                    tools:text="1位"/>
 
                 <ImageView
                     android:id="@+id/iv_result_player_two"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
+                    android:layout_marginTop="20dp"
                     app:layout_constraintEnd_toStartOf="@+id/guideline_begin"
                     app:layout_constraintTop_toBottomOf="@+id/iv_result_player_one"
                     app:srcCompat="@drawable/resource_super" />
 
+                <ImageView
+                    android:id="@+id/iv_result_player_two_king"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/tv_result_player_two"
+                    app:layout_constraintEnd_toStartOf="@+id/tv_result_player_two"
+                    app:layout_constraintTop_toTopOf="@+id/tv_result_player_two"
+                    app:srcCompat="@drawable/kingsrock" />
+
+                <!--    three   -->
+                <TextView
+                    android:id="@+id/tv_result_player_three"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{@string/ranking(buzzerVM.playerScoreList[3])}"
+                    android:visibility="@{buzzerVM.isDisplayPlayerImage(3)}"
+                    app:layout_constraintBottom_toBottomOf="@+id/iv_result_player_three"
+                    app:layout_constraintEnd_toStartOf="@+id/iv_result_player_three"
+                    app:layout_constraintTop_toTopOf="@+id/iv_result_player_three"
+                    tools:text="1位"/>
+
+                <ImageView
+                    android:id="@+id/iv_result_player_three"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:visibility="@{buzzerVM.isDisplayPlayerImage(3)}"
+                    app:layout_constraintEnd_toStartOf="@+id/guideline_begin"
+                    app:layout_constraintTop_toBottomOf="@+id/iv_result_player_two"
+                    app:srcCompat="@drawable/hyper" />
+
+                <ImageView
+                    android:id="@+id/iv_result_player_three_king"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    android:visibility="@{buzzerVM.isDisplayPlayerImage(3)}"
+                    app:layout_constraintBottom_toBottomOf="@+id/tv_result_player_three"
+                    app:layout_constraintEnd_toStartOf="@+id/tv_result_player_three"
+                    app:layout_constraintTop_toTopOf="@+id/tv_result_player_three"
+                    app:srcCompat="@drawable/kingsrock" />
+
+                <!--    four   -->
+                <TextView
+                    android:id="@+id/tv_result_player_four"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{@string/ranking(buzzerVM.playerScoreList[4])}"
+                    android:visibility="@{buzzerVM.isDisplayPlayerImage(4)}"
+                    app:layout_constraintBottom_toBottomOf="@+id/iv_result_player_four"
+                    app:layout_constraintEnd_toStartOf="@+id/iv_result_player_four"
+                    app:layout_constraintTop_toTopOf="@+id/iv_result_player_four"
+                    tools:text="1位"/>
+
+                <ImageView
+                    android:id="@+id/iv_result_player_four"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:visibility="@{buzzerVM.isDisplayPlayerImage(4)}"
+                    app:layout_constraintEnd_toStartOf="@+id/guideline_begin"
+                    app:layout_constraintTop_toBottomOf="@+id/iv_result_player_three"
+                    app:srcCompat="@drawable/master_ball" />
+
+                <ImageView
+                    android:id="@+id/iv_result_player_four_king"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    android:visibility="@{buzzerVM.isDisplayPlayerImage(4)}"
+                    app:layout_constraintBottom_toBottomOf="@+id/tv_result_player_four"
+                    app:layout_constraintEnd_toStartOf="@+id/tv_result_player_four"
+                    app:layout_constraintTop_toTopOf="@+id/tv_result_player_four"
+                    app:srcCompat="@drawable/kingsrock" />
+
+                <!--    five   -->
+                <TextView
+                    android:id="@+id/tv_result_player_five"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{@string/ranking(buzzerVM.playerScoreList[5])}"
+                    android:visibility="@{buzzerVM.isDisplayPlayerImage(5)}"
+                    app:layout_constraintBottom_toBottomOf="@+id/iv_result_player_five"
+                    app:layout_constraintEnd_toStartOf="@+id/iv_result_player_five"
+                    app:layout_constraintTop_toTopOf="@+id/iv_result_player_five"
+                    tools:text="1位"/>
+
+                <ImageView
+                    android:id="@+id/iv_result_player_five"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:visibility="@{buzzerVM.isDisplayPlayerImage(5)}"
+                    app:layout_constraintEnd_toStartOf="@+id/guideline_begin"
+                    app:layout_constraintTop_toBottomOf="@+id/iv_result_player_four"
+                    app:srcCompat="@drawable/timer_ball" />
+
+                <ImageView
+                    android:id="@+id/iv_result_player_five_king"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    android:visibility="@{buzzerVM.isDisplayPlayerImage(5)}"
+                    app:layout_constraintBottom_toBottomOf="@+id/tv_result_player_five"
+                    app:layout_constraintEnd_toStartOf="@+id/tv_result_player_five"
+                    app:layout_constraintTop_toTopOf="@+id/tv_result_player_five"
+                    app:srcCompat="@drawable/kingsrock" />
+
+                <!--    six   -->
+                <TextView
+                    android:id="@+id/tv_result_player_six"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{@string/ranking(buzzerVM.playerScoreList[6])}"
+                    android:visibility="@{buzzerVM.isDisplayPlayerImage(6)}"
+                    app:layout_constraintBottom_toBottomOf="@+id/iv_result_player_six"
+                    app:layout_constraintEnd_toStartOf="@+id/iv_result_player_six"
+                    app:layout_constraintTop_toTopOf="@+id/iv_result_player_six"
+                    tools:text="1位"/>
+
+                <ImageView
+                    android:id="@+id/iv_result_player_six"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:visibility="@{buzzerVM.isDisplayPlayerImage(6)}"
+                    app:layout_constraintEnd_toStartOf="@+id/guideline_begin"
+                    app:layout_constraintTop_toBottomOf="@+id/iv_result_player_five"
+                    app:srcCompat="@drawable/quick_ball" />
+
+                <ImageView
+                    android:id="@+id/iv_result_player_six_king"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    android:visibility="@{buzzerVM.isDisplayPlayerImage(6)}"
+                    app:layout_constraintBottom_toBottomOf="@+id/tv_result_player_six"
+                    app:layout_constraintEnd_toStartOf="@+id/tv_result_player_six"
+                    app:layout_constraintTop_toTopOf="@+id/tv_result_player_six"
+                    app:srcCompat="@drawable/kingsrock" />
+
+
+
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="2"
-                    app:layout_constraintEnd_toStartOf="@+id/iv_result_player_one"
-                    app:layout_constraintTop_toBottomOf="@+id/textView" />
+                    android:layout_marginBottom="30dp"
 
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintEnd_toStartOf="@+id/iv_result_player_two"
-                    app:layout_constraintTop_toTopOf="@+id/iv_result_player_two"
-                    app:srcCompat="@drawable/kingsrock" />
+                    android:text="ふせいかい"
+                    app:layout_constraintBottom_toBottomOf="@id/bar_chart"
+                    app:layout_constraintEnd_toStartOf="@id/bar_chart" />
 
                 <androidx.constraintlayout.widget.Guideline
                     android:id="@+id/guideline_begin"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    app:layout_constraintGuide_percent="0.25" />
+                    app:layout_constraintGuide_percent="0.3" />
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -99,5 +273,17 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/cardView" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="けっかはっぴょう"
+            android:textColor="@color/white"
+            android:textSize="24dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

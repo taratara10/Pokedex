@@ -37,7 +37,7 @@ class BuzzerResultFragment: Fragment() {
 
 
             //表示用サンプルデータの作成//
-            val xx = listOf(1f,2f)
+            val xx = listOf(1f,2f,3f, 4f)
             val x = listOf<Float>(1f, 2f,3f, 4f, 5f, 6f )//X軸データ
             val y = x.map{it*2}//Y軸データ（X軸の2乗）
             inflateHorizontalBarChart(barChart, xx, y)

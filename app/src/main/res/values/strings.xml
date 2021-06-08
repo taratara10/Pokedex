@@ -8,4 +8,6 @@
     <string name="progress_count">%1d/%1d</string>
     <string name="next_btn">つぎへ</string>
     <string name="finish_btn">けっかはっぴょう</string>
+    <string name="ranking">%1d位</string>
+    <string name="result_title">とくてん（%1dもん）</string>
 </resources>
