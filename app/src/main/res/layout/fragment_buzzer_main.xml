@@ -129,15 +129,6 @@
                 app:layout_constraintStart_toEndOf="@+id/tv_buzzer_player_number_title"
                 app:layout_constraintTop_toBottomOf="@+id/buzzer_radio_group" />
 
-            <Button
-                android:id="@+id/btn_buzzer_start"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="スタート！"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/guideline_end2"
-                app:layout_constraintStart_toStartOf="@+id/guideline_begin2"
-                app:layout_constraintTop_toBottomOf="@+id/np_buzzer_player" />
 
 
             <androidx.constraintlayout.widget.Guideline
@@ -227,7 +218,24 @@
                 app:layout_constraintTop_toBottomOf="@+id/iv_player_ball"
                 app:srcCompat="@drawable/quick_ball" />
 
+            <Button
+                android:id="@+id/btn_buzzer_start"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="スタート！"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/guideline_end2"
+                app:layout_constraintStart_toStartOf="@+id/guideline_begin2"
+                app:layout_constraintTop_toBottomOf="@+id/np_buzzer_player" />
 
+            <Button
+                android:id="@+id/skip_question"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="skip result"
+                app:layout_constraintEnd_toStartOf="@+id/guideline_end2"
+                app:layout_constraintStart_toStartOf="@+id/guideline_begin2"
+                app:layout_constraintTop_toBottomOf="@+id/btn_buzzer_start" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -71,6 +71,9 @@
         <action
             android:id="@+id/action_navigation_buzzer_main_to_navigation_buzzer_quiz"
             app:destination="@id/navigation_buzzer_quiz" />
+        <action
+            android:id="@+id/action_navigation_buzzer_main_to_navigation_buzzer_result"
+            app:destination="@id/navigation_buzzer_result" />
 
     </fragment>
 

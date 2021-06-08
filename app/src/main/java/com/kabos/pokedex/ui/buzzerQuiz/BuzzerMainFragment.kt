@@ -42,6 +42,11 @@ class BuzzerMainFragment: Fragment() {
                 buzzerViewModel.startQuestion()
                 findNavController().navigate(R.id.action_navigation_buzzer_main_to_navigation_buzzer_quiz)
             }
+
+            //todo 仮置なので消す
+            skipQuestion.setOnClickListener {
+                findNavController().navigate(R.id.action_navigation_buzzer_main_to_navigation_buzzer_result)
+            }
         }
     }
 
