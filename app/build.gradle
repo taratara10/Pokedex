@@ -44,6 +44,9 @@ android {
         enabled true
     }
 }
+repositories {
+    maven { url 'https://jitpack.io' }
+}
 
 dependencies {
 
@@ -97,4 +100,7 @@ dependencies {
 
     //折りたたみ
     implementation 'net.cachapa.expandablelayout:expandablelayout:2.9.2'
+
+    //Graph
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
 }
