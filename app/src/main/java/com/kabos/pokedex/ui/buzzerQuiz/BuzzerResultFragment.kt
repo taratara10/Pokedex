@@ -14,7 +14,6 @@ import com.github.mikephil.charting.data.BarDataSet
 import com.github.mikephil.charting.data.BarEntry
 import com.github.mikephil.charting.formatter.ValueFormatter
 import com.github.mikephil.charting.interfaces.datasets.IBarDataSet
-import com.kabos.pokedex.databinding.FragmentBuzzerMainBinding
 import com.kabos.pokedex.databinding.FragmentBuzzerResultBinding
 import com.kabos.pokedex.ui.viewModel.BuzzerViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -38,9 +37,10 @@ class BuzzerResultFragment: Fragment() {
 
 
             //表示用サンプルデータの作成//
-            val x = listOf<Float>(1f, 2f, 3f, 4f, 5f, 6f)//X軸データ
+            val xx = listOf(1f,2f)
+            val x = listOf<Float>(1f, 2f,3f, 4f, 5f, 6f )//X軸データ
             val y = x.map{it*2}//Y軸データ（X軸の2乗）
-            inflateHorizontalBarChart(barChart, x, y)
+            inflateHorizontalBarChart(barChart, xx, y)
         }
     }
 
@@ -64,11 +64,13 @@ class BuzzerResultFragment: Fragment() {
         //②DataSetにデータ格納
         val barDataSet = BarDataSet(entryList,"とくてん")
         //③DataSetのフォーマット指定
-        barDataSet.color = Color.BLUE
-        barDataSet.valueTextSize = 18f
-        barDataSet.valueFormatter =  object: ValueFormatter(){
-            override fun getFormattedValue(value: Float): String{
-                return value.toInt().toString()
+        barDataSet.apply {
+            color = Color.BLUE
+            valueTextSize = 18f
+            valueFormatter =  object: ValueFormatter(){
+                override fun getFormattedValue(value: Float): String{
+                    return value.toInt().toString()
+                }
             }
         }
         //リストに格納
@@ -76,6 +78,7 @@ class BuzzerResultFragment: Fragment() {
 
         //④BarDataにBarDataSet格納
         val barData = BarData(barDataSets)
+        barData.barWidth = .5f
         //⑤BarChartにBarData格納
         barChart.data = barData
         //⑥Chartのフォーマット指定
