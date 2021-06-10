@@ -32,8 +32,9 @@ class BuzzerViewModel @Inject constructor(private val repository: PokemonReposit
 
     var questionIdList = arrayListOf<Int>()
 
-    //6人分のスコア [0]が不正解
+    //6人分のスコア [0]がなし、[1]がplayerOne
     var playerScoreList = mutableListOf(0f, 0f, 0f, 0f, 0f, 0f)
+    var playerRanking = mutableListOf<Float>()
 
     //LiveData<MutableList>にしてもいいんだけど、処理が面倒なので個別の変数で運用する
     var playerOneChecked = MutableLiveData(false)
@@ -198,6 +199,31 @@ class BuzzerViewModel @Inject constructor(private val repository: PokemonReposit
     }
 
 
+    /**
+     * barChartの処理
+     */
 
+
+    fun shapePlayerScoreToRankingList(){
+        //人数分 + none 切り抜く
+        val takeList = playerScoreList.take(numberOfPlayer + 1) as MutableList<Float>
+        //[0]を最後にもってくる
+        val none = takeList.first()
+        takeList.removeFirst()
+        takeList.add(none)
+
+        //[one, two,... none]
+        playerRanking = takeList
+
+    }
+
+     fun isDisplayKingsRock(id: Int): Int{
+        //noneは順位に含めない
+        val onlyPlayerList = playerRanking.drop(1)
+        val maxPlayerScore = onlyPlayerList.maxOrNull()
+        //同率もあるので、listで返す
+        val topPlayerList = onlyPlayerList.mapIndexedNotNull{index, element -> if (element == maxPlayerScore) index else null}
+        return if (topPlayerList.contains(id)) View.VISIBLE else View.GONE
+    }
 
 }
