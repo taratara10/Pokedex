@@ -54,7 +54,9 @@ class BuzzerViewModel @Inject constructor(private val repository: PokemonReposit
 
 
 
+    private fun resetPlayerScore(){
 
+    }
 
 
     private fun generateQuestionIdList() {
@@ -71,13 +73,19 @@ class BuzzerViewModel @Inject constructor(private val repository: PokemonReposit
      *   btnBuzzerNext click listener
      */
     fun startQuestion(){
+        //reset value
         currentProgress.postValue(1)
+        playerScoreList = mutableListOf(0f, 0f, 0f, 0f, 0f, 0f, 0f)
+
         generateQuestionIdList()
         getPokemon(questionIdList.first())
         goResultFragment.postValue(false)
     }
 
     fun setupNextQuestion(){
+        //checkboxが空ならreturn
+        if (!isAnswered) return
+
         if (currentProgress.value != numberOfQuestion) {
             updateQuestion()
         } else {
@@ -86,9 +94,6 @@ class BuzzerViewModel @Inject constructor(private val repository: PokemonReposit
     }
 
     private fun updateQuestion(){
-        //checkboxが空ならreturn
-        if (!isAnswered) return
-
         //fragment側で検知してcardを閉じる
         isCollapseCardView.postValue(true)
         countPlayerScore()
@@ -206,7 +211,7 @@ class BuzzerViewModel @Inject constructor(private val repository: PokemonReposit
      */
 
 
-    fun shapePlayerScoreToRankingList(){
+    private fun shapePlayerScoreToRankingList(){
         //人数分 + none 切り抜く
         val takeList = playerScoreList.take(numberOfPlayer + 1) as MutableList<Float>
         //[0]を最後にもってくる
@@ -216,6 +221,7 @@ class BuzzerViewModel @Inject constructor(private val repository: PokemonReposit
 
         //[one, two,... none]
         playerRanking = takeList
+        Log.d("agagggg", "${playerRanking}/ ${takeList}")
 
     }
 
