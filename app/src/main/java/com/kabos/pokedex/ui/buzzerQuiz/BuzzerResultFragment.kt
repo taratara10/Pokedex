@@ -36,11 +36,12 @@ class BuzzerResultFragment: Fragment() {
             buzzerVM = buzzerViewModel
 
 
-            //表示用サンプルデータの作成//
-            val xx = listOf(1f,2f,3f, 4f)
-            val x = listOf<Float>(1f, 2f,3f, 4f, 5f, 6f )//X軸データ
-            val y = x.map{it*2}//Y軸データ（X軸の2乗）
-            inflateHorizontalBarChart(barChart, xx, y)
+//            //表示用サンプルデータの作成//
+//            val xx = listOf(1f,2f,3f, 4f)
+//            val x = listOf<Float>(1f, 2f,3f, 4f, 5f, 6f )//X軸データ
+//            val y = x.map{it*2}//Y軸データ（X軸の2乗）
+            val xAxisPlayerList = mutableListOf(1f, 2f, 3f, 4f, 5f, 6f, 7f).take(buzzerViewModel.numberOfPlayer + 1)
+            inflateHorizontalBarChart(barChart, xAxisPlayerList, buzzerViewModel.playerScoreList)
         }
     }
 

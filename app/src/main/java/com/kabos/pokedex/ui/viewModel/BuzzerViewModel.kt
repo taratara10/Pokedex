@@ -32,8 +32,8 @@ class BuzzerViewModel @Inject constructor(private val repository: PokemonReposit
 
     var questionIdList = arrayListOf<Int>()
 
-    //6人分のスコア [0]がなし、[1]がplayerOne
-    var playerScoreList = mutableListOf(0f, 0f, 0f, 0f, 0f, 0f)
+    //6人分 + 不正解のスコア [none, playerOne, playerTwo ..]
+    var playerScoreList = mutableListOf(0f, 0f, 0f, 0f, 0f, 0f, 0f)
     var playerRanking = mutableListOf<Float>()
 
     //LiveData<MutableList>にしてもいいんだけど、処理が面倒なので個別の変数で運用する
@@ -102,6 +102,7 @@ class BuzzerViewModel @Inject constructor(private val repository: PokemonReposit
 
     private fun navigateResultFragment(){
         countPlayerScore()
+        shapePlayerScoreToRankingList()
         //buzzerQuizFragmentに通知を送って、navigationをFragmentで処理
         goResultFragment.postValue(true)
 
@@ -137,32 +138,33 @@ class BuzzerViewModel @Inject constructor(private val repository: PokemonReposit
     }
 
     private fun countPlayerScore(){
-        if (playerOneChecked.value!!) {
+        if (playerNoneChecked.value!!){
             playerScoreList[0] ++
+            playerNoneChecked.postValue(false)
+        }
+        if (playerOneChecked.value!!) {
+            playerScoreList[1] ++
             playerOneChecked.postValue(false)
         }
         if (playerTwoChecked.value!!) {
-            playerScoreList[1] ++
+            playerScoreList[2] ++
             playerTwoChecked.postValue(false)
         }
         if (playerThreeChecked.value!!) {
-            playerScoreList[2] ++
+            playerScoreList[3] ++
             playerThreeChecked.postValue(false)
         }
         if (playerFourChecked.value!!) {
-            playerScoreList[3] ++
+            playerScoreList[4] ++
             playerFourChecked.postValue(false)
         }
         if (playerFiveChecked.value!!) {
-            playerScoreList[4] ++
+            playerScoreList[5] ++
             playerFiveChecked.postValue(false)
         }
         if (playerSixChecked.value!!) {
-            playerScoreList[5] ++
+            playerScoreList[6] ++
             playerSixChecked.postValue(false)
-        }
-        if (playerNoneChecked.value!!){
-            playerNoneChecked.postValue(false)
         }
     }
 
