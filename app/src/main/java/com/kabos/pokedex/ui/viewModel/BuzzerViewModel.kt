@@ -32,9 +32,9 @@ class BuzzerViewModel @Inject constructor(private val repository: PokemonReposit
 
     var questionIdList = arrayListOf<Int>()
 
-    //6人分 + 不正解のスコア [none, playerOne, playerTwo ..]
+    //6人分 + 不正解のスコア [playerOne, playerTwo .. None]
     var playerScoreList = mutableListOf(0f, 0f, 0f, 0f, 0f, 0f, 0f)
-    var playerRanking = mutableListOf<Float>()
+    var playerRanking = mutableListOf(1, 1, 1, 1, 1, 1, 1)
 
     //LiveData<MutableList>にしてもいいんだけど、処理が面倒なので個別の変数で運用する
     var playerOneChecked = MutableLiveData(false)
@@ -76,6 +76,10 @@ class BuzzerViewModel @Inject constructor(private val repository: PokemonReposit
         //reset value
         currentProgress.postValue(1)
         playerScoreList = mutableListOf(0f, 0f, 0f, 0f, 0f, 0f, 0f)
+        playerRanking = mutableListOf(1, 1, 1, 1, 1, 1, 1)
+        //人数 + noneに整形
+        playerScoreList.take(numberOfPlayer + 1)
+        playerRanking.take( numberOfPlayer + 1)
 
         generateQuestionIdList()
         getPokemon(questionIdList.first())
@@ -144,31 +148,31 @@ class BuzzerViewModel @Inject constructor(private val repository: PokemonReposit
 
     private fun countPlayerScore(){
         if (playerNoneChecked.value!!){
-            playerScoreList[0] ++
+            playerScoreList[playerScoreList.lastIndex]++
             playerNoneChecked.postValue(false)
         }
         if (playerOneChecked.value!!) {
-            playerScoreList[1] ++
+            playerScoreList[0] ++
             playerOneChecked.postValue(false)
         }
         if (playerTwoChecked.value!!) {
-            playerScoreList[2] ++
+            playerScoreList[1] ++
             playerTwoChecked.postValue(false)
         }
         if (playerThreeChecked.value!!) {
-            playerScoreList[3] ++
+            playerScoreList[2] ++
             playerThreeChecked.postValue(false)
         }
         if (playerFourChecked.value!!) {
-            playerScoreList[4] ++
+            playerScoreList[3] ++
             playerFourChecked.postValue(false)
         }
         if (playerFiveChecked.value!!) {
-            playerScoreList[5] ++
+            playerScoreList[4] ++
             playerFiveChecked.postValue(false)
         }
         if (playerSixChecked.value!!) {
-            playerScoreList[6] ++
+            playerScoreList[5] ++
             playerSixChecked.postValue(false)
         }
     }
@@ -212,15 +216,11 @@ class BuzzerViewModel @Inject constructor(private val repository: PokemonReposit
 
 
     private fun shapePlayerScoreToRankingList(){
-        //人数分 + none 切り抜く
-        val takeList = playerScoreList.take(numberOfPlayer + 1) as MutableList<Float>
-        //[0]を最後にもってくる
-        val none = takeList.first()
-        takeList.removeFirst()
-        takeList.add(none)
 
-        //[one, two,... none]
-        playerRanking = takeList
+
+
+
+
         Log.d("agagggg", "${playerRanking}/ ${takeList}")
 
     }
