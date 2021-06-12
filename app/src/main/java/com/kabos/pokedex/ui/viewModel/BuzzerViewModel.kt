@@ -187,7 +187,7 @@ class BuzzerViewModel @Inject constructor(private val repository: PokemonReposit
 
     private fun calcRankingFromScore() {
         //noneはrankingにカウントしない
-        val onlyPlayerList = playerRanking.drop(playerRanking.lastIndex)
+        val onlyPlayerList = playerScoreList.dropLast(1)
         //rankingの初期値1で、自分より大きな数があれば順位 +1
         for (i in onlyPlayerList.indices) {
             for (j in onlyPlayerList.indices) {
@@ -200,10 +200,11 @@ class BuzzerViewModel @Inject constructor(private val repository: PokemonReposit
 
     fun isDisplayKingsRock(id: Int): Int {
         //noneは順位に含めない
-        val onlyPlayerList = playerRanking.drop(playerRanking.lastIndex)
+        val onlyPlayerList = playerScoreList.dropLast(1)
         val maxPlayerScore = onlyPlayerList.maxOrNull()
         //同率もあるので、listで返す
         val topPlayerList = onlyPlayerList.mapIndexedNotNull { index, element -> if (element == maxPlayerScore) index else null }
+        Log.d("kingsRock", "${maxPlayerScore}/${topPlayerList}")
         return if (topPlayerList.contains(id)) View.VISIBLE else View.GONE
     }
 
