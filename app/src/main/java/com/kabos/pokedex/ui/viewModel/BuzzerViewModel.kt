@@ -89,8 +89,7 @@ class BuzzerViewModel @Inject constructor(private val repository: PokemonReposit
 
     fun setupNextQuestion() {
         //checkboxが空ならreturn
-        if (!isAnswered) return
-
+        if (!isAnswered) return else isAnswered = false
         if (currentProgress.value != numberOfQuestion) {
             updateQuestion()
         } else {
