@@ -27,7 +27,7 @@ class MainActivity : AppCompatActivity() {
         navController.addOnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {
                 R.id.navigation_buzzer_quiz -> navView.visibility = View.GONE
-                else -> navView.visibility = View.VISIBLE
+                else -> navView.visibility =  View.VISIBLE
             }
         }
 

@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.constraintlayout.widget.ConstraintLayoutStates
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import com.github.mikephil.charting.animation.Easing
 import com.github.mikephil.charting.charts.BarChart
 import com.github.mikephil.charting.data.BarData
 import com.github.mikephil.charting.data.BarDataSet
@@ -37,7 +38,8 @@ class BuzzerResultFragment: Fragment() {
             buzzerVM = buzzerViewModel
             //calculate barChart height
             barChart.layoutParams.height = ((buzzerViewModel.numberOfPlayer * 50 + 80) * resources.displayMetrics.density).toInt()
-            Log.d("fragmenr result" ,"${buzzerViewModel.numberOfPlayer * 50 + 30}")
+            barChart.animateY(2000)
+
             val xAxisPlayerList = mutableListOf(1f, 2f, 3f, 4f, 5f, 6f, 7f).take(buzzerViewModel.numberOfPlayer + 1)
             inflateHorizontalBarChart(barChart, xAxisPlayerList, buzzerViewModel.playerScoreList)
         }
