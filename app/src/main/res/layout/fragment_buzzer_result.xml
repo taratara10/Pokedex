@@ -183,6 +183,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@{@string/ranking(buzzerVM.playerRanking[4])}"
+                    android:visibility="@{buzzerVM.isDisplayPlayerImage(5)}"
                     app:layout_constraintBottom_toBottomOf="@+id/iv_result_player_five"
                     app:layout_constraintEnd_toStartOf="@+id/iv_result_player_five"
                     app:layout_constraintTop_toTopOf="@+id/iv_result_player_five"
