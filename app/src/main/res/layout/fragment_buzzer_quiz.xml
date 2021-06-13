@@ -138,10 +138,50 @@
                             app:layout_constraintTop_toBottomOf="@id/tv_hint_two"
                             app:layout_constraintStart_toStartOf="@id/tv_hint_two">
 
+                            <ImageView
+                                android:id="@+id/buzzer_quiz_type_one"
+                                android:layout_width="30dp"
+                                android:layout_height="30dp"
+                                android:layout_marginStart="70dp"
+                                app:imageResource="@{buzzerVM.currentPokemon.type_one.image}"
+                                app:layout_constraintStart_toEndOf="@+id/parent"
+                                app:layout_constraintTop_toTopOf="@+id/parent"
+                                tools:srcCompat="@tools:sample/avatars" />
+
                             <TextView
+                                android:id="@+id/tv_buzzer_quiz_type_one_name"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text=""/>
+                                android:textSize="10sp"
+                                android:text="@{buzzerVM.currentPokemon.type_one.japanese}"
+                                android:layout_marginTop="30dp"
+                                android:layout_marginStart="70dp"
+                                tools:text="フェアリー" />
+
+                            <ImageView
+                                android:id="@+id/buzzer_quiz_type_two"
+                                android:layout_width="30dp"
+                                android:layout_height="30dp"
+                                android:layout_marginStart="124dp"
+                                app:imageResource="@{buzzerVM.currentPokemon.type_two.image}"
+                                app:layout_constraintBottom_toBottomOf="@+id/buzzer_quiz_type_one"
+                                app:layout_constraintStart_toEndOf="@+id/buzzer_quiz_type_one"
+                                app:layout_constraintTop_toTopOf="@+id/buzzer_quiz_type_one"
+                                app:layout_constraintVertical_bias="0.0"
+                                tools:srcCompat="@tools:sample/avatars" />
+
+                            <TextView
+                                android:id="@+id/tv_buzzer_quiz_type_two_name"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="10sp"
+                                android:layout_marginStart="124dp"
+                                android:layout_marginTop="30dp"
+                                android:text="@{buzzerVM.currentPokemon.type_two.japanese}"
+                                app:layout_constraintEnd_toEndOf="@+id/buzzer_quiz_type_two"
+                                app:layout_constraintStart_toStartOf="@+id/buzzer_quiz_type_two"
+                                app:layout_constraintTop_toBottomOf="@+id/buzzer_quiz_type_two"
+                                tools:text="ドラゴン" />
 
                         </net.cachapa.expandablelayout.ExpandableLayout>
                     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -184,6 +224,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:layout_marginStart="70dp"
                                 android:text="@{buzzerVM.currentPokemon.genera}"/>
 
                         </net.cachapa.expandablelayout.ExpandableLayout>
