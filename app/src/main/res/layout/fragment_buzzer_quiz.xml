@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:tools="http://schemas.android.com/tools"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/fragment_buzzer_quiz">
 
     <data>
         <variable
@@ -12,189 +13,473 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
-        <ProgressBar
-            android:id="@+id/progressBar"
-            style="?android:attr/progressBarStyleHorizontal"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:layout_marginRight="16dp"
-            app:layout_constraintEnd_toStartOf="@+id/tv_buzzer_progress_count"
-            app:layout_constraintStart_toStartOf="@+id/guideline_begin"
-            app:layout_constraintTop_toTopOf="parent" />
-
-
-        <TextView
-            android:id="@+id/tv_buzzer_progress_count"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@{@string/progress_count(buzzerVM.currentProgress,buzzerVM.questionsNumber)}"
-            app:layout_constraintBottom_toBottomOf="@+id/progressBar"
-            app:layout_constraintEnd_toStartOf="@+id/guideline_end"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toEndOf="@+id/guideline_begin"
-            app:layout_constraintTop_toTopOf="@+id/progressBar"
-            tools:text="1/10" />
-
-        <!--    question    -->
-        <androidx.cardview.widget.CardView
-            android:id="@+id/question"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="@id/guideline_end"
-            app:layout_constraintStart_toStartOf="@id/guideline_begin"
-            app:layout_constraintTop_toBottomOf="@+id/progressBar"
-            android:layout_marginTop="16dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                android:text="@{buzzerVM.currentPokemon.flavor_text}"
-                tools:text="うまれたときから　せなかに　しょくぶつの　タネが　あって すこしずつ　おおきく　そだつ。" />
-        </androidx.cardview.widget.CardView>
-
-        <!--    hint one    -->
-        <androidx.cardview.widget.CardView
-            android:id="@+id/card_hint_one"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            app:layout_constraintEnd_toEndOf="@id/guideline_end"
-            app:layout_constraintStart_toStartOf="@id/guideline_begin"
-            app:layout_constraintTop_toBottomOf="@id/question">
-
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
-                <TextView
-                    android:id="@+id/tv_hint_one"
+                <ProgressBar
+                    android:id="@+id/buzzerProgressBar"
+                    style="?android:attr/progressBarStyleHorizontal"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    android:text="ヒント１　たかさ・おもさ" />
+                    android:layout_marginTop="16dp"
+                    android:layout_marginRight="16dp"
+                    app:layout_constraintEnd_toStartOf="@+id/tv_buzzer_progress_count"
+                    app:layout_constraintStart_toStartOf="@+id/guideline_begin"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-                <net.cachapa.expandablelayout.ExpandableLayout
-                    android:id="@+id/el_hint_one"
-                    android:layout_width="match_parent"
+                <TextView
+                    android:id="@+id/tv_buzzer_progress_count"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:el_duration="1000"
-                    app:el_expanded="false"
-                    app:el_parallax="0.5"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/tv_hint_one">
-                    <androidx.constraintlayout.widget.ConstraintLayout
+                    android:text="@{@string/progress_count(buzzerVM.currentProgress,buzzerVM.numberOfQuestion)}"
+                    app:layout_constraintBottom_toBottomOf="@+id/buzzerProgressBar"
+                    app:layout_constraintEnd_toStartOf="@+id/guideline_end"
+                    app:layout_constraintHorizontal_bias="1.0"
+                    app:layout_constraintStart_toEndOf="@+id/guideline_begin"
+                    app:layout_constraintTop_toTopOf="@+id/buzzerProgressBar"
+                    tools:text="1/10" />
+
+                <!--    question    -->
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/question"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="@id/guideline_end"
+                    app:layout_constraintStart_toStartOf="@id/guideline_begin"
+                    app:layout_constraintTop_toBottomOf="@+id/buzzerProgressBar"
+                    android:layout_marginTop="16dp">
+
+                    <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_margin="8dp"
-                        app:layout_constraintTop_toBottomOf="@+id/tv_hint_one"
-                        tools:layout_editor_absoluteX="22dp">
+                        android:layout_margin="16dp"
+                        android:gravity="center"
+                        android:text="@{buzzerVM.currentPokemon.flavor_text}"
+                        tools:text="うまれたときから　せなかに　しょくぶつの　タネが　あって すこしずつ　おおきく　そだつ。" />
+                </androidx.cardview.widget.CardView>
+
+                <!--    hint one    -->
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/card_hint_one"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:onClick="@{() -> elHintOne.toggle()}"
+                    app:layout_constraintEnd_toEndOf="@id/guideline_end"
+                    app:layout_constraintStart_toStartOf="@id/guideline_begin"
+                    app:layout_constraintTop_toBottomOf="@id/question">
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="8dp"
+                        android:layout_marginStart="16dp" >
 
                         <TextView
+                            android:id="@+id/tv_hint_one"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="8dp"
-                            android:text="@{@string/hint_one(buzzerVM.currentPokemon.height, buzzerVM.currentPokemon.weight)}"
-                            app:layout_constraintBottom_toBottomOf="parent"
+                            android:text="ヒント１　たかさ・おもさ"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <net.cachapa.expandablelayout.ExpandableLayout
+                            android:id="@+id/el_hint_one"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:el_duration="1000"
+                            app:el_expanded="false"
+                            app:layout_constraintTop_toBottomOf="@id/tv_hint_one"
+                            app:layout_constraintStart_toStartOf="@id/tv_hint_one">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@{@string/hint_one(buzzerVM.currentPokemon.height/10, buzzerVM.currentPokemon.weight/10)}" />
+
+                        </net.cachapa.expandablelayout.ExpandableLayout>
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.cardview.widget.CardView>
+
+                <!--   hint two     -->
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/card_hint_two"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:onClick="@{() -> elHintTwo.toggle()}"
+                    app:layout_constraintEnd_toEndOf="@id/guideline_end"
+                    app:layout_constraintStart_toStartOf="@id/guideline_begin"
+                    app:layout_constraintTop_toBottomOf="@id/card_hint_one">
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="8dp"
+                        android:layout_marginStart="16dp" >
+
+                        <TextView
+                            android:id="@+id/tv_hint_two"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="ヒント２　タイプ"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <net.cachapa.expandablelayout.ExpandableLayout
+                            android:id="@+id/el_hint_two"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:el_duration="1000"
+                            app:el_expanded="false"
+                            app:layout_constraintTop_toBottomOf="@id/tv_hint_two"
+                            app:layout_constraintStart_toStartOf="@id/tv_hint_two">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text=""/>
+
+                        </net.cachapa.expandablelayout.ExpandableLayout>
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.cardview.widget.CardView>
+
+                <!--   hint three    -->
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/card_hint_three"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:onClick="@{() -> elHintThree.toggle()}"
+                    app:layout_constraintEnd_toEndOf="@id/guideline_end"
+                    app:layout_constraintStart_toStartOf="@id/guideline_begin"
+                    app:layout_constraintTop_toBottomOf="@id/card_hint_two">
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="8dp"
+                        android:layout_marginStart="16dp" >
+
+                        <TextView
+                            android:id="@+id/tv_hint_three"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="ヒント３　ぶんるい"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <net.cachapa.expandablelayout.ExpandableLayout
+                            android:id="@+id/el_hint_three"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:el_duration="1000"
+                            app:el_expanded="false"
+                            app:layout_constraintTop_toBottomOf="@id/tv_hint_three"
+                            app:layout_constraintStart_toStartOf="@id/tv_hint_three">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@{buzzerVM.currentPokemon.genera}"/>
+
+                        </net.cachapa.expandablelayout.ExpandableLayout>
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.cardview.widget.CardView>
+
+                <!--    answer    -->
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/card_answer"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:onClick="@{() -> elAnswer.toggle()}"
+                    app:layout_constraintEnd_toEndOf="@id/guideline_end"
+                    app:layout_constraintStart_toStartOf="@id/guideline_begin"
+                    app:layout_constraintTop_toBottomOf="@id/card_hint_three"
+                    app:cardBackgroundColor="@color/red_500">
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="8dp"
+                        android:layout_marginStart="16dp" >
+
+                        <TextView
+                            android:id="@+id/tv_answer"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="こたえ"
+                            android:textSize="20dp"
+                            android:textColor="@color/white"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
+                        <net.cachapa.expandablelayout.ExpandableLayout
+                            android:id="@+id/el_answer"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:el_duration="1000"
+                            app:el_expanded="false"
+                            app:layout_constraintTop_toBottomOf="@id/tv_answer"
+                            app:layout_constraintStart_toStartOf="@id/tv_answer">
+
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent">
+                                <ImageView
+                                    android:id="@+id/answer_pokemon_sprite"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_margin="8dp"
+                                    android:background="@drawable/shape_rounded_corner"
+                                    app:imageUrl="@{buzzerVM.currentPokemon.sprite}"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintEnd_toEndOf="@id/guideline_center"
+                                    app:layout_constraintTop_toTopOf="parent" />
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@{buzzerVM.currentPokemon.name}"
+                                    android:textColor="@color/white"
+                                    android:textSize="24dp"
+                                    app:layout_constraintStart_toEndOf="@id/guideline_center"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent"
+                                    app:layout_constraintBottom_toBottomOf="parent"/>
+                                <androidx.constraintlayout.widget.Guideline
+                                    android:id="@+id/guideline_center"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical"
+                                    app:layout_constraintGuide_percent="0.5" />
+                            </androidx.constraintlayout.widget.ConstraintLayout>
+
+                        </net.cachapa.expandablelayout.ExpandableLayout>
                     </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.cardview.widget.CardView>
 
-                </net.cachapa.expandablelayout.ExpandableLayout>
-            </androidx.constraintlayout.widget.ConstraintLayout>
-        </androidx.cardview.widget.CardView>
-
-        <!--   hint two     -->
-
-        <!--   hint three    -->
-
-        <!--    answer    -->
-
-        <!--   correct answer     -->
-        <androidx.cardview.widget.CardView
-            android:id="@+id/correct_answer"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="@id/button">
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <TextView
-                    android:id="@+id/tv_correct_answer"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="せいかい　した　ひと"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    android:layout_marginStart="8dp"/>
-
-
-                <RadioGroup
-                    android:id="@+id/buzzer_radio_group"
+                <!--   correct answer     -->
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/card_player"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/tv_correct_answer">
+                    android:layout_marginTop="24dp"
+                    app:layout_constraintEnd_toEndOf="@id/guideline_end"
+                    app:layout_constraintStart_toStartOf="@id/guideline_begin"
+                    app:layout_constraintTop_toBottomOf="@id/card_answer">
 
-                    <RadioButton
-                        android:id="@+id/rb_buzzer_quiz_number_one"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="５問"
-                        app:layout_constraintStart_toStartOf="parent" />
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
 
-                    <RadioButton
-                        android:id="@+id/rb_buzzer_quiz_number_two"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="１０問"
-                        app:layout_constraintStart_toStartOf="parent" />
+                        <TextView
+                            android:id="@+id/tv_answer_player"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="せいかい　した　ひと"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
 
-                    <RadioButton
-                        android:id="@+id/rb_buzzer_quiz_number_three"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="１５問"
-                        app:layout_constraintStart_toStartOf="parent" />
-                </RadioGroup>
+                        <!-- player one -->
+                        <CheckBox
+                            android:id="@+id/cb_player_one"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:button="@null"
+                            android:checked="@={buzzerVM.playerOneChecked}"
+                            android:onClick="@{() -> buzzerVM.isAnsweredAnyPlayer()}"
+                            android:drawableEnd="?android:attr/listChoiceIndicatorMultiple"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/tv_answer_player" />
+
+                        <ImageView
+                            android:id="@+id/iv_player_one"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintBottom_toBottomOf="@+id/cb_player_one"
+                            app:layout_constraintStart_toEndOf="@id/cb_player_one"
+                            app:layout_constraintTop_toTopOf="@+id/cb_player_one"
+                            app:srcCompat="@drawable/poke_ball" />
+
+                        <!-- player two -->
+                        <CheckBox
+                            android:id="@+id/cb_player_two"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="16dp"
+                            android:button="@null"
+                            android:checked="@={buzzerVM.playerTwoChecked}"
+                            android:onClick="@{() -> buzzerVM.isAnsweredAnyPlayer()}"
+                            android:drawableEnd="?android:attr/listChoiceIndicatorMultiple"
+                            app:layout_constraintStart_toEndOf="@id/iv_player_one"
+                            app:layout_constraintTop_toBottomOf="@id/tv_answer_player" />
+
+                        <ImageView
+                            android:id="@+id/iv_player_two"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintBottom_toBottomOf="@+id/cb_player_one"
+                            app:layout_constraintStart_toEndOf="@id/cb_player_two"
+                            app:layout_constraintTop_toTopOf="@+id/cb_player_one"
+                            app:srcCompat="@drawable/resource_super" />
+
+                        <!-- player three -->
+                        <CheckBox
+                            android:id="@+id/cb_player_three"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:visibility="@{buzzerVM.isDisplayPlayerImage(3)}"
+                            android:checked="@={buzzerVM.playerThreeChecked}"
+                            android:onClick="@{() -> buzzerVM.isAnsweredAnyPlayer()}"
+                            android:layout_marginStart="16dp"
+                            android:button="@null"
+                            android:drawableEnd="?android:attr/listChoiceIndicatorMultiple"
+                            app:layout_constraintStart_toEndOf="@id/iv_player_two"
+                            app:layout_constraintTop_toBottomOf="@id/tv_answer_player" />
+
+                        <ImageView
+                            android:id="@+id/iv_player_three"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:visibility="@{buzzerVM.isDisplayPlayerImage(3)}"
+                            app:layout_constraintBottom_toBottomOf="@+id/cb_player_one"
+                            app:layout_constraintStart_toEndOf="@id/cb_player_three"
+                            app:layout_constraintTop_toTopOf="@+id/cb_player_one"
+                            app:srcCompat="@drawable/hyper" />
+
+                        <!-- player four -->
+                        <CheckBox
+                            android:id="@+id/cb_player_four"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="16dp"
+                            android:visibility="@{buzzerVM.isDisplayPlayerImage(4)}"
+                            android:checked="@={buzzerVM.playerFourChecked}"
+                            android:onClick="@{() -> buzzerVM.isAnsweredAnyPlayer()}"
+                            android:button="@null"
+                            android:drawableEnd="?android:attr/listChoiceIndicatorMultiple"
+                            app:layout_constraintStart_toEndOf="@id/iv_player_three"
+                            app:layout_constraintTop_toBottomOf="@id/tv_answer_player" />
+
+                        <ImageView
+                            android:id="@+id/iv_player_four"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:visibility="@{buzzerVM.isDisplayPlayerImage(4)}"
+                            app:layout_constraintBottom_toBottomOf="@+id/cb_player_one"
+                            app:layout_constraintStart_toEndOf="@id/cb_player_four"
+                            app:layout_constraintTop_toTopOf="@+id/cb_player_one"
+                            app:srcCompat="@drawable/master_ball" />
+
+                        <!-- なし　-->
+                        <CheckBox
+                            android:id="@+id/cb_player_none"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:checked="@={buzzerVM.playerNoneChecked}"
+                            android:onClick="@{() -> buzzerVM.isAnsweredAnyPlayer()}"
+                            android:button="@null"
+                            android:drawableEnd="?android:attr/listChoiceIndicatorMultiple"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/cb_player_one" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="なし"
+                            app:layout_constraintStart_toEndOf="@+id/cb_player_none"
+                            app:layout_constraintTop_toTopOf="@id/cb_player_none"
+                            app:layout_constraintBottom_toBottomOf="@+id/cb_player_none"/>
+
+                        <!-- player five -->
+                        <CheckBox
+                            android:id="@+id/cb_player_five"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:visibility="@{buzzerVM.isDisplayPlayerImage(5)}"
+                            android:checked="@={buzzerVM.playerFiveChecked}"
+                            android:onClick="@{() -> buzzerVM.isAnsweredAnyPlayer()}"
+                            android:button="@null"
+                            android:drawableEnd="?android:attr/listChoiceIndicatorMultiple"
+                            app:layout_constraintStart_toStartOf="@+id/cb_player_three"
+                            app:layout_constraintTop_toBottomOf="@id/cb_player_three" />
+
+                        <ImageView
+                            android:id="@+id/iv_player_five"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:visibility="@{buzzerVM.isDisplayPlayerImage(5)}"
+                            app:layout_constraintBottom_toBottomOf="@+id/cb_player_five"
+                            app:layout_constraintStart_toEndOf="@id/cb_player_five"
+                            app:layout_constraintTop_toTopOf="@+id/cb_player_five"
+                            app:srcCompat="@drawable/timer_ball" />
+
+
+                        <!-- player six -->
+                        <CheckBox
+                            android:id="@+id/cb_player_six"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:visibility="@{buzzerVM.isDisplayPlayerImage(6)}"
+                            android:checked="@={buzzerVM.playerSixChecked}"
+                            android:onClick="@{() -> buzzerVM.isAnsweredAnyPlayer()}"
+                            android:button="@null"
+                            android:drawableEnd="?android:attr/listChoiceIndicatorMultiple"
+                            app:layout_constraintStart_toStartOf="@+id/cb_player_four"
+                            app:layout_constraintTop_toBottomOf="@id/cb_player_four" />
+
+                        <ImageView
+                            android:id="@+id/iv_player_six"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:visibility="@{buzzerVM.isDisplayPlayerImage(6)}"
+                            app:layout_constraintBottom_toBottomOf="@+id/cb_player_six"
+                            app:layout_constraintStart_toEndOf="@id/cb_player_six"
+                            app:layout_constraintTop_toTopOf="@+id/cb_player_six"
+                            app:srcCompat="@drawable/quick_ball" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                </androidx.cardview.widget.CardView>
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/guideline_begin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_begin="24dp" />
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/guideline_end"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_end="24dp" />
+
+                <Button
+                    android:id="@+id/btn_buzzer_next"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="24dp"
+                    android:backgroundTint="@drawable/button_enable"
+                    android:enabled="@{buzzerVM.isBtnEnable}"
+                    android:text="@{buzzerVM.buttonText}"
+                    android:textColor="@drawable/button_text"
+                    android:onClick="@{() -> buzzerVM.setupNextQuestion()}"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/guideline_end"
+                    app:layout_constraintTop_toBottomOf="@+id/card_player" />
+
+
+
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
-        </androidx.cardview.widget.CardView>
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline_begin"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_begin="24dp" />
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline_end"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_end="24dp" />
-
-        <Button
-            android:id="@+id/button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="24dp"
-            android:text="Button"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/guideline_end" />
-
-
+        </ScrollView>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

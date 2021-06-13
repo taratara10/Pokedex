@@ -1,6 +1,7 @@
 package com.kabos.pokedex.ui
 
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
@@ -22,6 +23,13 @@ class MainActivity : AppCompatActivity() {
         //set up bottom navigation
         val navView: BottomNavigationView = findViewById(R.id.nav_view)
         navView.setupWithNavController(navController)
+
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            when (destination.id) {
+                R.id.navigation_buzzer_quiz -> navView.visibility = View.GONE
+                else -> navView.visibility =  View.VISIBLE
+            }
+        }
 
 
     }

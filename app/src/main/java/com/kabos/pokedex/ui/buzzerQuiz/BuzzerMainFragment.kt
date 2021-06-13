@@ -1,7 +1,6 @@
 package com.kabos.pokedex.ui.buzzerQuiz
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,6 +8,7 @@ import android.widget.NumberPicker
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
+import com.kabos.pokedex.R
 import com.kabos.pokedex.databinding.FragmentBuzzerMainBinding
 import com.kabos.pokedex.ui.viewModel.BuzzerViewModel
 import com.kabos.pokedex.util.NavigateRegionCallback
@@ -38,6 +38,15 @@ class BuzzerMainFragment: Fragment() {
             buzzerVM = buzzerViewModel
             callback = navigateRegionCallback
             setupNumberPicker(npBuzzerPlayer)
+            btnBuzzerStart.setOnClickListener {
+                buzzerViewModel.startQuestion()
+                findNavController().navigate(R.id.action_navigation_buzzer_main_to_navigation_buzzer_quiz)
+            }
+
+            //todo 仮置なので消す
+            skipQuestion.setOnClickListener {
+                findNavController().navigate(R.id.action_navigation_buzzer_main_to_navigation_buzzer_result)
+            }
         }
     }
 
@@ -47,7 +56,7 @@ class BuzzerMainFragment: Fragment() {
             maxValue = 6
             wrapSelectorWheel = false
             setOnValueChangedListener { _, _, newVal ->
-                buzzerViewModel.playerNumber = newVal
+                buzzerViewModel.numberOfPlayer = newVal
                 binding.apply {
                     ivPlayerBall3.visibility = buzzerViewModel.isDisplayPlayerImage(3)
                     ivPlayerBall4.visibility = buzzerViewModel.isDisplayPlayerImage(4)
