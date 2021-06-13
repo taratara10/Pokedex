@@ -59,7 +59,6 @@
             android:layout_height="19dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="16dp"
-            app:imageUrl="@{pokemonData.type_one}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:srcCompat="@tools:sample/avatars" />
@@ -70,7 +69,6 @@
             android:layout_height="19dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="16dp"
-            app:imageUrl="@{pokemonData.type_two}"
             app:layout_constraintEnd_toStartOf="@+id/adapter_type_one"
             app:layout_constraintTop_toTopOf="parent"
             tools:srcCompat="@tools:sample/avatars" />
