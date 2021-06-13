@@ -29,7 +29,7 @@
             android:id="@+id/tv_detail_number"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="8dp"
             android:text="@{@string/pokemon_number(pokedexVM.dialogPokemon.id)}"
             android:textSize="18sp"
             app:layout_constraintStart_toStartOf="@+id/guideline_center"
@@ -51,11 +51,11 @@
             android:id="@+id/tv_detail_genera"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="8dp"
             android:text="@{pokedexVM.dialogPokemon.genera}"
-            android:textSize="18sp"
+            android:textSize="14sp"
             app:layout_constraintStart_toEndOf="@id/guideline_center"
-            app:layout_constraintTop_toBottomOf="@id/tv_detail_name"
+            app:layout_constraintTop_toBottomOf="@+id/tv_adapter_type_one_name"
             tools:text="たねポケモン" />
 
         <TextView
@@ -72,41 +72,70 @@
             android:id="@+id/tv_detail_weight"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
             android:text="@{@string/pokemon_weight(pokedexVM.dialogPokemon.weight/10)}"
             android:textSize="18sp"
+            app:layout_constraintBottom_toTopOf="@+id/guideline3"
             app:layout_constraintStart_toEndOf="@id/guideline_center"
             app:layout_constraintTop_toBottomOf="@id/tv_detail_height"
+            app:layout_constraintVertical_bias="0.0"
             tools:text="おもさ　6.9kg" />
 
 
         <ImageView
             android:id="@+id/adapter_type_one"
-            android:layout_width="22dp"
-            android:layout_height="19dp"
-            android:layout_marginStart="12dp"
-            android:layout_marginTop="16dp"
-            app:layout_constraintStart_toEndOf="@+id/adapter_type_two"
-            app:layout_constraintTop_toBottomOf="@+id/tv_detail_weight"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="8dp"
+            app:imageResource="@{pokedexVM.dialogPokemon.type_one.image}"
+            app:layout_constraintStart_toStartOf="@+id/guideline_center"
+            app:layout_constraintTop_toBottomOf="@+id/tv_detail_name"
             tools:srcCompat="@tools:sample/avatars" />
+
+        <TextView
+            android:id="@+id/tv_adapter_type_one_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="10sp"
+            android:text="@{pokedexVM.dialogPokemon.type_one.japanese}"
+            app:layout_constraintEnd_toEndOf="@+id/adapter_type_one"
+            app:layout_constraintStart_toStartOf="@+id/adapter_type_one"
+            app:layout_constraintTop_toBottomOf="@+id/adapter_type_one"
+            tools:text="フェアリー" />
 
         <ImageView
             android:id="@+id/adapter_type_two"
-            android:layout_width="22dp"
-            android:layout_height="19dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="24dp"
+            app:imageResource="@{pokedexVM.dialogPokemon.type_two.image}"
             app:layout_constraintBottom_toBottomOf="@+id/adapter_type_one"
-            app:layout_constraintStart_toStartOf="@+id/guideline_center"
+            app:layout_constraintStart_toEndOf="@+id/adapter_type_one"
             app:layout_constraintTop_toTopOf="@+id/adapter_type_one"
-            app:layout_constraintVertical_bias="1.0"
+            app:layout_constraintVertical_bias="0.0"
             tools:srcCompat="@tools:sample/avatars" />
+
+        <TextView
+            android:id="@+id/tv_adapter_type_two_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="10sp"
+            android:text="@{pokedexVM.dialogPokemon.type_two.japanese}"
+            app:layout_constraintEnd_toEndOf="@+id/adapter_type_two"
+            app:layout_constraintStart_toStartOf="@+id/adapter_type_two"
+            app:layout_constraintTop_toBottomOf="@+id/adapter_type_two"
+            tools:text="ドラゴン" />
 
         <TextView
             android:id="@+id/tv_detail_flavor_text"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
+            android:layout_marginStart="24dp"
             android:layout_marginTop="16dp"
-            android:layout_marginEnd="32dp"
+            android:layout_marginEnd="24dp"
             android:layout_marginBottom="16dp"
+            android:textSize="14sp"
+            android:gravity="center"
             android:text="@{pokedexVM.dialogPokemon.flavor_text}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -136,7 +165,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.7" />
+            app:layout_constraintGuide_begin="210dp" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
