@@ -98,7 +98,7 @@
                     android:layout_marginTop="20dp"
                     app:layout_constraintEnd_toStartOf="@+id/guideline_begin"
                     app:layout_constraintTop_toBottomOf="@+id/iv_result_player_one"
-                    app:srcCompat="@drawable/resource_super" />
+                    app:srcCompat="@drawable/super_ball" />
 
                 <ImageView
                     android:id="@+id/iv_result_player_two_king"
@@ -131,7 +131,7 @@
                     android:visibility="@{buzzerVM.isDisplayPlayerImage(3)}"
                     app:layout_constraintEnd_toStartOf="@+id/guideline_begin"
                     app:layout_constraintTop_toBottomOf="@+id/iv_result_player_two"
-                    app:srcCompat="@drawable/hyper" />
+                    app:srcCompat="@drawable/hyper_ball" />
 
                 <ImageView
                     android:id="@+id/iv_result_player_three_king"

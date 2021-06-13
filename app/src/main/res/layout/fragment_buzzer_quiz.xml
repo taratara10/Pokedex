@@ -327,7 +327,7 @@
                             app:layout_constraintBottom_toBottomOf="@+id/cb_player_one"
                             app:layout_constraintStart_toEndOf="@id/cb_player_two"
                             app:layout_constraintTop_toTopOf="@+id/cb_player_one"
-                            app:srcCompat="@drawable/resource_super" />
+                            app:srcCompat="@drawable/super_ball" />
 
                         <!-- player three -->
                         <CheckBox
@@ -351,7 +351,7 @@
                             app:layout_constraintBottom_toBottomOf="@+id/cb_player_one"
                             app:layout_constraintStart_toEndOf="@id/cb_player_three"
                             app:layout_constraintTop_toTopOf="@+id/cb_player_one"
-                            app:srcCompat="@drawable/hyper" />
+                            app:srcCompat="@drawable/hyper_ball" />
 
                         <!-- player four -->
                         <CheckBox
