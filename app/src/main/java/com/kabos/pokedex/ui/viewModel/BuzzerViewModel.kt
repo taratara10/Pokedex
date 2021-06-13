@@ -2,7 +2,6 @@ package com.kabos.pokedex.ui.viewModel
 
 import android.util.Log
 import android.view.View
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -13,12 +12,9 @@ import com.kabos.pokedex.model.PokemonSpecies
 import com.kabos.pokedex.model.Region
 import com.kabos.pokedex.repository.PokemonRepository
 import com.kabos.pokedex.util.QuestionsRadio
-import com.kabos.pokedex.util.RegionCallback
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.*
-import net.cachapa.expandablelayout.ExpandableLayout
 import javax.inject.Inject
-import kotlin.random.Random
 
 @HiltViewModel
 class BuzzerViewModel @Inject constructor(private val repository: PokemonRepository)
@@ -48,6 +44,7 @@ class BuzzerViewModel @Inject constructor(private val repository: PokemonReposit
     var goResultFragment = MutableLiveData(false)
 
     var buttonText = MutableLiveData(R.string.next_btn)
+    var isBtnEnable = MutableLiveData(false)
 
     var isCollapseCardView = MutableLiveData(false)
     var isCheckedNumberOfQuestionRadio = MutableLiveData(QuestionsRadio.secound)
@@ -100,6 +97,7 @@ class BuzzerViewModel @Inject constructor(private val repository: PokemonReposit
     private fun updateQuestion() {
         //fragment側で検知してcardを閉じる
         isCollapseCardView.postValue(true)
+        isBtnEnable.postValue(false)
         countPlayerScore()
         incrementCurrentProgress()
         getPokemon(questionIdList[currentProgress.value as Int - 1])
@@ -146,6 +144,12 @@ class BuzzerViewModel @Inject constructor(private val repository: PokemonReposit
                 || playerFiveChecked.value!!
                 || playerSixChecked.value!!
                 || playerNoneChecked.value!!
+        toggleButtonContent()
+    }
+
+    private fun toggleButtonContent() {
+        if (!isAnswered) isBtnEnable.postValue(false)
+            else isBtnEnable.postValue(true)
     }
 
     private fun countPlayerScore() {
@@ -193,8 +197,6 @@ class BuzzerViewModel @Inject constructor(private val repository: PokemonReposit
                 if (onlyPlayerList[j] > onlyPlayerList[i]) playerRanking[i]++
             }
         }
-
-        Log.d("ranking" , "${playerScoreList}/rank:${playerRanking}")
     }
 
     fun isDisplayKingsRock(id: Int): Int {

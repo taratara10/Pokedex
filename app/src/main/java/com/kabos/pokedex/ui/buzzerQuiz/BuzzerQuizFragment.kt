@@ -35,7 +35,6 @@ class BuzzerQuizFragment: Fragment() {
                 min = 0
                 max = buzzerViewModel.numberOfQuestion
             }
-
         }
 
         buzzerViewModel.goResultFragment.observe(viewLifecycleOwner,{goResult ->
@@ -56,6 +55,7 @@ class BuzzerQuizFragment: Fragment() {
        buzzerViewModel.currentProgress.observe(viewLifecycleOwner, { progress ->
            onProgressChanged(progress)
        })
+
     }
 
     private fun onProgressChanged(progress: Int) {
