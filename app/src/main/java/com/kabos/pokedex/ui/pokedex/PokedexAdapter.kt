@@ -20,7 +20,7 @@ class PokedexAdapter(private val onClick: (Pokemon) -> Unit)
                 root.setOnClickListener {
                     onClick(item)
                 }
-                Log.d("tasssssss","${item.type_one?.name}/${item.type_one?.image}/${item.sprite}")
+                Log.d("tasssssss","${item.flavor_text}")
                 executePendingBindings()
             }
         }

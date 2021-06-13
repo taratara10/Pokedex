@@ -76,7 +76,7 @@ class PokemonRepository @Inject constructor(
             genera = species.genera[0].genus,
             weight = info.weight,
             height = info.height,
-            flavor_text = flavorText!!.flavor_text,
+            flavor_text = flavorText!!.flavor_text.replace("\\n",""),
             sprite = info.sprites.front_default,
             type_one = convertTypeToTypeImage(info.types[0].type.name),
             type_two = null
@@ -87,7 +87,7 @@ class PokemonRepository @Inject constructor(
             genera = species.genera[0].genus,
             weight = info.weight,
             height = info.height,
-            flavor_text = flavorText!!.flavor_text,
+            flavor_text = flavorText!!.flavor_text.replace("\\n",""),
             sprite = info.sprites.front_default,
             type_one = convertTypeToTypeImage(info.types[0].type.name),
             type_two = convertTypeToTypeImage(info.types[1].type.name)
