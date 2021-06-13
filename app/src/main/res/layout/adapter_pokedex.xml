@@ -48,7 +48,6 @@
             android:layout_marginTop="8dp"
             android:text="@{pokemonData.flavor_text}"
             android:textSize="12sp"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/guideline2"
             app:layout_constraintTop_toBottomOf="@+id/adapter_pokemon_name"
@@ -81,7 +80,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.3" />
+            app:layout_constraintGuide_percent="0.32" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline4"
