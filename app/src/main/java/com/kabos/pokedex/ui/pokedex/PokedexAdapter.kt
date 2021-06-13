@@ -1,8 +1,8 @@
 package com.kabos.pokedex.ui.pokedex
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil.inflate
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.kabos.pokedex.databinding.AdapterPokedexBinding
@@ -20,6 +20,7 @@ class PokedexAdapter(private val onClick: (Pokemon) -> Unit)
                 root.setOnClickListener {
                     onClick(item)
                 }
+                Log.d("tasssssss","${item.flavor_text}")
                 executePendingBindings()
             }
         }

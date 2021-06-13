@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 
 
 class InfiniteScrollListener(
-        val layoutManager: LinearLayoutManager,
+        private val layoutManager: LinearLayoutManager,
         val func: () -> Unit /*呼び出し元でcallback引数として{}を実装*/) : RecyclerView.OnScrollListener() {
 
     private var loading = true

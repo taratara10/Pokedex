@@ -1,8 +1,6 @@
 package com.kabos.pokedex.repository
 
-import com.kabos.pokedex.model.Pokemon
-import com.kabos.pokedex.model.PokemonInfo
-import com.kabos.pokedex.model.PokemonSpecies
+import com.kabos.pokedex.model.*
 import com.kabos.pokedex.util.NetworkBoundResource
 import com.kabos.pokedex.util.Resource
 import retrofit2.HttpException
@@ -78,9 +76,9 @@ class PokemonRepository @Inject constructor(
             genera = species.genera[0].genus,
             weight = info.weight,
             height = info.height,
-            flavor_text = flavorText!!.flavor_text,
+            flavor_text = flavorText!!.flavor_text.replace("\\n",""),
             sprite = info.sprites.front_default,
-            type_one = info.types[0].type.name,
+            type_one = convertTypeToTypeImage(info.types[0].type.name),
             type_two = null
         )
         else Pokemon(
@@ -89,10 +87,37 @@ class PokemonRepository @Inject constructor(
             genera = species.genera[0].genus,
             weight = info.weight,
             height = info.height,
-            flavor_text = flavorText!!.flavor_text,
+            flavor_text = flavorText!!.flavor_text.replace("\\n",""),
             sprite = info.sprites.front_default,
-            type_one = info.types[0].type.name,
-            type_two = info.types[1].type.name
+            type_one = convertTypeToTypeImage(info.types[0].type.name),
+            type_two = convertTypeToTypeImage(info.types[1].type.name)
         )
     }
+
+    private fun convertTypeToTypeImage(type: String): TypeData? {
+        return when(type) {
+            "bug" -> TypeData.Bug
+            "dark" -> TypeData.Dark
+            "dragon" -> TypeData.Dragon
+            "electric" -> TypeData.Electric
+            "fairy" -> TypeData.Fairy
+            "fighting" -> TypeData.Fighting
+            "fire" -> TypeData.Fire
+            "flying" -> TypeData.Flying
+            "ghost" -> TypeData.Ghost
+            "grass" -> TypeData.Grass
+            "ground" -> TypeData.Ground
+            "ice" -> TypeData.Ice
+            "normal" -> TypeData.Normal
+            "poison" -> TypeData.Poison
+            "psychic" -> TypeData.Psychic
+            "rock" -> TypeData.Rock
+            "steel" -> TypeData.Steel
+            "water" -> TypeData.Water
+            else -> null
+        }
+    }
+
+
+
 }
