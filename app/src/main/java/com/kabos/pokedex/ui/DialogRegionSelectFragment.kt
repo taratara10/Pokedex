@@ -12,8 +12,10 @@ import androidx.navigation.fragment.navArgs
 import com.kabos.pokedex.R
 import com.kabos.pokedex.databinding.DialogRegionSelectBinding
 import com.kabos.pokedex.model.Region
+import com.kabos.pokedex.ui.buzzerQuiz.BuzzerMainFragmentArgs
 import com.kabos.pokedex.util.RegionCallback
 import com.kabos.pokedex.ui.pokedex.PokedexFragmentArgs
+import com.kabos.pokedex.ui.viewModel.BuzzerViewModel
 import com.kabos.pokedex.ui.viewModel.PokedexViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -23,7 +25,9 @@ class DialogRegionSelectFragment: DialogFragment() {
     private lateinit var binding: DialogRegionSelectBinding
 
     val pokedexViewModel: PokedexViewModel by activityViewModels()
+    val buzzerViewModel: BuzzerViewModel by activityViewModels()
     private val pokedexFragmentArgs: PokedexFragmentArgs by navArgs()
+    private val buzzerMainFragmentArgs: BuzzerMainFragmentArgs by navArgs()
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val builder = AlertDialog.Builder(activity)
@@ -42,7 +46,10 @@ class DialogRegionSelectFragment: DialogFragment() {
                 }
                 //todo  Add buzzer and choices navigation
                 //isBackStack をfalseでリセットしないと、Fragment増えた時にバグりそう
-
+                if (buzzerMainFragmentArgs.isBackStack) {
+                    buzzerViewModel.currentRegion.postValue(region)
+                    findNavController().popBackStack()
+                }
             }
         }
 
