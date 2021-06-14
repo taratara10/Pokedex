@@ -21,7 +21,7 @@ class BuzzerMainFragment: Fragment() {
     private val navigateRegionCallback = object: NavigateRegionCallback {
         override fun navigateRegionFragment() {
             val action = BuzzerMainFragmentDirections
-                    .actionNavigationBuzzerMainToNavigationRegionSelect(isBackStack = true)
+                    .actionNavigationBuzzerMainToNavigationRegionSelect(fromBuzzer = true)
             findNavController().navigate(action)
         }
     }

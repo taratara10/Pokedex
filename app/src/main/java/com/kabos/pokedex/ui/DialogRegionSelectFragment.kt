@@ -3,6 +3,7 @@ package com.kabos.pokedex.ui
 import android.app.AlertDialog
 import android.app.Dialog
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.DialogFragment
@@ -36,18 +37,16 @@ class DialogRegionSelectFragment: DialogFragment() {
                 R.layout.dialog_region_select,
                 null, false)
 
+        Log.d("dialog","pokedex:${pokedexFragmentArgs.fromPokedex}/buzzer:${buzzerMainFragmentArgs.fromBuzzer}")
         binding.callback = object : RegionCallback {
             override fun onClick(region: Region) {
                 //check navigation
-                //todo 毎回isBackStackってリセットされるのか？　よしなに初期化処理書く
-                if (pokedexFragmentArgs.isBackStack) {
+                if (pokedexFragmentArgs.fromPokedex) {
                     pokedexViewModel.updateRegion(region)
                     findNavController().popBackStack()
                 }
-                //todo  Add buzzer and choices navigation
-                //isBackStack をfalseでリセットしないと、Fragment増えた時にバグりそう
-                if (buzzerMainFragmentArgs.isBackStack) {
-                    buzzerViewModel.currentRegion.postValue(region)
+                if (buzzerMainFragmentArgs.fromBuzzer) {
+                    buzzerViewModel.updateRegion(region)
                     findNavController().popBackStack()
                 }
             }

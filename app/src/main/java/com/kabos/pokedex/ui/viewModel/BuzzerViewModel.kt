@@ -50,8 +50,9 @@ class BuzzerViewModel @Inject constructor(private val repository: PokemonReposit
     var isCheckedNumberOfQuestionRadio = MutableLiveData(QuestionsRadio.secound)
 
 
-    private fun resetPlayerScore() {
-
+    fun updateRegion(region: Region) {
+        currentRegion.postValue(region)
+        currentRegion
     }
 
 
