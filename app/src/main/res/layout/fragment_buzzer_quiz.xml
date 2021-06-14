@@ -12,7 +12,8 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@drawable/winterneva">
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent">
@@ -22,6 +23,7 @@
                 <ProgressBar
                     android:id="@+id/buzzerProgressBar"
                     style="?android:attr/progressBarStyleHorizontal"
+                    android:progressTint="@color/red_500"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
@@ -35,6 +37,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@{@string/progress_count(buzzerVM.currentProgress,buzzerVM.numberOfQuestion)}"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="@+id/buzzerProgressBar"
                     app:layout_constraintEnd_toStartOf="@+id/guideline_end"
                     app:layout_constraintHorizontal_bias="1.0"
@@ -67,6 +71,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="24dp"
+                    android:backgroundTint="@color/blue_gray_50"
                     android:onClick="@{() -> elHintOne.toggle()}"
                     app:layout_constraintEnd_toEndOf="@id/guideline_end"
                     app:layout_constraintStart_toStartOf="@id/guideline_begin"
@@ -110,6 +115,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="24dp"
+                    android:backgroundTint="@color/blue_gray_50"
                     android:onClick="@{() -> elHintTwo.toggle()}"
                     app:layout_constraintEnd_toEndOf="@id/guideline_end"
                     app:layout_constraintStart_toStartOf="@id/guideline_begin"
@@ -193,6 +199,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="24dp"
+                    android:backgroundTint="@color/blue_gray_50"
                     android:onClick="@{() -> elHintThree.toggle()}"
                     app:layout_constraintEnd_toEndOf="@id/guideline_end"
                     app:layout_constraintStart_toStartOf="@id/guideline_begin"
@@ -323,6 +330,8 @@
                             android:id="@+id/tv_answer_player"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginStart="24dp"
+                            android:layout_marginTop="8dp"
                             android:text="せいかい　した　ひと"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
@@ -353,7 +362,7 @@
                             android:id="@+id/cb_player_two"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="16dp"
+                            android:layout_marginStart="8dp"
                             android:button="@null"
                             android:checked="@={buzzerVM.playerTwoChecked}"
                             android:onClick="@{() -> buzzerVM.isAnsweredAnyPlayer()}"
@@ -378,7 +387,7 @@
                             android:visibility="@{buzzerVM.isDisplayPlayerImage(3)}"
                             android:checked="@={buzzerVM.playerThreeChecked}"
                             android:onClick="@{() -> buzzerVM.isAnsweredAnyPlayer()}"
-                            android:layout_marginStart="16dp"
+                            android:layout_marginStart="8dp"
                             android:button="@null"
                             android:drawableEnd="?android:attr/listChoiceIndicatorMultiple"
                             app:layout_constraintStart_toEndOf="@id/iv_player_two"
@@ -399,7 +408,7 @@
                             android:id="@+id/cb_player_four"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="16dp"
+                            android:layout_marginStart="8dp"
                             android:visibility="@{buzzerVM.isDisplayPlayerImage(4)}"
                             android:checked="@={buzzerVM.playerFourChecked}"
                             android:onClick="@{() -> buzzerVM.isAnsweredAnyPlayer()}"
@@ -507,6 +516,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="24dp"
+                    android:layout_marginTop="8dp"
                     android:backgroundTint="@drawable/button_enable"
                     android:enabled="@{buzzerVM.isBtnEnable}"
                     android:text="@{buzzerVM.buttonText}"
