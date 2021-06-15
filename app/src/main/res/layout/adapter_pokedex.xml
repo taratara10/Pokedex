@@ -13,6 +13,7 @@
         android:id="@+id/adapter_pokedex"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
+        android:paddingBottom="8dp"
         android:background="@drawable/shape_rounded_corner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -48,6 +49,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
             android:text="@{pokemonData.flavor_text}"
             android:textSize="12sp"
             app:layout_constraintEnd_toEndOf="parent"
