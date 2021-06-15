@@ -1,5 +1,6 @@
 package com.kabos.pokedex.repository
 
+import android.util.Log
 import com.kabos.pokedex.model.*
 import com.kabos.pokedex.util.NetworkBoundResource
 import com.kabos.pokedex.util.Resource
@@ -65,9 +66,11 @@ class PokemonRepository @Inject constructor(
 
     fun mergePokemonData(info: PokemonInfo, species: PokemonSpecies): Pokemon {
         val typeSize = info.types.size
-        val flavorText = species.flavor_text_entries.findLast {
+        val flavorTextEntry = species.flavor_text_entries.findLast {
             it.language.name == "ja-Hrkt"
         }//実際はversion.name == "sword"にしたいけど、未登場ポケモンがnullなので、findLastで最新の説明を引用
+        val flavorText = flavorTextEntry!!.flavor_text.replace("\n","")
+
 
         //typeが1つならtype_twoはnull
         return if (typeSize == 1) Pokemon(
@@ -76,7 +79,7 @@ class PokemonRepository @Inject constructor(
             genera = species.genera[0].genus,
             weight = info.weight,
             height = info.height,
-            flavor_text = flavorText!!.flavor_text.replace("\\n",""),
+            flavor_text = flavorText,
             sprite = info.sprites.front_default,
             type_one = convertTypeToTypeImage(info.types[0].type.name),
             type_two = null
@@ -87,7 +90,7 @@ class PokemonRepository @Inject constructor(
             genera = species.genera[0].genus,
             weight = info.weight,
             height = info.height,
-            flavor_text = flavorText!!.flavor_text.replace("\\n",""),
+            flavor_text = flavorText,
             sprite = info.sprites.front_default,
             type_one = convertTypeToTypeImage(info.types[0].type.name),
             type_two = convertTypeToTypeImage(info.types[1].type.name)
