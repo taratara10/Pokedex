@@ -79,10 +79,10 @@ class BuzzerViewModel @Inject constructor(private val repository: PokemonReposit
         playerRanking = playerRanking.take(numberOfPlayer + 1) as MutableList<Float>
 
 
-        Log.d("ranking" , "${playerScoreList}/rank:${playerRanking}")
         generateQuestionIdList()
         getPokemon(questionIdList.first())
         goResultFragment.postValue(false)
+        buttonText.postValue(R.string.next_btn)
     }
 
     fun setupNextQuestion() {
