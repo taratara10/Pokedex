@@ -21,7 +21,7 @@ class BuzzerViewModel @Inject constructor(private val repository: PokemonReposit
     : ViewModel() {
 
     var currentPokemon: MutableLiveData<Pokemon> = MutableLiveData()
-    var currentRegion: Region = Region.Kanto
+    var currentRegion: MutableLiveData<Region> = MutableLiveData(Region.Kanto)
     var currentProgress = MutableLiveData(1)
     var numberOfQuestion: Int = 10
     var numberOfPlayer: Int = 2
@@ -50,14 +50,15 @@ class BuzzerViewModel @Inject constructor(private val repository: PokemonReposit
     var isCheckedNumberOfQuestionRadio = MutableLiveData(QuestionsRadio.secound)
 
 
-    private fun resetPlayerScore() {
-
+    fun updateRegion(region: Region) {
+        currentRegion.postValue(region)
+        currentRegion
     }
 
 
     private fun generateQuestionIdList() {
         val range = mutableListOf<Int>() //Regionの範囲
-        for (i in currentRegion.start..currentRegion.end) {
+        for (i in currentRegion.value!!.start .. currentRegion.value!!.end) {
             range.add(i)
         }
         range.shuffle()
@@ -78,10 +79,10 @@ class BuzzerViewModel @Inject constructor(private val repository: PokemonReposit
         playerRanking = playerRanking.take(numberOfPlayer + 1) as MutableList<Float>
 
 
-        Log.d("ranking" , "${playerScoreList}/rank:${playerRanking}")
         generateQuestionIdList()
         getPokemon(questionIdList.first())
         goResultFragment.postValue(false)
+        buttonText.postValue(R.string.next_btn)
     }
 
     fun setupNextQuestion() {

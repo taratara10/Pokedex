@@ -13,7 +13,7 @@
         tools:layout="@layout/fragment_pokedex" >
 
         <argument
-            android:name="isBackStack"
+            android:name="fromPokedex"
             app:argType="boolean"
             android:defaultValue="false"/>
         <action
@@ -38,7 +38,11 @@
         tools:layout="@layout/dialog_region_select">
 
         <argument
-            android:name="isBackStack"
+            android:name="fromPokedex"
+            app:argType="boolean"
+            android:defaultValue="false"/>
+        <argument
+            android:name="fromBuzzer"
             app:argType="boolean"
             android:defaultValue="false"/>
     </dialog>
@@ -62,7 +66,7 @@
         tools:layout="@layout/fragment_buzzer_main" >
 
         <argument
-            android:name="isBackStack"
+            android:name="fromBuzzer"
             app:argType="boolean"
             android:defaultValue="false"/>
         <action

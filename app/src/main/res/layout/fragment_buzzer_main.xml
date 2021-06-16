@@ -15,229 +15,248 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@drawable/winterneva">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <androidx.cardview.widget.CardView
             android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:background="@drawable/shape_rounded_corner"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="15dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/guideline_end"
-            app:layout_constraintStart_toEndOf="@id/guideline_begin"
-            tools:layout_editor_absoluteY="60dp">
-
-            <TextView
-                android:id="@+id/tv_buzzer_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                android:gravity="center"
-                android:text="ずかんの　せつめいから　\n ポケモンの　なまえを　あてよう"
-                android:textSize="20sp"
-                app:layout_constraintEnd_toEndOf="@id/guideline_end2"
-                app:layout_constraintStart_toStartOf="@id/guideline_begin2"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/tv_buzzer_region_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                android:text="・しゅつだいはんい"
-                app:layout_constraintStart_toStartOf="@+id/guideline_begin2"
-                app:layout_constraintTop_toBottomOf="@id/tv_buzzer_title" />
+            app:layout_constraintStart_toStartOf="@+id/guideline_begin"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.19999999">
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/buzzer_region_select"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:onClick="@{() -> callback.navigateRegionFragment()}"
-                app:layout_constraintEnd_toEndOf="@id/guideline_end2"
-                app:layout_constraintStart_toStartOf="@id/guideline_begin2"
-                app:layout_constraintTop_toBottomOf="@id/tv_buzzer_region_title">
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingBottom="16dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/guideline_end"
+                app:layout_constraintStart_toEndOf="@id/guideline_begin"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.13">
 
                 <TextView
-                    android:layout_width="match_parent"
+                    android:id="@+id/tv_buzzer_title"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@{buzzerVM.currentRegion.regionName}"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:text="カントー" />
+                    android:layout_marginTop="24dp"
+                    android:gravity="center"
+                    android:text="ずかんの　せつめいから　\n ポケモンの　なまえを　あてよう"
+                    android:textSize="20sp"
+                    app:layout_constraintEnd_toEndOf="@id/guideline_end2"
+                    app:layout_constraintStart_toStartOf="@id/guideline_begin2"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tv_buzzer_region_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:text="・しゅつだいはんい"
+                    app:layout_constraintStart_toStartOf="@+id/guideline_begin2"
+                    app:layout_constraintTop_toBottomOf="@id/tv_buzzer_title" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/buzzer_region_select"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:padding="8dp"
+                    android:background="@drawable/shape_rounded_corner"
+                    android:onClick="@{() -> callback.navigateRegionFragment()}"
+                    app:layout_constraintEnd_toEndOf="@id/guideline_end2"
+                    app:layout_constraintStart_toStartOf="@id/guideline_begin2"
+                    app:layout_constraintTop_toBottomOf="@id/tv_buzzer_region_title">
+
+                    <TextView
+                        android:id="@+id/tv_buzzer_region_select"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="8dp"
+                        android:text="@{buzzerVM.currentRegion.regionName}"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:text="カントー" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="▼"
+                        android:layout_marginEnd="16dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <TextView
+                    android:id="@+id/tv_question_number_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:text="・もんだいすう"
+                    app:layout_constraintStart_toStartOf="@id/guideline_begin2"
+                    app:layout_constraintTop_toBottomOf="@id/buzzer_region_select" />
+
+                <RadioGroup
+                    android:id="@+id/buzzer_radio_group"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/shape_rounded_corner"
+                    android:checkedButton="@={RadioTypeConverter.typeToButtonId(buzzerVM.isCheckedNumberOfQuestionRadio())}"
+                    android:orientation="horizontal"
+                    app:layout_constraintEnd_toStartOf="@+id/guideline_end2"
+                    app:layout_constraintStart_toStartOf="@+id/guideline_begin2"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_question_number_title">
+
+                    <RadioButton
+                        android:id="@+id/rb_buzzer_questions_number_first"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:onClick="@{() -> buzzerVM.updateNumberOfQuestion()}"
+                        android:text="５問"
+                        app:layout_constraintStart_toStartOf="parent" />
+
+                    <RadioButton
+                        android:id="@+id/rb_buzzer_questions_number_second"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:onClick="@{() -> buzzerVM.updateNumberOfQuestion()}"
+                        android:text="１０問"
+                        app:layout_constraintStart_toStartOf="parent" />
+
+                    <RadioButton
+                        android:id="@+id/rb_buzzer_questions_number_third"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:onClick="@{() -> buzzerVM.updateNumberOfQuestion()}"
+                        android:text="１５問"
+                        app:layout_constraintStart_toStartOf="parent" />
+                </RadioGroup>
+
+                <TextView
+                    android:id="@+id/tv_buzzer_player_number_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="・さんかにんずう"
+                    app:layout_constraintBottom_toBottomOf="@+id/np_buzzer_player"
+                    app:layout_constraintStart_toStartOf="@id/guideline_begin2"
+                    app:layout_constraintTop_toTopOf="@+id/np_buzzer_player" />
+
+
+                <NumberPicker
+                    android:id="@+id/np_buzzer_player"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toStartOf="@+id/guideline_end2"
+                    app:layout_constraintStart_toEndOf="@+id/tv_buzzer_player_number_title"
+                    app:layout_constraintTop_toBottomOf="@+id/buzzer_radio_group" />
+
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/guideline_begin2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_begin="24dp" />
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/guideline_end2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_end="24dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="にん"
+                    app:layout_constraintBottom_toBottomOf="@+id/np_buzzer_player"
+                    app:layout_constraintEnd_toEndOf="@id/guideline_end2"
+                    app:layout_constraintStart_toEndOf="@+id/np_buzzer_player"
+                    app:layout_constraintTop_toTopOf="@+id/np_buzzer_player" />
+
+                <ImageView
+                    android:id="@+id/iv_player_ball"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    app:layout_constraintStart_toStartOf="@+id/guideline_begin2"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_buzzer_player_number_title"
+                    app:srcCompat="@drawable/poke_ball" />
+
+                <ImageView
+                    android:id="@+id/iv_player_ball2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    app:layout_constraintStart_toEndOf="@+id/iv_player_ball"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_buzzer_player_number_title"
+                    app:srcCompat="@drawable/super_ball" />
+
+                <ImageView
+                    android:id="@+id/iv_player_ball3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:visibility="gone"
+                    app:layout_constraintStart_toEndOf="@+id/iv_player_ball2"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_buzzer_player_number_title"
+                    app:srcCompat="@drawable/hyper_ball" />
+
+                <ImageView
+                    android:id="@+id/iv_player_ball4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:visibility="gone"
+                    app:layout_constraintStart_toStartOf="@+id/guideline_begin2"
+                    app:layout_constraintTop_toBottomOf="@+id/iv_player_ball"
+                    app:srcCompat="@drawable/master_ball" />
+
+                <ImageView
+                    android:id="@+id/iv_player_ball5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:visibility="gone"
+                    app:layout_constraintStart_toEndOf="@+id/iv_player_ball4"
+                    app:layout_constraintTop_toBottomOf="@+id/iv_player_ball"
+                    app:srcCompat="@drawable/timer_ball" />
+
+                <ImageView
+                    android:id="@+id/iv_player_ball6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:visibility="gone"
+                    app:layout_constraintStart_toEndOf="@+id/iv_player_ball5"
+                    app:layout_constraintTop_toBottomOf="@+id/iv_player_ball"
+                    app:srcCompat="@drawable/quick_ball" />
+
+                <Button
+                    android:id="@+id/btn_buzzer_start"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/red_500"
+                    android:text="スタート！"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/guideline_end2"
+                    app:layout_constraintStart_toStartOf="@+id/guideline_begin2"
+                    app:layout_constraintTop_toBottomOf="@+id/np_buzzer_player" />
+
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <TextView
-                android:id="@+id/tv_question_number_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                android:text="・もんだいすう"
-                app:layout_constraintStart_toStartOf="@id/guideline_begin2"
-                app:layout_constraintTop_toBottomOf="@id/buzzer_region_select" />
-
-            <RadioGroup
-                android:id="@+id/buzzer_radio_group"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:checkedButton="@={RadioTypeConverter.typeToButtonId(buzzerVM.isCheckedNumberOfQuestionRadio())}"
-                android:orientation="horizontal"
-                app:layout_constraintEnd_toStartOf="@+id/guideline_end2"
-                app:layout_constraintStart_toStartOf="@+id/guideline_begin2"
-                app:layout_constraintTop_toBottomOf="@+id/tv_question_number_title">
-
-                <RadioButton
-                    android:id="@+id/rb_buzzer_questions_number_first"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:onClick="@{() -> buzzerVM.updateNumberOfQuestion()}"
-                    android:text="５問"
-                    app:layout_constraintStart_toStartOf="parent" />
-
-                <RadioButton
-                    android:id="@+id/rb_buzzer_questions_number_second"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:onClick="@{() -> buzzerVM.updateNumberOfQuestion()}"
-                    android:text="１０問"
-                    app:layout_constraintStart_toStartOf="parent" />
-
-                <RadioButton
-                    android:id="@+id/rb_buzzer_questions_number_third"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:onClick="@{() -> buzzerVM.updateNumberOfQuestion()}"
-                    android:text="１５問"
-                    app:layout_constraintStart_toStartOf="parent" />
-            </RadioGroup>
-
-            <TextView
-                android:id="@+id/tv_buzzer_player_number_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="・さんかにんずう"
-                app:layout_constraintBottom_toBottomOf="@+id/np_buzzer_player"
-                app:layout_constraintStart_toStartOf="@id/guideline_begin2"
-                app:layout_constraintTop_toTopOf="@+id/np_buzzer_player" />
-
-
-            <NumberPicker
-                android:id="@+id/np_buzzer_player"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintEnd_toStartOf="@+id/guideline_end2"
-                app:layout_constraintStart_toEndOf="@+id/tv_buzzer_player_number_title"
-                app:layout_constraintTop_toBottomOf="@+id/buzzer_radio_group" />
-
-
-
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/guideline_begin2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                app:layout_constraintGuide_begin="24dp" />
-
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/guideline_end2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                app:layout_constraintGuide_end="24dp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="にん"
-                app:layout_constraintBottom_toBottomOf="@+id/np_buzzer_player"
-                app:layout_constraintEnd_toEndOf="@id/guideline_end2"
-                app:layout_constraintStart_toEndOf="@+id/np_buzzer_player"
-                app:layout_constraintTop_toTopOf="@+id/np_buzzer_player" />
-
-            <ImageView
-                android:id="@+id/iv_player_ball"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                app:layout_constraintStart_toStartOf="@+id/guideline_begin2"
-                app:layout_constraintTop_toBottomOf="@+id/tv_buzzer_player_number_title"
-                app:srcCompat="@drawable/poke_ball" />
-
-            <ImageView
-                android:id="@+id/iv_player_ball2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                app:layout_constraintStart_toEndOf="@+id/iv_player_ball"
-                app:layout_constraintTop_toBottomOf="@+id/tv_buzzer_player_number_title"
-                app:srcCompat="@drawable/super_ball" />
-
-            <ImageView
-                android:id="@+id/iv_player_ball3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:visibility="gone"
-                app:layout_constraintStart_toEndOf="@+id/iv_player_ball2"
-                app:layout_constraintTop_toBottomOf="@+id/tv_buzzer_player_number_title"
-                app:srcCompat="@drawable/hyper_ball" />
-
-            <ImageView
-                android:id="@+id/iv_player_ball4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:visibility="gone"
-                app:layout_constraintStart_toStartOf="@+id/guideline_begin2"
-                app:layout_constraintTop_toBottomOf="@+id/iv_player_ball"
-                app:srcCompat="@drawable/master_ball" />
-
-            <ImageView
-                android:id="@+id/iv_player_ball5"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:layout_marginStart="8dp"
-                android:visibility="gone"
-                app:layout_constraintStart_toEndOf="@+id/iv_player_ball4"
-                app:layout_constraintTop_toBottomOf="@+id/iv_player_ball"
-                app:srcCompat="@drawable/timer_ball" />
-
-            <ImageView
-                android:id="@+id/iv_player_ball6"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:layout_marginStart="8dp"
-                android:visibility="gone"
-                app:layout_constraintStart_toEndOf="@+id/iv_player_ball5"
-                app:layout_constraintTop_toBottomOf="@+id/iv_player_ball"
-                app:srcCompat="@drawable/quick_ball" />
-
-            <Button
-                android:id="@+id/btn_buzzer_start"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="スタート！"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/guideline_end2"
-                app:layout_constraintStart_toStartOf="@+id/guideline_begin2"
-                app:layout_constraintTop_toBottomOf="@+id/np_buzzer_player" />
-
-            <Button
-                android:id="@+id/skip_question"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="skip result"
-                app:layout_constraintEnd_toStartOf="@+id/guideline_end2"
-                app:layout_constraintStart_toStartOf="@+id/guideline_begin2"
-                app:layout_constraintTop_toBottomOf="@+id/btn_buzzer_start" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline_begin"

@@ -26,7 +26,7 @@ class PokedexFragment: Fragment(){
     }
     private val navigateRegionCallback = object : NavigateRegionCallback {
         override fun navigateRegionFragment() {
-            val action = PokedexFragmentDirections.actionNavigationPokedexToNavigationRegionSelect(isBackStack = true)
+            val action = PokedexFragmentDirections.actionNavigationPokedexToNavigationRegionSelect(fromPokedex = true)
             findNavController().navigate(action)
         }
     }

@@ -21,7 +21,7 @@ class BuzzerMainFragment: Fragment() {
     private val navigateRegionCallback = object: NavigateRegionCallback {
         override fun navigateRegionFragment() {
             val action = BuzzerMainFragmentDirections
-                    .actionNavigationBuzzerMainToNavigationRegionSelect(isBackStack = true)
+                    .actionNavigationBuzzerMainToNavigationRegionSelect(fromBuzzer = true)
             findNavController().navigate(action)
         }
     }
@@ -43,10 +43,6 @@ class BuzzerMainFragment: Fragment() {
                 findNavController().navigate(R.id.action_navigation_buzzer_main_to_navigation_buzzer_quiz)
             }
 
-            //todo 仮置なので消す
-            skipQuestion.setOnClickListener {
-                findNavController().navigate(R.id.action_navigation_buzzer_main_to_navigation_buzzer_result)
-            }
         }
     }
 
