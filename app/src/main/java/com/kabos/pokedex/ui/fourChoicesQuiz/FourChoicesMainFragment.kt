@@ -17,7 +17,8 @@ class FourChoicesMainFragment: Fragment() {
     private val fourChoicesViewModel: FourChoiceViewModel by activityViewModels()
     private val navigateRegionCallback = object: NavigateRegionCallback {
         override fun navigateRegionFragment() {
-            val action = ( = true)
+            val action = FourChoicesMainFragmentDirections
+                .actionNavigationFourChoicesToNavigationRegionSelect(fromFour = true)
             findNavController().navigate(action)
         }
     }
