@@ -37,6 +37,7 @@ class BuzzerMainFragment: Fragment() {
         binding.apply {
             buzzerVM = buzzerViewModel
             callback = navigateRegionCallback
+            lifecycleOwner = this@BuzzerMainFragment
             setupNumberPicker(npBuzzerPlayer)
             btnBuzzerStart.setOnClickListener {
                 buzzerViewModel.startQuestion()

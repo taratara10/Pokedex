@@ -51,7 +51,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/tv_buzzer_region_title"
+                    android:id="@+id/tv_four_choices_region_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="24dp"
@@ -60,7 +60,7 @@
                     app:layout_constraintTop_toBottomOf="@id/tv_four_choices_title" />
 
                 <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/buzzer_region_select"
+                    android:id="@+id/four_choices_region_select"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:padding="8dp"
@@ -68,10 +68,10 @@
                     android:onClick="@{() -> callback.navigateRegionFragment()}"
                     app:layout_constraintEnd_toEndOf="@id/guideline_end2"
                     app:layout_constraintStart_toStartOf="@id/guideline_begin2"
-                    app:layout_constraintTop_toBottomOf="@id/tv_buzzer_region_title">
+                    app:layout_constraintTop_toBottomOf="@id/tv_four_choices_region_title">
 
                     <TextView
-                        android:id="@+id/tv_buzzer_region_select"
+                        android:id="@+id/tv_four_choices_region_select"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_marginStart="8dp"
@@ -96,10 +96,10 @@
                     android:layout_marginTop="24dp"
                     android:text="・もんだいすう"
                     app:layout_constraintStart_toStartOf="@id/guideline_begin2"
-                    app:layout_constraintTop_toBottomOf="@id/buzzer_region_select" />
+                    app:layout_constraintTop_toBottomOf="@id/four_choices_region_select" />
 
                 <RadioGroup
-                    android:id="@+id/buzzer_radio_group"
+                    android:id="@+id/four_choices_radio_group"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:background="@drawable/shape_rounded_corner"
@@ -110,7 +110,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/tv_question_number_title">
 
                     <RadioButton
-                        android:id="@+id/rb_buzzer_questions_number_first"
+                        android:id="@+id/rb_four_choices_questions_number_first"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -119,7 +119,7 @@
                         app:layout_constraintStart_toStartOf="parent" />
 
                     <RadioButton
-                        android:id="@+id/rb_buzzer_questions_number_second"
+                        android:id="@+id/rb_four_choices_questions_number_second"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -128,7 +128,7 @@
                         app:layout_constraintStart_toStartOf="parent" />
 
                     <RadioButton
-                        android:id="@+id/rb_buzzer_questions_number_third"
+                        android:id="@+id/rb_four_choices_questions_number_third"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"

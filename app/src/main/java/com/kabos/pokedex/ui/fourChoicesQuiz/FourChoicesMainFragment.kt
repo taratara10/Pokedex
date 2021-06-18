@@ -35,6 +35,7 @@ class FourChoicesMainFragment: Fragment() {
         binding.apply {
             fourVM = fourChoicesViewModel
             callback = navigateRegionCallback
+            lifecycleOwner = this@FourChoicesMainFragment
 
         }
     }
