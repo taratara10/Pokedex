@@ -36,7 +36,10 @@ class FourChoiceViewModel @Inject constructor(private val repository: PokemonRep
         currentRegion.postValue(region)
         currentRegion
     }
-
+    //buzzer main fragment
+    fun updateNumberOfQuestion() {
+        numberOfQuestion = isCheckedNumberOfQuestionRadio.value?.number!!
+    }
     private fun generateQuestionIdList() {
         val range = mutableListOf<Int>() //Regionの範囲
         for (i in currentRegion.value!!.start .. currentRegion.value!!.end) {
