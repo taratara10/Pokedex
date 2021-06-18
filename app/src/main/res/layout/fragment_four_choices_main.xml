@@ -140,7 +140,7 @@
 
 
                 <Button
-                    android:id="@+id/btn_buzzer_start"
+                    android:id="@+id/btn_four_choices_start"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:backgroundTint="@color/red_500"
