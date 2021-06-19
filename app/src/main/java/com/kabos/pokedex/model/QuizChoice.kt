@@ -1,7 +1,7 @@
 package com.kabos.pokedex.model
 
-data class Choice(
+data class QuizChoice(
     val index: Int,
-    val pokemonName: String,
+    val name: String,
     val correct: Boolean
 )

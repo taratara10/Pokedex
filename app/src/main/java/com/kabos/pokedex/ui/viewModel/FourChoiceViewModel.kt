@@ -1,14 +1,10 @@
 package com.kabos.pokedex.ui.viewModel
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.kabos.pokedex.R
-import com.kabos.pokedex.model.Pokemon
-import com.kabos.pokedex.model.PokemonInfo
-import com.kabos.pokedex.model.PokemonSpecies
-import com.kabos.pokedex.model.Region
+import com.kabos.pokedex.model.*
 import com.kabos.pokedex.repository.PokemonRepository
 import com.kabos.pokedex.util.QuestionsRadio
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -26,7 +22,7 @@ class FourChoiceViewModel @Inject constructor(private val repository: PokemonRep
 
     var questionIdList = mutableListOf<Int>() //正解のid
     var fourChoicesList = mutableListOf<Int>() //問題数 x3 の選択肢のid
-    var currentChoices:MutableLiveData<List<String>> = MutableLiveData()
+    var currentChoices:MutableLiveData<List<QuizChoice>> = MutableLiveData()
 
     //UI parameter
     var goResultFragment = MutableLiveData(false)
@@ -93,7 +89,7 @@ class FourChoiceViewModel @Inject constructor(private val repository: PokemonRep
 
     private fun updateCurrentChoices() =viewModelScope.launch {
         //idを4つ生成
-        val correctChoice = questionIdList[currentProgress.value as Int - 1]
+        val correctChoice:Int = questionIdList[currentProgress.value as Int - 1]
         val wrongChoices = fourChoicesList.take(3)
         fourChoicesList = fourChoicesList.drop(3) as MutableList<Int>
         //4つの選択肢のリスト(id)
@@ -104,12 +100,14 @@ class FourChoiceViewModel @Inject constructor(private val repository: PokemonRep
         getPokemon(correctChoice)
 
         //4つの選択肢を取得(pokemonName)
-        val pokemonNameList = mutableListOf<String>()
+        val choiceDataList = mutableListOf<QuizChoice>()
         for (id in 0..3){
             val pokemonSpecies = getPokemonSpecies(currentChoicesIdList[id]).await() as PokemonSpecies
-            pokemonNameList.add(pokemonSpecies.names[0].name)
+            val isCorrect: Boolean = correctChoice == currentChoicesIdList[id]
+            val choice = QuizChoice(index = id, name = pokemonSpecies.names[0].name, correct = isCorrect )
+            choiceDataList.add(choice)
         }
-        currentChoices.postValue(pokemonNameList)
+        currentChoices.postValue(choiceDataList)
     }
 
     private fun incrementCurrentProgress() {
