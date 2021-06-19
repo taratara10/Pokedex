@@ -149,7 +149,7 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/guideline_end2"
                     app:layout_constraintStart_toStartOf="@+id/guideline_begin2"
-                    app:layout_constraintTop_toBottomOf="@+id/buzzer_radio_group" />
+                    app:layout_constraintTop_toBottomOf="@+id/four_choices_radio_group" />
 
                 <androidx.constraintlayout.widget.Guideline
                     android:id="@+id/guideline_begin2"

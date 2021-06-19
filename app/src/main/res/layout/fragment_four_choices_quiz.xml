@@ -1,13 +1,313 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+        <variable
+            name="fourVM"
+            type="com.kabos.pokedex.ui.viewModel.FourChoiceViewModel" />
     </data>
+
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@drawable/winterneva">
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <ProgressBar
+                    android:id="@+id/four_choicesProgressBar"
+                    style="?android:attr/progressBarStyleHorizontal"
+                    android:progressTint="@color/red_500"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"
+                    app:layout_constraintEnd_toStartOf="@+id/tv_four_choices_progress_count"
+                    app:layout_constraintStart_toStartOf="@+id/guideline_begin"
+                    app:layout_constraintTop_toTopOf="parent" />
 
+                <TextView
+                    android:id="@+id/tv_four_choices_progress_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{@string/progress_count(fourVM.currentProgress,fourVM.numberOfQuestion)}"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@+id/four_choicesProgressBar"
+                    app:layout_constraintEnd_toStartOf="@+id/guideline_end"
+                    app:layout_constraintHorizontal_bias="1.0"
+                    app:layout_constraintStart_toEndOf="@+id/guideline_begin"
+                    app:layout_constraintTop_toTopOf="@+id/four_choicesProgressBar"
+                    tools:text="1/10" />
+
+                <!--    question    -->
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/question"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="@id/guideline_end"
+                    app:layout_constraintStart_toStartOf="@id/guideline_begin"
+                    app:layout_constraintTop_toBottomOf="@+id/four_choicesProgressBar"
+                    android:layout_marginTop="16dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="16dp"
+                        android:gravity="center"
+                        android:text="@{fourVM.currentPokemon.flavor_text}"
+                        tools:text="うまれたときから　せなかに　しょくぶつの　タネが　あって すこしずつ　おおきく　そだつ。" />
+                </androidx.cardview.widget.CardView>
+
+                <!--    hint one    -->
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/card_hint_one"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:backgroundTint="@color/blue_gray_50"
+                    android:onClick="@{() -> elHintOne.toggle()}"
+                    app:layout_constraintEnd_toEndOf="@id/guideline_end"
+                    app:layout_constraintStart_toStartOf="@id/guideline_begin"
+                    app:layout_constraintTop_toBottomOf="@id/question">
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="8dp"
+                        android:layout_marginStart="16dp" >
+
+                        <TextView
+                            android:id="@+id/tv_hint_one"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="ヒント１　たかさ・おもさ"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <net.cachapa.expandablelayout.ExpandableLayout
+                            android:id="@+id/el_hint_one"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:el_duration="1000"
+                            app:el_expanded="false"
+                            app:layout_constraintTop_toBottomOf="@id/tv_hint_one"
+                            app:layout_constraintStart_toStartOf="@id/tv_hint_one">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@{@string/hint_one(fourVM.currentPokemon.height/10, fourVM.currentPokemon.weight/10)}" />
+
+                        </net.cachapa.expandablelayout.ExpandableLayout>
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.cardview.widget.CardView>
+
+                <!--   hint two     -->
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/card_hint_two"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:backgroundTint="@color/blue_gray_50"
+                    android:onClick="@{() -> elHintTwo.toggle()}"
+                    app:layout_constraintEnd_toEndOf="@id/guideline_end"
+                    app:layout_constraintStart_toStartOf="@id/guideline_begin"
+                    app:layout_constraintTop_toBottomOf="@id/card_hint_one">
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="8dp"
+                        android:layout_marginStart="16dp" >
+
+                        <TextView
+                            android:id="@+id/tv_hint_two"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="ヒント２　タイプ"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <net.cachapa.expandablelayout.ExpandableLayout
+                            android:id="@+id/el_hint_two"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:el_duration="1000"
+                            app:el_expanded="false"
+                            app:layout_constraintStart_toStartOf="@id/tv_hint_two"
+                            app:layout_constraintTop_toBottomOf="@id/tv_hint_two">
+
+                            <ImageView
+                                android:id="@+id/four_choices_quiz_type_one"
+                                android:layout_width="30dp"
+                                android:layout_height="30dp"
+                                android:layout_marginStart="70dp"
+                                app:imageResource="@{fourVM.currentPokemon.type_one.image}"
+                                app:layout_constraintStart_toEndOf="@+id/parent"
+                                app:layout_constraintTop_toTopOf="@+id/parent"
+                                tools:srcCompat="@tools:sample/avatars" />
+
+                            <TextView
+                                android:id="@+id/tv_four_choices_quiz_type_one_name"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="70dp"
+                                android:layout_marginTop="30dp"
+                                android:text="@{fourVM.currentPokemon.type_one.japanese}"
+                                android:textSize="10sp"
+                                tools:text="フェアリー" />
+
+                            <ImageView
+                                android:id="@+id/four_choices_quiz_type_two"
+                                android:layout_width="30dp"
+                                android:layout_height="30dp"
+                                android:layout_marginStart="124dp"
+                                app:imageResource="@{fourVM.currentPokemon.type_two.image}"
+                                app:layout_constraintBottom_toBottomOf="@+id/four_choices_quiz_type_one"
+                                app:layout_constraintStart_toEndOf="@+id/four_choices_quiz_type_one"
+                                app:layout_constraintTop_toTopOf="@+id/four_choices_quiz_type_one"
+                                app:layout_constraintVertical_bias="0.0"
+                                tools:srcCompat="@tools:sample/avatars" />
+
+                            <TextView
+                                android:id="@+id/tv_four_choices_quiz_type_two_name"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="124dp"
+                                android:layout_marginTop="30dp"
+                                android:text="@{fourVM.currentPokemon.type_two.japanese}"
+                                android:textSize="10sp"
+                                app:layout_constraintEnd_toEndOf="@+id/four_choices_quiz_type_two"
+                                app:layout_constraintStart_toStartOf="@+id/four_choices_quiz_type_two"
+                                app:layout_constraintTop_toBottomOf="@+id/four_choices_quiz_type_two"
+                                tools:text="ドラゴン" />
+
+                        </net.cachapa.expandablelayout.ExpandableLayout>
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.cardview.widget.CardView>
+
+                <!--   hint three    -->
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/card_hint_three"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:backgroundTint="@color/blue_gray_50"
+                    android:onClick="@{() -> elHintThree.toggle()}"
+                    app:layout_constraintEnd_toEndOf="@id/guideline_end"
+                    app:layout_constraintStart_toStartOf="@id/guideline_begin"
+                    app:layout_constraintTop_toBottomOf="@id/card_hint_two">
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="8dp"
+                        android:layout_marginStart="16dp" >
+
+                        <TextView
+                            android:id="@+id/tv_hint_three"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="ヒント３　ぶんるい"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <net.cachapa.expandablelayout.ExpandableLayout
+                            android:id="@+id/el_hint_three"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:el_duration="1000"
+                            app:el_expanded="false"
+                            app:layout_constraintTop_toBottomOf="@id/tv_hint_three"
+                            app:layout_constraintStart_toStartOf="@id/tv_hint_three">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="70dp"
+                                android:text="@{fourVM.currentPokemon.genera}"/>
+
+                        </net.cachapa.expandablelayout.ExpandableLayout>
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.cardview.widget.CardView>
+
+                <!--    answer    -->
+                <androidx.cardview.widget.CardView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    app:layout_constraintStart_toStartOf="@id/guideline_begin"
+                    app:layout_constraintEnd_toEndOf="@id/guideline_center"
+                    app:layout_constraintTop_toBottomOf="@id/card_hint_three"
+                    android:layout_marginTop="24dp"
+                    android:layout_marginEnd="8dp">
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <ImageView
+                            android:id="@+id/iv_correct_answer_one"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text=""
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            tools:text="ピカチュウ" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.cardview.widget.CardView>
+
+
+                <Button
+                    android:id="@+id/btn_four_choices_next"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="24dp"
+                    android:backgroundTint="@drawable/button_enable"
+                    android:enabled="@{fourVM.isBtnEnable}"
+                    android:onClick="@{() -> fourVM.setupNextQuestion()}"
+                    android:text="@{fourVM.buttonText}"
+                    android:textColor="@drawable/button_text"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/guideline_end"
+                    app:layout_constraintTop_toBottomOf="@+id/card_hint_three" />
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/guideline_begin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_begin="24dp" />
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/guideline_end"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_end="24dp" />
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/guideline_center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_percent="0.5"/>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </ScrollView>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
