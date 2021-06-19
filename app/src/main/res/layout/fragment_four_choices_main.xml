@@ -99,7 +99,7 @@
                     app:layout_constraintTop_toBottomOf="@id/four_choices_region_select" />
 
                 <RadioGroup
-                    android:id="@+id/four_choices_radio_group"
+                    android:id="@+id/radio_group"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:background="@drawable/shape_rounded_corner"
@@ -110,7 +110,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/tv_question_number_title">
 
                     <RadioButton
-                        android:id="@+id/rb_four_choices_questions_number_first"
+                        android:id="@+id/rb_questions_number_first"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -119,7 +119,7 @@
                         app:layout_constraintStart_toStartOf="parent" />
 
                     <RadioButton
-                        android:id="@+id/rb_four_choices_questions_number_second"
+                        android:id="@+id/rb_questions_number_second"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -128,7 +128,7 @@
                         app:layout_constraintStart_toStartOf="parent" />
 
                     <RadioButton
-                        android:id="@+id/rb_four_choices_questions_number_third"
+                        android:id="@+id/rb_questions_number_third"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -149,7 +149,7 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/guideline_end2"
                     app:layout_constraintStart_toStartOf="@+id/guideline_begin2"
-                    app:layout_constraintTop_toBottomOf="@+id/four_choices_radio_group" />
+                    app:layout_constraintTop_toBottomOf="@+id/radio_group" />
 
                 <androidx.constraintlayout.widget.Guideline
                     android:id="@+id/guideline_begin2"

@@ -6,6 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
+import com.kabos.pokedex.R
 import com.kabos.pokedex.databinding.FragmentFourChoicesQuizBinding
 import com.kabos.pokedex.ui.viewModel.FourChoiceViewModel
 
@@ -24,6 +26,26 @@ class FourChoicesQuizFragment: Fragment() {
         binding.apply {
             fourVM = fourChoicesViewModel
             lifecycleOwner = this@FourChoicesQuizFragment
+            fourChoicesProgressBar.apply {
+                min = 0
+                max = fourChoicesViewModel.numberOfQuestion
+            }
         }
+
+        fourChoicesViewModel.isCollapseCardView.observe(viewLifecycleOwner, { isCollapse ->
+            if (isCollapse){
+                binding.apply {
+                    elHintOne.collapse(false)
+                    elHintTwo.collapse(false)
+                    elHintThree.collapse(false)
+                    //elAnswer.collapse(false)
+                }
+            }
+        })
+
+        fourChoicesViewModel.goResultFragment.observe(viewLifecycleOwner, {goResult ->
+            if (goResult) findNavController().navigate(R.id.action_navigation_four_choices_quiz_to_navigation_four_choices_result)
+        })
+
     }
 }
