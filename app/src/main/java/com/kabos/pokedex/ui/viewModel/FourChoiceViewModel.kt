@@ -112,23 +112,22 @@ class FourChoiceViewModel @Inject constructor(private val repository: PokemonRep
         currentChoices.postValue(pokemonNameList)
     }
 
-
-    /**
-     * layout callback
-     */
     private fun incrementCurrentProgress() {
         currentProgress.value?.let { i ->
             if (i < numberOfQuestion) currentProgress.value = i + 1
         }
     }
 
-    private fun checkTheAnswer(position: Int) {
-        val correctPokemonName = currentPokemon.value?.name
-        val selectPokemonName = currentChoices.value?.get(position)
-        if (selectPokemonName == correctPokemonName) numberOfCorrectAnswer++
-
-        isBtnEnable.postValue(true)
-    }
+    /**
+     * layout callback
+     */
+//    private fun checkTheAnswer(position: Int) {
+//        val correctPokemonName = currentPokemon.value?.name
+//        val selectPokemonName = currentChoices.value?.get(position)
+//        if (selectPokemonName == correctPokemonName) numberOfCorrectAnswer++
+//
+//        isBtnEnable.postValue(true)
+//    }
 
 
 
