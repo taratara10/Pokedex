@@ -22,13 +22,15 @@ class FourChoiceViewModel @Inject constructor(private val repository: PokemonRep
     var currentProgress = MutableLiveData(1)
     var numberOfQuestion: Int = 10
 
-    var questionIdList = arrayListOf<Int>()
+    var questionIdList = mutableListOf<Int>() //正解のid
+    var fourChoicesList = mutableListOf<Int>() //問題数 x3 の選択肢のid
+
+
+    //UI parameter
     var isAnswered: Boolean = false
     var goResultFragment = MutableLiveData(false)
-
     var buttonText = MutableLiveData(R.string.next_btn)
     var isBtnEnable = MutableLiveData(false)
-
     var isCollapseCardView = MutableLiveData(false)
     var isCheckedNumberOfQuestionRadio = MutableLiveData(QuestionsRadio.secound)
 
@@ -37,14 +39,23 @@ class FourChoiceViewModel @Inject constructor(private val repository: PokemonRep
     fun updateNumberOfQuestion() {
         numberOfQuestion = isCheckedNumberOfQuestionRadio.value?.number!!
     }
+
     private fun generateQuestionIdList() {
-        val range = mutableListOf<Int>() //Regionの範囲
+        //regionのstart..endのidListを生成
+        val range = mutableListOf<Int>()
         for (i in currentRegion.value!!.start .. currentRegion.value!!.end) {
             range.add(i)
         }
+
+        //question分のelementをランダムに取得
         range.shuffle()
-        questionIdList = range.take(numberOfQuestion) as ArrayList<Int>
+        questionIdList = range.take(numberOfQuestion) as MutableList<Int>
+
+        //fourChoices用の選択肢をquestion x 3取得. answerは選択肢から除く
+        range.removeAll(questionIdList)
+        fourChoicesList = range.take(numberOfQuestion * 3) as MutableList<Int>
     }
+
 
     /**
      * btnNext ClickListener

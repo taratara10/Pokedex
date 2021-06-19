@@ -25,7 +25,6 @@ class BuzzerViewModel @Inject constructor(private val repository: PokemonReposit
     var currentProgress = MutableLiveData(1)
     var numberOfQuestion: Int = 10
     var numberOfPlayer: Int = 2
-
     var questionIdList = arrayListOf<Int>()
 
     //6人分 + 不正解のスコア [playerOne, playerTwo .. None]
@@ -41,11 +40,11 @@ class BuzzerViewModel @Inject constructor(private val repository: PokemonReposit
     var playerSixChecked = MutableLiveData(false)
     var playerNoneChecked = MutableLiveData(false)
     var isAnswered: Boolean = false
-    var goResultFragment = MutableLiveData(false)
 
+    //UI parameter
+    var goResultFragment = MutableLiveData(false)
     var buttonText = MutableLiveData(R.string.next_btn)
     var isBtnEnable = MutableLiveData(false)
-
     var isCollapseCardView = MutableLiveData(false)
     var isCheckedNumberOfQuestionRadio = MutableLiveData(QuestionsRadio.secound)
 
