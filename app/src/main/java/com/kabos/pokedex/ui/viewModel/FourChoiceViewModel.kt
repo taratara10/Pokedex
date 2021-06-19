@@ -24,7 +24,7 @@ class FourChoiceViewModel @Inject constructor(private val repository: PokemonRep
 
     var questionIdList = mutableListOf<Int>() //正解のid
     var fourChoicesList = mutableListOf<Int>() //問題数 x3 の選択肢のid
-
+    var currentChoices:MutableLiveData<List<String>> = MutableLiveData()
 
     //UI parameter
     var isAnswered: Boolean = false
@@ -43,9 +43,7 @@ class FourChoiceViewModel @Inject constructor(private val repository: PokemonRep
     private fun generateQuestionIdList() {
         //regionのstart..endのidListを生成
         val range = mutableListOf<Int>()
-        for (i in currentRegion.value!!.start .. currentRegion.value!!.end) {
-            range.add(i)
-        }
+        for (i in currentRegion.value!!.start .. currentRegion.value!!.end)  range.add(i)
 
         //question分のelementをランダムに取得
         range.shuffle()
@@ -56,6 +54,23 @@ class FourChoiceViewModel @Inject constructor(private val repository: PokemonRep
         fourChoicesList = range.take(numberOfQuestion * 3) as MutableList<Int>
     }
 
+    private fun updateCurrentChoices() =viewModelScope.launch{
+        //idを4つ生成
+        val wrongChoices = fourChoicesList.take(3)
+        fourChoicesList.drop(3)
+        val correctChoice = questionIdList[currentProgress.value!! - 1]
+        val currentChoicesIdList = (wrongChoices + correctChoice) as MutableList<Int>
+        currentChoicesIdList.shuffle()
+
+        val pokemonNameList = mutableListOf<String>()
+        for (id in currentChoicesIdList.indices){
+            val pokemonSpecies = getPokemonSpecies(id).await() as PokemonSpecies
+            pokemonNameList.add(pokemonSpecies.names[0].name)
+        }
+
+        currentChoices.postValue(pokemonNameList)
+
+    }
 
     /**
      * btnNext ClickListener
@@ -73,7 +88,7 @@ class FourChoiceViewModel @Inject constructor(private val repository: PokemonRep
     }
 
     fun setupNextQuestion() {
-        //checkboxが空ならreturn
+        //checkboxが空ならreturn trueならfalseにリセットして次の問題へ
         if (!isAnswered) return else isAnswered = false
         if (currentProgress.value != numberOfQuestion) {
             updateQuestion()
@@ -83,7 +98,16 @@ class FourChoiceViewModel @Inject constructor(private val repository: PokemonRep
     }
 
     private fun updateQuestion() {
-
+        //fragment側で検知してcardを閉じる
+        isCollapseCardView.postValue(true)
+        isBtnEnable.postValue(false)
+        incrementCurrentProgress()
+        getPokemon(questionIdList[currentProgress.value as Int - 1])
+        updateCurrentChoices()
+        //最終問題ならbuttonTextを差し替え
+        if (currentProgress.value == numberOfQuestion) {
+            buttonText.postValue(R.string.finish_btn)
+        }
     }
 
     private fun navigateResultFragment() {
