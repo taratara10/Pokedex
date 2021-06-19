@@ -22,6 +22,7 @@ class FourChoiceViewModel @Inject constructor(private val repository: PokemonRep
     var currentRegion: MutableLiveData<Region> = MutableLiveData(Region.Kanto)
     var currentProgress = MutableLiveData(1)
     var numberOfQuestion: Int = 10
+    var correctAnswer: Int = 0
 
     var questionIdList = mutableListOf<Int>() //正解のid
     var fourChoicesList = mutableListOf<Int>() //問題数 x3 の選択肢のid
@@ -63,10 +64,10 @@ class FourChoiceViewModel @Inject constructor(private val repository: PokemonRep
     fun startQuestion() {
         //reset value
         currentProgress.postValue(1)
+        correctAnswer = 0
 
         generateQuestionIdList()
-        getPokemon(questionIdList.first())
-
+        updateCurrentChoices()
         goResultFragment.postValue(false)
         buttonText.postValue(R.string.next_btn)
     }
@@ -87,23 +88,28 @@ class FourChoiceViewModel @Inject constructor(private val repository: PokemonRep
         isCollapseCardView.postValue(true)
         isBtnEnable.postValue(false)
         incrementCurrentProgress()
-        getPokemon(questionIdList[currentProgress.value as Int - 1])
         updateCurrentChoices()
         //最終問題ならbuttonTextを差し替え
         if (currentProgress.value == numberOfQuestion) {
             buttonText.postValue(R.string.finish_btn)
         }
+
+        Log.d("fourCHOices", "${currentChoices.value?.get(0)}")
     }
 
     private fun updateCurrentChoices() =viewModelScope.launch {
         //idを4つ生成
-        val correctChoice = questionIdList[currentProgress.value!! - 1]
+        val correctChoice = questionIdList[currentProgress.value as Int - 1]
         val wrongChoices = fourChoicesList.take(3)
         fourChoicesList = fourChoicesList.drop(3) as MutableList<Int>
         //4つの選択肢のリスト(id)
         val currentChoicesIdList = (wrongChoices + correctChoice) as MutableList<Int>
         currentChoicesIdList.shuffle()
-        //4つの選択肢(pokemonName)
+
+        //update currentPokemon
+        getPokemon(correctChoice)
+
+        //4つの選択肢を取得(pokemonName)
         val pokemonNameList = mutableListOf<String>()
         for (id in 0..3){
             val pokemonSpecies = getPokemonSpecies(currentChoicesIdList[id]).await() as PokemonSpecies
@@ -122,7 +128,9 @@ class FourChoiceViewModel @Inject constructor(private val repository: PokemonRep
         }
     }
 
-    private fun checkTheAnswer() {
+    private fun checkTheAnswer(position: Int) {
+        val correctPokemonName = currentPokemon.value?.name
+        val selectPokemonName = currentChoices.value?.get(0)
 
 
     }
