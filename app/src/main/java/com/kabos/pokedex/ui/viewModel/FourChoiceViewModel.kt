@@ -22,14 +22,13 @@ class FourChoiceViewModel @Inject constructor(private val repository: PokemonRep
     var currentRegion: MutableLiveData<Region> = MutableLiveData(Region.Kanto)
     var currentProgress = MutableLiveData(1)
     var numberOfQuestion: Int = 10
-    var correctAnswer: Int = 0
+    var numberOfCorrectAnswer: Int = 0
 
     var questionIdList = mutableListOf<Int>() //正解のid
     var fourChoicesList = mutableListOf<Int>() //問題数 x3 の選択肢のid
     var currentChoices:MutableLiveData<List<String>> = MutableLiveData()
 
     //UI parameter
-    var isAnswered: Boolean = false
     var goResultFragment = MutableLiveData(false)
     var buttonText = MutableLiveData(R.string.next_btn)
     var isBtnEnable = MutableLiveData(false)
@@ -64,7 +63,7 @@ class FourChoiceViewModel @Inject constructor(private val repository: PokemonRep
     fun startQuestion() {
         //reset value
         currentProgress.postValue(1)
-        correctAnswer = 0
+        numberOfCorrectAnswer = 0
 
         generateQuestionIdList()
         updateCurrentChoices()
@@ -73,9 +72,6 @@ class FourChoiceViewModel @Inject constructor(private val repository: PokemonRep
     }
 
     fun setupNextQuestion() {
-        isAnswered = true //todo 後で消す！！！
-        //checkboxが空ならreturn trueならfalseにリセットして次の問題へ
-        if (!isAnswered) return else isAnswered = false
         if (currentProgress.value != numberOfQuestion) {
             updateQuestion()
         } else {
@@ -93,8 +89,6 @@ class FourChoiceViewModel @Inject constructor(private val repository: PokemonRep
         if (currentProgress.value == numberOfQuestion) {
             buttonText.postValue(R.string.finish_btn)
         }
-
-        Log.d("fourCHOices", "${currentChoices.value?.get(0)}")
     }
 
     private fun updateCurrentChoices() =viewModelScope.launch {
@@ -130,14 +124,12 @@ class FourChoiceViewModel @Inject constructor(private val repository: PokemonRep
 
     private fun checkTheAnswer(position: Int) {
         val correctPokemonName = currentPokemon.value?.name
-        val selectPokemonName = currentChoices.value?.get(0)
+        val selectPokemonName = currentChoices.value?.get(position)
+        if (selectPokemonName == correctPokemonName) numberOfCorrectAnswer++
 
+        isBtnEnable.postValue(true)
+    }
 
-    }
-    private fun toggleButtonContent() {
-        if (!isAnswered) isBtnEnable.postValue(false)
-        else isBtnEnable.postValue(true)
-    }
 
 
     /**
