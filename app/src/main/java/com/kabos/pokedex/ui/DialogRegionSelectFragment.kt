@@ -46,11 +46,11 @@ class DialogRegionSelectFragment: DialogFragment() {
                     findNavController().popBackStack()
                 }
                 if (buzzerMainFragmentArgs.fromBuzzer) {
-                    buzzerViewModel.updateRegion(region)
+                    buzzerViewModel.currentRegion.postValue(region)
                     findNavController().popBackStack()
                 }
                 if (fourchoicesFragmentArgs.fromFour) {
-                    fourChoiceViewModel.updateRegion(region)
+                    fourChoiceViewModel.currentRegion.postValue(region)
                     findNavController().popBackStack()
                 }
             }

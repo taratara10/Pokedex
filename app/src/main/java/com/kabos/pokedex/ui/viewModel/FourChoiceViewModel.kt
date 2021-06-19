@@ -32,10 +32,7 @@ class FourChoiceViewModel @Inject constructor(private val repository: PokemonRep
     var isCollapseCardView = MutableLiveData(false)
     var isCheckedNumberOfQuestionRadio = MutableLiveData(QuestionsRadio.secound)
 
-    fun updateRegion(region: Region) {
-        currentRegion.postValue(region)
-        currentRegion
-    }
+
     //buzzer main fragment
     fun updateNumberOfQuestion() {
         numberOfQuestion = isCheckedNumberOfQuestionRadio.value?.number!!

@@ -50,12 +50,6 @@ class BuzzerViewModel @Inject constructor(private val repository: PokemonReposit
     var isCheckedNumberOfQuestionRadio = MutableLiveData(QuestionsRadio.secound)
 
 
-    fun updateRegion(region: Region) {
-        currentRegion.postValue(region)
-        currentRegion
-    }
-
-
     private fun generateQuestionIdList() {
         val range = mutableListOf<Int>() //Regionの範囲
         for (i in currentRegion.value!!.start .. currentRegion.value!!.end) {
