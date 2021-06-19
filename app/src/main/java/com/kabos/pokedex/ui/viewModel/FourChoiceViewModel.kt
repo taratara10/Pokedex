@@ -78,7 +78,7 @@ class FourChoiceViewModel @Inject constructor(private val repository: PokemonRep
         if (currentProgress.value != numberOfQuestion) {
             updateQuestion()
         } else {
-            navigateResultFragment()
+            goResultFragment.postValue(true)
         }
     }
 
@@ -112,9 +112,6 @@ class FourChoiceViewModel @Inject constructor(private val repository: PokemonRep
         currentChoices.postValue(pokemonNameList)
     }
 
-    private fun navigateResultFragment() {
-
-    }
 
     /**
      * layout callback
@@ -125,7 +122,7 @@ class FourChoiceViewModel @Inject constructor(private val repository: PokemonRep
         }
     }
 
-    fun isAnsweredAnyChoices() {
+    private fun checkTheAnswer() {
 
 
     }
