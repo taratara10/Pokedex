@@ -1,5 +1,6 @@
 package com.kabos.pokedex.ui.viewModel
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -54,23 +55,6 @@ class FourChoiceViewModel @Inject constructor(private val repository: PokemonRep
         fourChoicesList = range.take(numberOfQuestion * 3) as MutableList<Int>
     }
 
-    private fun updateCurrentChoices() =viewModelScope.launch{
-        //idを4つ生成
-        val wrongChoices = fourChoicesList.take(3)
-        fourChoicesList.drop(3)
-        val correctChoice = questionIdList[currentProgress.value!! - 1]
-        val currentChoicesIdList = (wrongChoices + correctChoice) as MutableList<Int>
-        currentChoicesIdList.shuffle()
-
-        val pokemonNameList = mutableListOf<String>()
-        for (id in currentChoicesIdList.indices){
-            val pokemonSpecies = getPokemonSpecies(id).await() as PokemonSpecies
-            pokemonNameList.add(pokemonSpecies.names[0].name)
-        }
-
-        currentChoices.postValue(pokemonNameList)
-
-    }
 
     /**
      * btnNext ClickListener
@@ -88,6 +72,7 @@ class FourChoiceViewModel @Inject constructor(private val repository: PokemonRep
     }
 
     fun setupNextQuestion() {
+        isAnswered = true //todo 後で消す！！！
         //checkboxが空ならreturn trueならfalseにリセットして次の問題へ
         if (!isAnswered) return else isAnswered = false
         if (currentProgress.value != numberOfQuestion) {
@@ -108,6 +93,23 @@ class FourChoiceViewModel @Inject constructor(private val repository: PokemonRep
         if (currentProgress.value == numberOfQuestion) {
             buttonText.postValue(R.string.finish_btn)
         }
+    }
+
+    private fun updateCurrentChoices() =viewModelScope.launch {
+        //idを4つ生成
+        val correctChoice = questionIdList[currentProgress.value!! - 1]
+        val wrongChoices = fourChoicesList.take(3)
+        fourChoicesList = fourChoicesList.drop(3) as MutableList<Int>
+        //4つの選択肢のリスト(id)
+        val currentChoicesIdList = (wrongChoices + correctChoice) as MutableList<Int>
+        currentChoicesIdList.shuffle()
+        //4つの選択肢(pokemonName)
+        val pokemonNameList = mutableListOf<String>()
+        for (id in 0..3){
+            val pokemonSpecies = getPokemonSpecies(currentChoicesIdList[id]).await() as PokemonSpecies
+            pokemonNameList.add(pokemonSpecies.names[0].name)
+        }
+        currentChoices.postValue(pokemonNameList)
     }
 
     private fun navigateResultFragment() {
