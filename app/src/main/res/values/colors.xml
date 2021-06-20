@@ -9,6 +9,8 @@
     <color name="white">#FFFFFFFF</color>
     <color name="dialog_bg">#585858</color>
     <color name="red_500">#F44336</color>
+    <color name="red_a200">#FF5252</color>
+    <color name="green_a400">#00E676</color>
     <color name="red_500_alpha_30">#4DF44336</color>
     <color name="blue_gray_50">#ECEFF1</color>
     <color name="gray_800">#424242</color>
