@@ -1,5 +1,6 @@
 package com.kabos.pokedex.ui.viewModel
 
+import android.view.View
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -32,11 +33,24 @@ class FourChoiceViewModel @Inject constructor(private val repository: PokemonRep
     var isCollapseCardView = MutableLiveData(false)
     var isCheckedNumberOfQuestionRadio = MutableLiveData(QuestionsRadio.secound)
 
+    //four choices card background color
+    private val unSelectedColor = R.color.white
+    val correctColor = R.color.green_a400
+    val wrongColor = R.color.red_a200
 
-    //buzzer main fragment
-    fun updateNumberOfQuestion() {
-        numberOfQuestion = isCheckedNumberOfQuestionRadio.value?.number!!
-    }
+
+    //default value
+    var _isDisplayImageCorrect = mutableListOf(View.GONE, View.GONE, View.GONE, View.GONE)
+    var _isDisplayImageWrong = mutableListOf(View.GONE, View.GONE, View.GONE, View.GONE)
+    var _isTransparentChoice = mutableListOf(1f, 1f, 1f, 1f)
+    var _isNotTransparentChoice = mutableListOf(0.5f, 0.5f, 0.5f, 0.5f)
+    var _isDisplayChoiceBackground = mutableListOf(unSelectedColor, unSelectedColor, unSelectedColor, unSelectedColor)
+    //displayed card status
+    var isDisplayImageCorrect = MutableLiveData<List<Int>>(_isDisplayImageCorrect)
+    var isDisplayImageWrong = MutableLiveData<List<Int>>(_isDisplayImageWrong)
+    var isTransparentChoice = MutableLiveData<List<Float>>(_isTransparentChoice)
+    var isDisplayChoiceBackground = MutableLiveData<List<Int>>(_isDisplayChoiceBackground)
+
 
     private fun generateQuestionIdList() {
         //regionのstart..endのidListを生成
@@ -122,15 +136,49 @@ class FourChoiceViewModel @Inject constructor(private val repository: PokemonRep
     /**
      * layout callback
      */
+    //main fragment
+    fun updateNumberOfQuestion() {
+        numberOfQuestion = isCheckedNumberOfQuestionRadio.value?.number!!
+    }
+
+    //quiz fragment
 
     //fragment_four_choices_quizから onClick="@{(position) -> VM.checkAnswer()}"で呼び出す
     //選択肢が正解なら、正解数++
     //isDisplayAnswer をFourChoicesQuizでobserveして正誤の背景を変更
-    fun checkTheAnswer(position: Int) {
-        val selectChoice = currentChoices.value?.get(position)
-        if (selectChoice!!.correct){
-            numberOfCorrectAnswer ++
+    fun checkTheAnswer(selectedPosition: Int) {
+        //find correct position
+        var correctPosition = 0
+        for (i in currentChoices.value!!.indices){
+            if (currentChoices.value?.get(i)!!.correct) correctPosition = i
         }
+
+        //display correct image
+        val correct = _isDisplayImageCorrect
+        correct[correctPosition] = View.VISIBLE
+        isDisplayImageCorrect.postValue(correct)
+
+        //display correct color
+        val background = _isDisplayChoiceBackground
+        background[correctPosition] = correctColor
+        isDisplayChoiceBackground.postValue(background)
+
+        //transparent not selected choices
+        val transparent = _isNotTransparentChoice
+        transparent[selectedPosition] = 1f
+        transparent[correctPosition] = 1f
+        isTransparentChoice.postValue(transparent)
+
+        //checkAnswer
+        if (selectedPosition == correctPosition){
+            numberOfCorrectAnswer ++
+        }else{
+            //display wrong image which player selected.
+            val wrong = _isDisplayImageWrong
+            wrong[selectedPosition] = View.VISIBLE
+            isDisplayImageWrong.postValue(wrong)
+        }
+
         isDisplayAnswer.postValue(true)
         isBtnEnable.postValue(true)
     }

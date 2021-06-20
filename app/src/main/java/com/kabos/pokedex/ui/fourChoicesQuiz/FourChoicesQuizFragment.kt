@@ -47,5 +47,6 @@ class FourChoicesQuizFragment: Fragment() {
             if (goResult) findNavController().navigate(R.id.action_navigation_four_choices_quiz_to_navigation_four_choices_result)
         })
 
+
     }
 }
