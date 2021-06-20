@@ -21,8 +21,8 @@ class FourChoiceViewModel @Inject constructor(private val repository: PokemonRep
     var numberOfCorrectAnswer: Int = 0
 
     var questionIdList = mutableListOf<Int>() //正解のid
-    var fourChoicesList = mutableListOf<Int>() //問題数 x3 の選択肢のid
-    var currentChoices:MutableLiveData<List<QuizChoice>> = MutableLiveData()
+    var wrongChoicesList = mutableListOf<Int>() //問題数 x3 の選択肢のid
+    var currentChoices:MutableLiveData<List<QuizChoice>> = MutableLiveData() //QuizChoice型の4択
 
     //UI parameter
     var goResultFragment = MutableLiveData(false)
@@ -48,7 +48,7 @@ class FourChoiceViewModel @Inject constructor(private val repository: PokemonRep
 
         //fourChoices用の選択肢をquestion x 3取得. answerは選択肢から除く
         range.removeAll(questionIdList)
-        fourChoicesList = range.take(numberOfQuestion * 3) as MutableList<Int>
+        wrongChoicesList = range.take(numberOfQuestion * 3) as MutableList<Int>
     }
 
 
@@ -90,8 +90,8 @@ class FourChoiceViewModel @Inject constructor(private val repository: PokemonRep
     private fun updateCurrentChoices() =viewModelScope.launch {
         //idを4つ生成
         val correctChoice:Int = questionIdList[currentProgress.value as Int - 1]
-        val wrongChoices = fourChoicesList.take(3)
-        fourChoicesList = fourChoicesList.drop(3) as MutableList<Int>
+        val wrongChoices = wrongChoicesList.take(3)
+        wrongChoicesList = wrongChoicesList.drop(3) as MutableList<Int>
         //4つの選択肢のリスト(id)
         val currentChoicesIdList = (wrongChoices + correctChoice) as MutableList<Int>
         currentChoicesIdList.shuffle()
