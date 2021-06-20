@@ -27,6 +27,7 @@ class FourChoiceViewModel @Inject constructor(private val repository: PokemonRep
     //UI parameter
     var goResultFragment = MutableLiveData(false)
     var buttonText = MutableLiveData(R.string.next_btn)
+    var isDisplayAnswer = MutableLiveData(false)
     var isBtnEnable = MutableLiveData(false)
     var isCollapseCardView = MutableLiveData(false)
     var isCheckedNumberOfQuestionRadio = MutableLiveData(QuestionsRadio.secound)
@@ -78,7 +79,9 @@ class FourChoiceViewModel @Inject constructor(private val repository: PokemonRep
     private fun updateQuestion() {
         //fragment側で検知してcardを閉じる
         isCollapseCardView.postValue(true)
+        isDisplayAnswer.postValue(false)
         isBtnEnable.postValue(false)
+
         incrementCurrentProgress()
         updateCurrentChoices()
         //最終問題ならbuttonTextを差し替え
@@ -119,14 +122,18 @@ class FourChoiceViewModel @Inject constructor(private val repository: PokemonRep
     /**
      * layout callback
      */
-//    private fun checkTheAnswer(position: Int) {
-//        val correctPokemonName = currentPokemon.value?.name
-//        val selectPokemonName = currentChoices.value?.get(position)
-//        if (selectPokemonName == correctPokemonName) numberOfCorrectAnswer++
-//
-//        isBtnEnable.postValue(true)
-//    }
 
+    //fragment_four_choices_quizから onClick="@{(position) -> VM.checkAnswer()}"で呼び出す
+    //選択肢が正解なら、正解数++
+    //isDisplayAnswer をFourChoicesQuizでobserveして正誤の背景を変更
+    fun checkTheAnswer(position: Int) {
+        val selectChoice = currentChoices.value?.get(position)
+        if (selectChoice!!.correct){
+            numberOfCorrectAnswer ++
+        }
+        isDisplayAnswer.postValue(true)
+        isBtnEnable.postValue(true)
+    }
 
 
     /**
