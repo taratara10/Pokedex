@@ -104,16 +104,15 @@ class BuzzerViewModel @Inject constructor(private val repository: PokemonReposit
 
     }
 
-
-    /**
-     * layout callback
-     */
     private fun incrementCurrentProgress() {
         currentProgress.value?.let { i ->
             if (i < numberOfQuestion) currentProgress.value = i + 1
             if (i == numberOfQuestion - 1) buttonText.postValue(R.string.finish_btn) //次が最終問題ならbuttonTextを差し替え
         }
     }
+    /**
+     * layout callback
+     */
 
     //buzzer main fragment
     fun updateNumberOfQuestion() {

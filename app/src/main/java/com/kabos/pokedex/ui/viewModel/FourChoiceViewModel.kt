@@ -70,6 +70,7 @@ class FourChoiceViewModel @Inject constructor(private val repository: PokemonRep
 
     /**
      * btnNext ClickListener
+     * setup Question
      */
 
     fun startQuestion() {
@@ -85,25 +86,12 @@ class FourChoiceViewModel @Inject constructor(private val repository: PokemonRep
 
     fun setupNextQuestion() {
         if (currentProgress.value != numberOfQuestion) {
-            updateQuestion()
+            incrementCurrentProgress()
+            updateCurrentChoices()
+            defaultViewState()
         } else {
             goResultFragment.postValue(true)
         }
-    }
-
-    private fun updateQuestion() {
-        //fragment側で検知してcardを閉じる
-        isCollapseCardView.postValue(true)
-        isDisplayAnswer.postValue(false)
-        isBtnEnable.postValue(false)
-
-        isDisplayChoiceBackground.postValue(_isDisplayChoiceBackground)
-
-
-
-        incrementCurrentProgress()
-        updateCurrentChoices()
-
     }
 
     private fun updateCurrentChoices() =viewModelScope.launch {
@@ -136,6 +124,16 @@ class FourChoiceViewModel @Inject constructor(private val repository: PokemonRep
         }
     }
 
+    private fun defaultViewState() {
+        //fragment側で検知してcardを閉じる
+        isCollapseCardView.postValue(true)
+        isDisplayAnswer.postValue(false)
+        isBtnEnable.postValue(false)
+        isDisplayImageCorrect.postValue(_isDisplayImageCorrect)
+        isDisplayImageWrong.postValue(_isDisplayImageWrong)
+        isTransparentChoice.postValue(_isNotTransparentChoice)
+        isDisplayChoiceBackground.postValue(_isDisplayChoiceBackground)
+    }
     /**
      * layout callback
      */
