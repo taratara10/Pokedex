@@ -71,7 +71,6 @@ class BuzzerViewModel @Inject constructor(private val repository: PokemonReposit
         playerScoreList = playerScoreList.take(numberOfPlayer + 1) as MutableList<Float>
         playerRanking = playerRanking.take(numberOfPlayer + 1) as MutableList<Float>
 
-
         generateQuestionIdList()
         getPokemon(questionIdList.first())
         goResultFragment.postValue(false)
@@ -95,10 +94,6 @@ class BuzzerViewModel @Inject constructor(private val repository: PokemonReposit
         countPlayerScore()
         incrementCurrentProgress()
         getPokemon(questionIdList[currentProgress.value as Int - 1])
-        //最終問題ならbuttonTextを差し替え
-        if (currentProgress.value == numberOfQuestion) {
-            buttonText.postValue(R.string.finish_btn)
-        }
     }
 
     private fun navigateResultFragment() {
@@ -116,6 +111,7 @@ class BuzzerViewModel @Inject constructor(private val repository: PokemonReposit
     private fun incrementCurrentProgress() {
         currentProgress.value?.let { i ->
             if (i < numberOfQuestion) currentProgress.value = i + 1
+            if (i == numberOfQuestion - 1) buttonText.postValue(R.string.finish_btn) //次が最終問題ならbuttonTextを差し替え
         }
     }
 

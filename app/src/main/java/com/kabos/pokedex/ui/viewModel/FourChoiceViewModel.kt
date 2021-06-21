@@ -43,13 +43,13 @@ class FourChoiceViewModel @Inject constructor(private val repository: PokemonRep
     //default value
     var _isDisplayImageCorrect = mutableListOf(View.GONE, View.GONE, View.GONE, View.GONE)
     var _isDisplayImageWrong = mutableListOf(View.GONE, View.GONE, View.GONE, View.GONE)
-    var _isTransparentChoice = mutableListOf(1f, 1f, 1f, 1f)
-    var _isNotTransparentChoice = mutableListOf(0.5f, 0.5f, 0.5f, 0.5f)
+    var _isTransparentChoice = mutableListOf(0.5f, 0.5f, 0.5f, 0.5f)
+    var _isNotTransparentChoice = mutableListOf(1f, 1f, 1f, 1f)
     var _isDisplayChoiceBackground = mutableListOf(unSelectedColor, unSelectedColor, unSelectedColor, unSelectedColor)
     //displayed card status
     var isDisplayImageCorrect = MutableLiveData<List<Int>>(_isDisplayImageCorrect)
     var isDisplayImageWrong = MutableLiveData<List<Int>>(_isDisplayImageWrong)
-    var isTransparentChoice = MutableLiveData<List<Float>>(_isTransparentChoice)
+    var isTransparentChoice = MutableLiveData<List<Float>>(_isNotTransparentChoice)
     var isDisplayChoiceBackground = MutableLiveData<List<Int>>(_isDisplayChoiceBackground)
 
 
@@ -98,12 +98,12 @@ class FourChoiceViewModel @Inject constructor(private val repository: PokemonRep
         isBtnEnable.postValue(false)
 
         isDisplayChoiceBackground.postValue(_isDisplayChoiceBackground)
+
+
+
         incrementCurrentProgress()
         updateCurrentChoices()
-        //最終問題ならbuttonTextを差し替え
-        if (currentProgress.value == numberOfQuestion) {
-            buttonText.postValue(R.string.finish_btn)
-        }
+
     }
 
     private fun updateCurrentChoices() =viewModelScope.launch {
@@ -132,6 +132,7 @@ class FourChoiceViewModel @Inject constructor(private val repository: PokemonRep
     private fun incrementCurrentProgress() {
         currentProgress.value?.let { i ->
             if (i < numberOfQuestion) currentProgress.value = i + 1
+            if (i == numberOfQuestion - 1) buttonText.postValue(R.string.finish_btn) //次が最終問題ならbuttonTextを差し替え
         }
     }
 
@@ -162,7 +163,7 @@ class FourChoiceViewModel @Inject constructor(private val repository: PokemonRep
 
 
         //transparent not selected choices
-        val transparent = _isNotTransparentChoice.toMutableList()
+        val transparent = _isTransparentChoice.toMutableList()
         transparent[selectedPosition] = 1f
         transparent[correctPosition] = 1f
         isTransparentChoice.postValue(transparent)

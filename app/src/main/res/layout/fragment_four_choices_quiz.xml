@@ -260,6 +260,7 @@
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/choice_one"
+                        android:alpha="@{fourVM.isTransparentChoice[0]}"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
 
@@ -314,6 +315,7 @@
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/choice_two"
+                        android:alpha="@{fourVM.isTransparentChoice[1]}"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
 
@@ -368,6 +370,7 @@
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/choice_three"
+                        android:alpha="@{fourVM.isTransparentChoice[2]}"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
 
@@ -421,6 +424,7 @@
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/choice_four"
+                        android:alpha="@{fourVM.isTransparentChoice[3]}"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
 
