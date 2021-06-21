@@ -1,6 +1,7 @@
 package com.kabos.pokedex.ui.fourChoicesQuiz
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -31,6 +32,15 @@ class FourChoicesQuizFragment: Fragment() {
                 max = fourChoicesViewModel.numberOfQuestion
             }
         }
+
+        fourChoicesViewModel.isDisplayChoiceBackground.observe(viewLifecycleOwner, { background ->
+            binding.apply {
+                choiceOne.setBackgroundResource(background[0])
+                choiceTwo.setBackgroundResource(background[1])
+                choiceThree.setBackgroundResource(background[2])
+                choiceFour.setBackgroundResource(background[3])
+            }
+        })
 
         fourChoicesViewModel.isCollapseCardView.observe(viewLifecycleOwner, { isCollapse ->
             if (isCollapse){

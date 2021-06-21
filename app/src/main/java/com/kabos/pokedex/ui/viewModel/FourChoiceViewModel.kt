@@ -1,5 +1,6 @@
 package com.kabos.pokedex.ui.viewModel
 
+import android.util.Log
 import android.view.View
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -96,6 +97,7 @@ class FourChoiceViewModel @Inject constructor(private val repository: PokemonRep
         isDisplayAnswer.postValue(false)
         isBtnEnable.postValue(false)
 
+        isDisplayChoiceBackground.postValue(_isDisplayChoiceBackground)
         incrementCurrentProgress()
         updateCurrentChoices()
         //最終問題ならbuttonTextを差し替え
@@ -154,31 +156,34 @@ class FourChoiceViewModel @Inject constructor(private val repository: PokemonRep
         }
 
         //display correct image
-        val correct = _isDisplayImageCorrect
+        val correct = _isDisplayImageCorrect.toMutableList() //toで新しいインスタンスを生成する
         correct[correctPosition] = View.VISIBLE
         isDisplayImageCorrect.postValue(correct)
 
-        //display correct color
-        val background = _isDisplayChoiceBackground
-        background[correctPosition] = correctColor
-        isDisplayChoiceBackground.postValue(background)
 
         //transparent not selected choices
-        val transparent = _isNotTransparentChoice
+        val transparent = _isNotTransparentChoice.toMutableList()
         transparent[selectedPosition] = 1f
         transparent[correctPosition] = 1f
         isTransparentChoice.postValue(transparent)
+
+        //display correct color
+        val background = _isDisplayChoiceBackground.toMutableList()
+        background[correctPosition] = correctColor
 
         //checkAnswer
         if (selectedPosition == correctPosition){
             numberOfCorrectAnswer ++
         }else{
             //display wrong image which player selected.
-            val wrong = _isDisplayImageWrong
+            val wrong = _isDisplayImageWrong.toMutableList()
             wrong[selectedPosition] = View.VISIBLE
             isDisplayImageWrong.postValue(wrong)
-        }
 
+            //display wrong background
+            background[selectedPosition] = wrongColor
+        }
+        isDisplayChoiceBackground.postValue(background)
         isDisplayAnswer.postValue(true)
         isBtnEnable.postValue(true)
     }
