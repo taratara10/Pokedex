@@ -29,7 +29,6 @@ class FourChoiceViewModel @Inject constructor(private val repository: PokemonRep
     //UI parameter
     var goResultFragment = MutableLiveData(false)
     var buttonText = MutableLiveData(R.string.next_btn)
-    var isDisplayAnswer = MutableLiveData(false)
     var isBtnEnable = MutableLiveData(false)
     var isCollapseCardView = MutableLiveData(false)
     var isCheckedNumberOfQuestionRadio = MutableLiveData(QuestionsRadio.secound)
@@ -127,7 +126,6 @@ class FourChoiceViewModel @Inject constructor(private val repository: PokemonRep
     private fun defaultViewState() {
         //fragment側で検知してcardを閉じる
         isCollapseCardView.postValue(true)
-        isDisplayAnswer.postValue(false)
         isBtnEnable.postValue(false)
         isDisplayImageCorrect.postValue(_isDisplayImageCorrect)
         isDisplayImageWrong.postValue(_isDisplayImageWrong)
@@ -145,9 +143,11 @@ class FourChoiceViewModel @Inject constructor(private val repository: PokemonRep
     //quiz fragment
 
     //fragment_four_choices_quizから onClick="@{(position) -> VM.checkAnswer()}"で呼び出す
-    //選択肢が正解なら、正解数++
-    //isDisplayAnswer をFourChoicesQuizでobserveして正誤の背景を変更
+    //選択肢の背景変えたり、画像表示とかするやつ
     fun checkTheAnswer(selectedPosition: Int) {
+        //既に回答を表示したらキャンセル
+        if (isBtnEnable.value!!) return
+
         //find correct position
         var correctPosition = 0
         for (i in currentChoices.value!!.indices){
@@ -183,7 +183,6 @@ class FourChoiceViewModel @Inject constructor(private val repository: PokemonRep
             background[selectedPosition] = wrongColor
         }
         isDisplayChoiceBackground.postValue(background)
-        isDisplayAnswer.postValue(true)
         isBtnEnable.postValue(true)
     }
 
