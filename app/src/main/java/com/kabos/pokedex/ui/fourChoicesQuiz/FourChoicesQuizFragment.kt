@@ -48,9 +48,14 @@ class FourChoicesQuizFragment: Fragment() {
                     elHintOne.collapse(false)
                     elHintTwo.collapse(false)
                     elHintThree.collapse(false)
-                    //elAnswer.collapse(false)
+                    elAnswer.collapse(false)
                 }
             }
+        })
+
+        //回答したら答えがオープンする
+        fourChoicesViewModel.isBtnEnable.observe(viewLifecycleOwner, {isAnswered ->
+            if (isAnswered) binding.elAnswer.expand()
         })
 
         fourChoicesViewModel.goResultFragment.observe(viewLifecycleOwner, {goResult ->

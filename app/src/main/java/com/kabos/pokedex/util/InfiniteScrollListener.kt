@@ -10,7 +10,7 @@ class InfiniteScrollListener(
         val func: () -> Unit /*呼び出し元でcallback引数として{}を実装*/) : RecyclerView.OnScrollListener() {
 
     private var loading = true
-    private var visibleThreshold = 5 //閾値
+    private var visibleThreshold = 10 //閾値
     private var firstVisibleItem = 0 //adapter position
     private var visibleItemCount = 0 //recyclerView
     private var totalItemCount = 0   //layoutManager

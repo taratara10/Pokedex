@@ -79,6 +79,7 @@ class FourChoiceViewModel @Inject constructor(private val repository: PokemonRep
 
         generateQuestionIdList()
         updateCurrentChoices()
+        defaultViewState()
         goResultFragment.postValue(false)
         buttonText.postValue(R.string.next_btn)
     }
