@@ -21,7 +21,7 @@ class FourChoiceViewModel @Inject constructor(private val repository: PokemonRep
     var currentProgress = MutableLiveData(1)
     var numberOfQuestion: Int = 10
     var numberOfCorrectAnswer: Int = 0
-    var numberOfWrongAnswer: Int = numberOfQuestion - numberOfCorrectAnswer //todo これ反映されている？
+    var numberOfWrongAnswer: Int = 0
 
     var questionIdList = mutableListOf<Int>() //正解のid
     var wrongChoicesList = mutableListOf<Int>() //問題数 x3 の選択肢のid
@@ -78,6 +78,7 @@ class FourChoiceViewModel @Inject constructor(private val repository: PokemonRep
         currentProgress.postValue(1)
         numberOfCorrectAnswer = 0
 
+
         generateQuestionIdList()
         updateCurrentChoices()
         defaultViewState()
@@ -91,6 +92,8 @@ class FourChoiceViewModel @Inject constructor(private val repository: PokemonRep
             updateCurrentChoices()
             defaultViewState()
         } else {
+            //pieChartの描画に必要なので計算する
+            numberOfWrongAnswer = numberOfQuestion - numberOfCorrectAnswer
             goResultFragment.postValue(true)
         }
     }
