@@ -1,4 +1,6 @@
 package com.kabos.pokedex.ui.fourChoicesQuiz
 
-class FourChoicesResultFragment {
+import androidx.fragment.app.Fragment
+
+class FourChoicesResultFragment: Fragment() {
 }

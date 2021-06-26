@@ -21,6 +21,7 @@ class FourChoiceViewModel @Inject constructor(private val repository: PokemonRep
     var currentProgress = MutableLiveData(1)
     var numberOfQuestion: Int = 10
     var numberOfCorrectAnswer: Int = 0
+    var numberOfWrongAnswer: Int = numberOfQuestion - numberOfCorrectAnswer //todo これ反映されている？
 
     var questionIdList = mutableListOf<Int>() //正解のid
     var wrongChoicesList = mutableListOf<Int>() //問題数 x3 の選択肢のid

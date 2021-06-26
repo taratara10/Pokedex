@@ -128,7 +128,6 @@
         android:label="FourChoices"
         tools:layout="@layout/fragment_four_choices_result" >
 
-
     </fragment>
 
 </navigation>
