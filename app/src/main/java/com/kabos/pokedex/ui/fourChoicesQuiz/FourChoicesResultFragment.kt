@@ -31,22 +31,22 @@ class FourChoicesResultFragment: Fragment() {
 
         binding.apply {
             fourVM = fourChoiceViewModel
-            inflatePieChart(pieChart)
+
+            val pieChartValue = listOf(
+                fourChoiceViewModel.numberOfCorrectAnswer.toFloat(),
+                fourChoiceViewModel.numberOfWrongAnswer.toFloat()
+            )
+            inflatePieChart(pieChart, pieChartValue)
 
         }
     }
 
-    private fun inflatePieChart(pieChart: PieChart) {
-        //表示用サンプルデータの作成//
-        val dimensions = listOf("A", "B", "C", "D")//分割円の名称(String型)
-        val values = listOf(1f, 2f, 3f, 4f)//分割円の大きさ(Float型)
+    private fun inflatePieChart(pieChart: PieChart, values: List<Float>) {
 
         //①Entryにデータ格納
-        var entryList = mutableListOf<PieEntry>()
+        val entryList = mutableListOf<PieEntry>()
         for(i in values.indices){
-            entryList.add(
-                PieEntry(values[i], dimensions[i])
-            )
+            entryList.add(PieEntry(values[i]))
         }
 
         //②PieDataSetにデータ格納
