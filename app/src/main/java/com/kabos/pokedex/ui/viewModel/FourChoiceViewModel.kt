@@ -99,7 +99,8 @@ class FourChoiceViewModel @Inject constructor(private val repository: PokemonRep
         //idを4つ生成
         val correctChoice:Int = questionIdList[currentProgress.value as Int - 1]
         val wrongChoices = wrongChoicesList.take(3)
-        wrongChoicesList = wrongChoicesList.drop(3) as MutableList<Int>
+        if (wrongChoicesList.size > 3) wrongChoicesList = wrongChoicesList.drop(3) as MutableList<Int>
+        Log.d("fourVM", "${wrongChoicesList}")
         //4つの選択肢のリスト(id)
         val currentChoicesIdList = (wrongChoices + correctChoice) as MutableList<Int>
         currentChoicesIdList.shuffle()
