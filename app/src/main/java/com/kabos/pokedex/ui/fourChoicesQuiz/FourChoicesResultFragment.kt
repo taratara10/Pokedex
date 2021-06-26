@@ -1,9 +1,11 @@
 package com.kabos.pokedex.ui.fourChoicesQuiz
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.github.mikephil.charting.charts.PieChart
@@ -11,6 +13,7 @@ import com.github.mikephil.charting.data.PieData
 import com.github.mikephil.charting.data.PieDataSet
 import com.github.mikephil.charting.data.PieEntry
 import com.github.mikephil.charting.utils.ColorTemplate
+import com.kabos.pokedex.R
 import com.kabos.pokedex.databinding.FragmentFourChoicesResultBinding
 import com.kabos.pokedex.ui.viewModel.FourChoiceViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -52,14 +55,30 @@ class FourChoicesResultFragment: Fragment() {
         //②PieDataSetにデータ格納
         val pieDataSet = PieDataSet(entryList, "candle")
         //③DataSetのフォーマット指定
-        pieDataSet.colors = ColorTemplate.COLORFUL_COLORS.toList()
+        pieDataSet.apply {
+            colors = listOf(
+                ContextCompat.getColor(requireContext(), R.color.correct),
+                ContextCompat.getColor(requireContext(), R.color.wrong_transparent),
+            )
+
+            setDrawValues(false)
+        }
 
         //④PieDataにPieDataSet格納
         val pieData = PieData(pieDataSet)
         //⑤PieChartにPieData格納
         pieChart.data = pieData
         //⑥Chartのフォーマット指定
-        pieChart.legend.isEnabled = false
+        pieChart.apply {
+            legend.isEnabled = false
+            description.isEnabled = false
+            transparentCircleRadius = 0f
+            centerText ="${(values[0]/(values[0] + values[1]) *100).toInt()} %"
+            setCenterTextSize(20f)
+            setTouchEnabled(false)
+
+        }
+
         //⑦PieChart更新
         pieChart.invalidate()
     }

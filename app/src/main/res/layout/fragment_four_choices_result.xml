@@ -23,7 +23,8 @@
             app:layout_constraintTop_toBottomOf="@+id/tv_four_result_top_title">
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:layout_margin="24dp">
 
                 <com.github.mikephil.charting.charts.PieChart
                     android:id="@+id/pie_chart"
@@ -49,6 +50,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
+                    android:textStyle="bold"
                     android:text="@{@string/number_to_string(fourVM.numberOfQuestion)}"
                     app:layout_constraintBottom_toBottomOf="@+id/tv_number_of_question"
                     app:layout_constraintStart_toStartOf="@id/guideline_card_center"
@@ -70,6 +72,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:text="@{@string/number_to_string(fourVM.numberOfCorrectAnswer)}"
+                    android:textColor="@color/correct"
+                    android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="@+id/tv_number_of_correct"
                     app:layout_constraintStart_toStartOf="@id/guideline_card_center"
                     app:layout_constraintTop_toTopOf="@id/tv_number_of_correct"
@@ -91,6 +95,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
+                    android:textStyle="bold"
+                    android:textColor="@color/wrong"
                     android:text="@{@string/number_to_string(fourVM.numberOfWrongAnswer)}"
                     app:layout_constraintBottom_toBottomOf="@+id/tv_number_of_wrong"
                     app:layout_constraintStart_toStartOf="@id/guideline_card_center"

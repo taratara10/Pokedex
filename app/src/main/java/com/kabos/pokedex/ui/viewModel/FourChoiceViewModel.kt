@@ -36,8 +36,8 @@ class FourChoiceViewModel @Inject constructor(private val repository: PokemonRep
 
     //four choices card background color
     private val unSelectedColor = R.color.white
-    val correctColor = R.color.green_a400
-    val wrongColor = R.color.red_a200
+    val correctColor = R.color.correct
+    val wrongColor = R.color.wrong
 
 
     //default value
