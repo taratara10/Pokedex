@@ -39,6 +39,7 @@ class FourChoicesResultFragment: Fragment() {
                 fourChoiceViewModel.numberOfCorrectAnswer.toFloat(),
                 fourChoiceViewModel.numberOfWrongAnswer.toFloat()
             )
+            pieChart.animateXY(2000, 2000)
             inflatePieChart(pieChart, pieChartValue)
 
         }

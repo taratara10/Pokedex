@@ -11,29 +11,44 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@drawable/happyacid">
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cardView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="24dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_four_result_top_title">
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.25">
+
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_margin="24dp">
 
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="せいかいりつ"
+                    android:textSize="24dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
                 <com.github.mikephil.charting.charts.PieChart
                     android:id="@+id/pie_chart"
                     android:layout_width="200dp"
                     android:layout_height="200dp"
+                    android:layout_marginTop="8dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.498"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
                 <TextView
                     android:id="@+id/tv_number_of_question"
@@ -50,8 +65,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
-                    android:textStyle="bold"
                     android:text="@{@string/number_to_string(fourVM.numberOfQuestion)}"
+                    android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="@+id/tv_number_of_question"
                     app:layout_constraintStart_toStartOf="@id/guideline_card_center"
                     app:layout_constraintTop_toTopOf="@id/tv_number_of_question"
@@ -66,6 +81,7 @@
                     android:text="せいかい"
                     app:layout_constraintEnd_toStartOf="@+id/guideline_card_center"
                     app:layout_constraintTop_toBottomOf="@+id/tv_number_of_question" />
+
                 <TextView
                     android:id="@+id/tv_number_of_correct_result"
                     android:layout_width="wrap_content"
@@ -90,39 +106,47 @@
                     app:layout_constraintEnd_toStartOf="@+id/guideline_card_center"
                     app:layout_constraintTop_toBottomOf="@+id/tv_number_of_correct"
                     app:layout_constraintVertical_bias="0.0" />
+
                 <TextView
                     android:id="@+id/tv_number_of_wrong_result"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
-                    android:textStyle="bold"
-                    android:textColor="@color/wrong"
                     android:text="@{@string/number_to_string(fourVM.numberOfWrongAnswer)}"
+                    android:textColor="@color/wrong"
+                    android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="@+id/tv_number_of_wrong"
                     app:layout_constraintStart_toStartOf="@id/guideline_card_center"
                     app:layout_constraintTop_toTopOf="@id/tv_number_of_wrong"
                     tools:text="10" />
+
+                <ImageView
+                    android:layout_width="2dp"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@color/blue_gray_50"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="@id/guideline_card_center"
+                    app:layout_constraintTop_toBottomOf="@+id/pie_chart" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="8dp"
+                    android:text=" "
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_number_of_wrong" />
+
                 <androidx.constraintlayout.widget.Guideline
                     android:id="@+id/guideline_card_center"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    app:layout_constraintGuide_percent="0.5" />
+                    app:layout_constraintGuide_percent="0.55" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>
 
 
-
-        <TextView
-            android:id="@+id/tv_four_result_top_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="けっかはっぴょう"
-            android:textSize="24dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginTop="24dp"/>
         <Button
             android:id="@+id/btn_four_result_bottom"
             android:layout_width="wrap_content"
