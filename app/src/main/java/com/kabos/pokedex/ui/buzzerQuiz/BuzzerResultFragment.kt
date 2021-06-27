@@ -51,7 +51,6 @@ class BuzzerResultFragment: Fragment() {
     }
 
     private fun inflateHorizontalBarChart(barChart: BarChart, xData: List<Float>, yData: List<Float>) {
-
         //Entry:データ1行の情報を格納
         //DataSet:グループ毎のデータを格納
         //Data:グラフ全体のデータを格納
