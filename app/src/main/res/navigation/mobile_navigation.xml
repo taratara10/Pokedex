@@ -91,6 +91,9 @@
         android:label="Buzzer"
         tools:layout="@layout/fragment_buzzer_result" >
 
+        <action
+            android:id="@+id/action_navigation_buzzer_result_to_navigation_buzzer_main"
+            app:destination="@id/navigation_buzzer_main" />
     </fragment>
 
 <!--  four choices  -->
@@ -128,6 +131,9 @@
         android:label="FourChoices"
         tools:layout="@layout/fragment_four_choices_result" >
 
+        <action
+            android:id="@+id/action_navigation_four_choices_result_to_navigation_four_choices_main"
+            app:destination="@id/navigation_four_choices_main" />
     </fragment>
 
 </navigation>

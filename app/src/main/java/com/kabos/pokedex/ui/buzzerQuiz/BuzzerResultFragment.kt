@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.constraintlayout.widget.ConstraintLayoutStates
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import com.github.mikephil.charting.animation.Easing
 import com.github.mikephil.charting.charts.BarChart
 import com.github.mikephil.charting.data.BarData
@@ -16,6 +17,7 @@ import com.github.mikephil.charting.data.BarDataSet
 import com.github.mikephil.charting.data.BarEntry
 import com.github.mikephil.charting.formatter.ValueFormatter
 import com.github.mikephil.charting.interfaces.datasets.IBarDataSet
+import com.kabos.pokedex.R
 import com.kabos.pokedex.databinding.FragmentBuzzerResultBinding
 import com.kabos.pokedex.ui.viewModel.BuzzerViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -36,10 +38,13 @@ class BuzzerResultFragment: Fragment() {
 
         binding.apply {
             buzzerVM = buzzerViewModel
+            btnBuzzerEnd.setOnClickListener {
+                findNavController().navigate(R.id.action_navigation_buzzer_result_to_navigation_buzzer_main)
+            }
+
             //calculate barChart height
             barChart.layoutParams.height = ((buzzerViewModel.numberOfPlayer * 50 + 80) * resources.displayMetrics.density).toInt()
             barChart.animateY(2000)
-
             val xAxisPlayerList = mutableListOf(1f, 2f, 3f, 4f, 5f, 6f, 7f).take(buzzerViewModel.numberOfPlayer + 1)
             inflateHorizontalBarChart(barChart, xAxisPlayerList, buzzerViewModel.playerScoreList)
         }

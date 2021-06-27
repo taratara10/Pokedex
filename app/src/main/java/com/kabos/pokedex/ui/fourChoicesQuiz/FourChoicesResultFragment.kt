@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import com.github.mikephil.charting.charts.PieChart
 import com.github.mikephil.charting.data.PieData
 import com.github.mikephil.charting.data.PieDataSet
@@ -34,6 +35,9 @@ class FourChoicesResultFragment: Fragment() {
 
         binding.apply {
             fourVM = fourChoiceViewModel
+            btnFourResultEnd.setOnClickListener {
+                findNavController().navigate(R.id.action_navigation_four_choices_result_to_navigation_four_choices_main)
+            }
 
             val pieChartValue = listOf(
                 fourChoiceViewModel.numberOfCorrectAnswer.toFloat(),
@@ -61,7 +65,6 @@ class FourChoicesResultFragment: Fragment() {
                 ContextCompat.getColor(requireContext(), R.color.correct),
                 ContextCompat.getColor(requireContext(), R.color.wrong_transparent),
             )
-
             setDrawValues(false)
         }
 

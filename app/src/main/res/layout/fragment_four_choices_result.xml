@@ -148,11 +148,12 @@
 
 
         <Button
-            android:id="@+id/btn_four_result_bottom"
+            android:id="@+id/btn_four_result_end"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:backgroundTint="@color/red_500"
             android:text="もどる"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/cardView" />
