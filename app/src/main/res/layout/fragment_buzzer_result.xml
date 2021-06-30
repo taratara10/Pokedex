@@ -12,7 +12,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/happyacid">
+        android:background="@drawable/orange_juice">
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cardView"
@@ -271,8 +271,9 @@
             android:id="@+id/btn_buzzer_end"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/red_500"
+            android:backgroundTint="@color/correct"
             android:text="もどる"
+            android:textColor="@color/black"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
