@@ -16,7 +16,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/winterneva">
+        android:background="@drawable/healthy_water">
 
         <androidx.cardview.widget.CardView
             android:layout_width="0dp"
