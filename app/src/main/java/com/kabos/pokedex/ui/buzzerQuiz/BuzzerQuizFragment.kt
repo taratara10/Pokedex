@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.DecelerateInterpolator
+import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
@@ -19,10 +20,15 @@ import dagger.hilt.android.AndroidEntryPoint
 class BuzzerQuizFragment: Fragment() {
     private lateinit var binding: FragmentBuzzerQuizBinding
     private val buzzerViewModel: BuzzerViewModel by activityViewModels()
-
+    private val backPressCallback = object: OnBackPressedCallback(true) {
+        override fun handleOnBackPressed() {
+            findNavController().navigate(R.id.action_navigation_buzzer_quiz_to_navigation_confirm_backpress)
+        }
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = FragmentBuzzerQuizBinding.inflate(inflater, container, false)
+        requireActivity().onBackPressedDispatcher.addCallback(backPressCallback)
         return binding.root
     }
 
