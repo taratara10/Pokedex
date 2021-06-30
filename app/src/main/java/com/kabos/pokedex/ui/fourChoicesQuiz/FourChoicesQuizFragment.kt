@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
@@ -17,8 +18,15 @@ class FourChoicesQuizFragment: Fragment() {
     private lateinit var binding: FragmentFourChoicesQuizBinding
     private val fourChoicesViewModel: FourChoiceViewModel by activityViewModels()
 
+    private val backPressCallback = object: OnBackPressedCallback(true) {
+        override fun handleOnBackPressed() {
+            findNavController().navigate(R.id.action_navigation_four_choices_quiz_to_navigation_confirm_backpress)
+        }
+    }
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = FragmentFourChoicesQuizBinding.inflate(inflater, container, false)
+        requireActivity().onBackPressedDispatcher.addCallback(backPressCallback)
         return binding.root
     }
 
@@ -64,4 +72,6 @@ class FourChoicesQuizFragment: Fragment() {
 
 
     }
+
+
 }

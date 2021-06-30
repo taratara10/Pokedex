@@ -28,6 +28,7 @@ class MainActivity : AppCompatActivity() {
             when (destination.id) {
                 R.id.navigation_buzzer_quiz -> navView.visibility = View.GONE
                 R.id.navigation_four_choices_quiz -> navView.visibility = View.GONE
+                R.id.navigation_confirm_backpress -> navView.visibility = View.GONE
                 else -> navView.visibility =  View.VISIBLE
             }
         }
