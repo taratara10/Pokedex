@@ -70,12 +70,6 @@
             android:id="@+id/action_navigation_confirm_backpress_to_navigation_four_choices_main"
             app:destination="@id/navigation_four_choices_main" />
         <action
-            android:id="@+id/action_navigation_confirm_backpress_to_navigation_four_choices_result"
-            app:destination="@id/navigation_four_choices_result" />
-        <action
-            android:id="@+id/action_navigation_confirm_backpress_to_navigation_buzzer_result"
-            app:destination="@id/navigation_buzzer_result" />
-        <action
             android:id="@+id/action_navigation_confirm_backpress_to_navigation_buzzer_main"
             app:destination="@id/navigation_buzzer_main" />
     </dialog>

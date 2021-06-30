@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
 import androidx.constraintlayout.widget.ConstraintLayoutStates
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -27,8 +28,14 @@ class BuzzerResultFragment: Fragment() {
 
     private lateinit var binding: FragmentBuzzerResultBinding
     private val buzzerViewModel: BuzzerViewModel by activityViewModels()
+    private val backPressCallback = object: OnBackPressedCallback(true) {
+        override fun handleOnBackPressed() {
+            findNavController().navigate(R.id.action_navigation_buzzer_result_to_navigation_buzzer_main)
+        }
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        requireActivity().onBackPressedDispatcher.addCallback(backPressCallback)
         binding = FragmentBuzzerResultBinding.inflate(inflater, container, false)
         return binding.root
     }

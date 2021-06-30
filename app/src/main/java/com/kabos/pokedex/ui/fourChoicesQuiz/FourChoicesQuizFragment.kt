@@ -20,7 +20,9 @@ class FourChoicesQuizFragment: Fragment() {
 
     private val backPressCallback = object: OnBackPressedCallback(true) {
         override fun handleOnBackPressed() {
-            findNavController().navigate(R.id.action_navigation_four_choices_quiz_to_navigation_confirm_backpress)
+            val action = FourChoicesQuizFragmentDirections
+                .actionNavigationFourChoicesQuizToNavigationConfirmBackpress(fromFour = true)
+            findNavController().navigate(action)
         }
     }
 

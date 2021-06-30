@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -24,8 +25,14 @@ class FourChoicesResultFragment: Fragment() {
 
     private lateinit var binding: FragmentFourChoicesResultBinding
     private val fourChoiceViewModel: FourChoiceViewModel by activityViewModels()
+    private val backPressCallback = object: OnBackPressedCallback(true) {
+        override fun handleOnBackPressed() {
+            findNavController().navigate(R.id.action_navigation_four_choices_result_to_navigation_four_choices_main)
+        }
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        requireActivity().onBackPressedDispatcher.addCallback(backPressCallback)
         binding = FragmentFourChoicesResultBinding.inflate(inflater, container, false)
         return binding.root
     }

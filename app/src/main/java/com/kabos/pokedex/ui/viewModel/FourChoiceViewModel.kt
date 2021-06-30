@@ -92,9 +92,7 @@ class FourChoiceViewModel @Inject constructor(private val repository: PokemonRep
             updateCurrentChoices()
             defaultViewState()
         } else {
-            //pieChartの描画に必要なので計算する
-            numberOfWrongAnswer = numberOfQuestion - numberOfCorrectAnswer
-            goResultFragment.postValue(true)
+            navigateResultFragment()
         }
     }
 
@@ -138,6 +136,13 @@ class FourChoiceViewModel @Inject constructor(private val repository: PokemonRep
         isTransparentChoice.postValue(_isNotTransparentChoice)
         isDisplayChoiceBackground.postValue(_isDisplayChoiceBackground)
     }
+
+    fun navigateResultFragment() {
+        //pieChartの描画に必要なので計算する
+        numberOfWrongAnswer = numberOfQuestion - numberOfCorrectAnswer
+        goResultFragment.postValue(true)
+    }
+
     /**
      * layout callback
      */

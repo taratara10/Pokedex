@@ -96,7 +96,7 @@ class BuzzerViewModel @Inject constructor(private val repository: PokemonReposit
         getPokemon(questionIdList[currentProgress.value as Int - 1])
     }
 
-    private fun navigateResultFragment() {
+    fun navigateResultFragment() {
         countPlayerScore()
         calcRankingFromScore()
         //buzzerQuizFragmentに通知を送って、navigationをFragmentで処理

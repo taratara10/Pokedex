@@ -22,7 +22,9 @@ class BuzzerQuizFragment: Fragment() {
     private val buzzerViewModel: BuzzerViewModel by activityViewModels()
     private val backPressCallback = object: OnBackPressedCallback(true) {
         override fun handleOnBackPressed() {
-            findNavController().navigate(R.id.action_navigation_buzzer_quiz_to_navigation_confirm_backpress)
+            val action = BuzzerQuizFragmentDirections
+                .actionNavigationBuzzerQuizToNavigationConfirmBackpress(fromBuzzer = true)
+            findNavController().navigate(action)
         }
     }
 

@@ -27,12 +27,12 @@ class DialogRegionSelectFragment: DialogFragment() {
 
     private lateinit var binding: DialogRegionSelectBinding
 
-    val pokedexViewModel: PokedexViewModel by activityViewModels()
-    val buzzerViewModel: BuzzerViewModel by activityViewModels()
-    val fourChoiceViewModel: FourChoiceViewModel by activityViewModels()
+    private val pokedexViewModel: PokedexViewModel by activityViewModels()
+    private val buzzerViewModel: BuzzerViewModel by activityViewModels()
+    private val fourChoiceViewModel: FourChoiceViewModel by activityViewModels()
     private val pokedexFragmentArgs: PokedexFragmentArgs by navArgs()
-    private val buzzerMainFragmentArgs: BuzzerMainFragmentArgs by navArgs()
-    private val fourchoicesFragmentArgs: FourChoicesMainFragmentArgs by navArgs()
+    private val buzzerFragmentArgs: BuzzerMainFragmentArgs by navArgs()
+    private val fourChoicesFragmentArgs: FourChoicesMainFragmentArgs by navArgs()
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val builder = AlertDialog.Builder(activity)
@@ -45,11 +45,11 @@ class DialogRegionSelectFragment: DialogFragment() {
                     pokedexViewModel.updateRegion(region)
                     findNavController().popBackStack()
                 }
-                if (buzzerMainFragmentArgs.fromBuzzer) {
+                if (buzzerFragmentArgs.fromBuzzer) {
                     buzzerViewModel.currentRegion.postValue(region)
                     findNavController().popBackStack()
                 }
-                if (fourchoicesFragmentArgs.fromFour) {
+                if (fourChoicesFragmentArgs.fromFour) {
                     fourChoiceViewModel.currentRegion.postValue(region)
                     findNavController().popBackStack()
                 }
