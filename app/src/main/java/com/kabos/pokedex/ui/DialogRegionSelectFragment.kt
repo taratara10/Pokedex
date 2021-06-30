@@ -60,7 +60,4 @@ class DialogRegionSelectFragment: DialogFragment() {
         return builder.create()
     }
 
-
-
-
 }
