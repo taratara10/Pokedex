@@ -30,7 +30,6 @@ class DialogConfirmBackPress: DialogFragment() {
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val builder = AlertDialog.Builder(activity)
         binding = DataBindingUtil.inflate(LayoutInflater.from(activity), R.layout.dialog_confirm_backpress, null, false)
-
         binding.callback = object: ConfirmBackPressCallback {
             override fun navigateMainFragment() {
                 if (buzzerFragmentArgs.fromBuzzer) {
@@ -56,4 +55,10 @@ class DialogConfirmBackPress: DialogFragment() {
         builder.setView(binding.root)
         return builder.create()
     }
+
+    override fun onStart() {
+        super.onStart()
+        dialog!!.window!!.setBackgroundDrawableResource(android.R.color.transparent)
+    }
+
 }

@@ -22,26 +22,18 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:layout_marginTop="55dp"
-                    android:background="@android:color/holo_blue_dark"
+                    android:layout_marginTop="95dp"
+                    android:background="@drawable/dialog_solid_corner"
                     android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-                        android:layout_marginTop="60dp"
-                        android:text="@string/app_name"
-                        android:textColor="@android:color/black"
-                        android:textSize="22sp"
-                        android:textStyle="bold" />
 
                     <Button
                         android:id="@+id/alert_btn_back"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_margin="16dp"
-                        android:background="#FF00F5"
+                        android:layout_marginTop="60dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginEnd="16dp"
+                        android:backgroundTint="@color/red_500"
                         android:text="クイズをやめる"
                         android:onClick="@{() -> callback.navigateMainFragment()}"
                         android:textSize="18sp" />
@@ -50,19 +42,23 @@
                         android:id="@+id/alert_btn_result"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_margin="16dp"
+                        android:layout_marginTop="24dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginEnd="16dp"
+                        android:layout_marginBottom="24dp"
                         android:backgroundTint="@color/correct"
                         android:text="けっかはっぴょう"
+                        android:textColor="@color/black"
                         android:onClick="@{() -> callback.navigateResultFragment()}"
                         android:textSize="18sp" />
                 </LinearLayout>
 
                 <ImageView
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="100dp"
                     android:layout_alignParentTop="true"
                     android:layout_centerHorizontal="true"
-                    android:src="@mipmap/ic_launcher" />
+                    android:src="@drawable/nc115768" />
             </RelativeLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
