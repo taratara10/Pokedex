@@ -41,7 +41,7 @@ class BuzzerQuizFragment: Fragment() {
             lifecycleOwner = this@BuzzerQuizFragment
             buzzerProgressBar.apply {
                 min = 0
-                max = buzzerViewModel.numberOfQuestion
+                max = buzzerViewModel.numberOfQuestion *100 //初期値10だと小さすぎてアニメーションが上手くいかない
             }
         }
 
@@ -61,7 +61,7 @@ class BuzzerQuizFragment: Fragment() {
         })
 
        buzzerViewModel.currentProgress.observe(viewLifecycleOwner, { progress ->
-           onProgressChanged(progress)
+           onProgressChanged(progress*100)
        })
 
     }
@@ -71,12 +71,5 @@ class BuzzerQuizFragment: Fragment() {
         animation.duration = 1000
         animation.interpolator = DecelerateInterpolator()
         animation.start()
-        Log.d("animation", "animation called!")
     }
-
-
-
-
-
-
 }

@@ -1,10 +1,12 @@
 package com.kabos.pokedex.ui.fourChoicesQuiz
 
+import android.animation.ObjectAnimator
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.DecelerateInterpolator
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -39,9 +41,13 @@ class FourChoicesQuizFragment: Fragment() {
             lifecycleOwner = this@FourChoicesQuizFragment
             fourChoicesProgressBar.apply {
                 min = 0
-                max = fourChoicesViewModel.numberOfQuestion
+                max = fourChoicesViewModel.numberOfQuestion *100
             }
         }
+
+        fourChoicesViewModel.currentProgress.observe(viewLifecycleOwner, { progress ->
+            onProgressChanged(progress*100)
+        })
 
         fourChoicesViewModel.isDisplayChoiceBackground.observe(viewLifecycleOwner, { background ->
             binding.apply {
@@ -75,5 +81,10 @@ class FourChoicesQuizFragment: Fragment() {
 
     }
 
-
+    private fun onProgressChanged(progress: Int) {
+        val animation = ObjectAnimator.ofInt(binding.fourChoicesProgressBar, "progress", progress)
+        animation.duration = 1000
+        animation.interpolator = DecelerateInterpolator()
+        animation.start()
+    }
 }
