@@ -26,6 +26,7 @@ class FourChoicesMainFragment: Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        activity?.title = "４たくクイズ"
         binding = FragmentFourChoicesMainBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -44,5 +45,6 @@ class FourChoicesMainFragment: Fragment() {
             }
 
         }
+
     }
 }

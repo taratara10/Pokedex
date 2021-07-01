@@ -33,6 +33,7 @@ class PokedexFragment: Fragment(){
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        activity?.title = "ポケモンずかん"
         binding = FragmentPokedexBinding.inflate(inflater, container, false)
         return binding.root
     }
