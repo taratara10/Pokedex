@@ -16,7 +16,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/winterneva">
+        android:background="@drawable/healthy_water">
 
         <androidx.cardview.widget.CardView
             android:layout_width="0dp"
@@ -44,7 +44,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="24dp"
                     android:gravity="center"
-                    android:text="ずかんの　せつめいから　\n ポケモンの　なまえを　あてよう"
+                    android:text="【みんなでクイズ】\nずかんの　せつめいから　\n ポケモンの　なまえを　あてよう！"
                     android:textSize="20sp"
                     app:layout_constraintEnd_toEndOf="@id/guideline_end2"
                     app:layout_constraintStart_toStartOf="@id/guideline_begin2"
@@ -63,7 +63,8 @@
                     android:id="@+id/buzzer_region_select"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:padding="8dp"
+                    android:padding="12dp"
+                    android:layout_marginTop="4dp"
                     android:background="@drawable/shape_rounded_corner"
                     android:onClick="@{() -> callback.navigateRegionFragment()}"
                     app:layout_constraintEnd_toEndOf="@id/guideline_end2"
@@ -99,9 +100,10 @@
                     app:layout_constraintTop_toBottomOf="@id/buzzer_region_select" />
 
                 <RadioGroup
-                    android:id="@+id/buzzer_radio_group"
+                    android:id="@+id/radio_group"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
                     android:background="@drawable/shape_rounded_corner"
                     android:checkedButton="@={RadioTypeConverter.typeToButtonId(buzzerVM.isCheckedNumberOfQuestionRadio())}"
                     android:orientation="horizontal"
@@ -110,7 +112,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/tv_question_number_title">
 
                     <RadioButton
-                        android:id="@+id/rb_buzzer_questions_number_first"
+                        android:id="@+id/rb_questions_number_first"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -119,7 +121,7 @@
                         app:layout_constraintStart_toStartOf="parent" />
 
                     <RadioButton
-                        android:id="@+id/rb_buzzer_questions_number_second"
+                        android:id="@+id/rb_questions_number_second"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -128,7 +130,7 @@
                         app:layout_constraintStart_toStartOf="parent" />
 
                     <RadioButton
-                        android:id="@+id/rb_buzzer_questions_number_third"
+                        android:id="@+id/rb_questions_number_third"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -153,7 +155,7 @@
                     android:layout_height="wrap_content"
                     app:layout_constraintEnd_toStartOf="@+id/guideline_end2"
                     app:layout_constraintStart_toEndOf="@+id/tv_buzzer_player_number_title"
-                    app:layout_constraintTop_toBottomOf="@+id/buzzer_radio_group" />
+                    app:layout_constraintTop_toBottomOf="@+id/radio_group" />
 
 
                 <androidx.constraintlayout.widget.Guideline

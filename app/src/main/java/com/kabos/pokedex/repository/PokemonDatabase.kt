@@ -12,7 +12,7 @@ import com.kabos.pokedex.util.*
 @Database(entities = [Pokemon::class,
         PokemonInfo::class,
         PokemonSpecies::class],
-        version = 2)
+        version = 3)
 @TypeConverters(SpritesConverter::class,
         TypesConverter::class,
         NameConverter::class,

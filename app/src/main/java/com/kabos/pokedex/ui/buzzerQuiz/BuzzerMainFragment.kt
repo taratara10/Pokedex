@@ -27,6 +27,7 @@ class BuzzerMainFragment: Fragment() {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        activity?.title = "みんなでクイズ"
         binding = FragmentBuzzerMainBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -37,6 +38,7 @@ class BuzzerMainFragment: Fragment() {
         binding.apply {
             buzzerVM = buzzerViewModel
             callback = navigateRegionCallback
+            lifecycleOwner = this@BuzzerMainFragment
             setupNumberPicker(npBuzzerPlayer)
             btnBuzzerStart.setOnClickListener {
                 buzzerViewModel.startQuestion()

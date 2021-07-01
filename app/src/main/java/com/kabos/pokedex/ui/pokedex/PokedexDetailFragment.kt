@@ -30,4 +30,8 @@ class PokedexDetailFragment: DialogFragment() {
         return builder.create()
     }
 
+    override fun onStart() {
+        super.onStart()
+        dialog?.window?.setBackgroundDrawableResource(android.R.color.transparent)
+    }
 }

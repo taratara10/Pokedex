@@ -12,3 +12,8 @@ interface RegionCallback {
 interface NavigateRegionCallback {
     fun navigateRegionFragment()
 }
+
+interface ConfirmBackPressCallback {
+    fun navigateMainFragment()
+    fun navigateResultFragment()
+}

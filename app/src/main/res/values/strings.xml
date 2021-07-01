@@ -10,4 +10,5 @@
     <string name="finish_btn">けっかはっぴょう</string>
     <string name="ranking">%.0f位</string>
     <string name="result_title">とくてん（%1dもん）</string>
+    <string name="number_to_string">%1d</string>
 </resources>

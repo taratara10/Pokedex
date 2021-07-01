@@ -15,9 +15,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         setContentView(R.layout.activity_main)
-
 
         val navController = findNavController(R.id.nav_host_fragment)
         //set up bottom navigation
@@ -27,18 +25,16 @@ class MainActivity : AppCompatActivity() {
         navController.addOnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {
                 R.id.navigation_buzzer_quiz -> navView.visibility = View.GONE
+                R.id.navigation_four_choices_quiz -> navView.visibility = View.GONE
+                R.id.navigation_confirm_backpress -> navView.visibility = View.GONE
                 else -> navView.visibility =  View.VISIBLE
             }
         }
-
-
     }
 
     override fun onSupportNavigateUp(): Boolean {
         //Fragmentのコールバックがあればそれを実行する
-        if (onBackPressedDispatcher.hasEnabledCallbacks()) {
-            onBackPressedDispatcher.onBackPressed()
-        }
+        if (onBackPressedDispatcher.hasEnabledCallbacks()) onBackPressedDispatcher.onBackPressed()
         return true
     }
 }

@@ -25,7 +25,6 @@ class BuzzerViewModel @Inject constructor(private val repository: PokemonReposit
     var currentProgress = MutableLiveData(1)
     var numberOfQuestion: Int = 10
     var numberOfPlayer: Int = 2
-
     var questionIdList = arrayListOf<Int>()
 
     //6人分 + 不正解のスコア [playerOne, playerTwo .. None]
@@ -41,19 +40,13 @@ class BuzzerViewModel @Inject constructor(private val repository: PokemonReposit
     var playerSixChecked = MutableLiveData(false)
     var playerNoneChecked = MutableLiveData(false)
     var isAnswered: Boolean = false
-    var goResultFragment = MutableLiveData(false)
 
+    //UI parameter
+    var goResultFragment = MutableLiveData(false)
     var buttonText = MutableLiveData(R.string.next_btn)
     var isBtnEnable = MutableLiveData(false)
-
     var isCollapseCardView = MutableLiveData(false)
     var isCheckedNumberOfQuestionRadio = MutableLiveData(QuestionsRadio.secound)
-
-
-    fun updateRegion(region: Region) {
-        currentRegion.postValue(region)
-        currentRegion
-    }
 
 
     private fun generateQuestionIdList() {
@@ -78,7 +71,6 @@ class BuzzerViewModel @Inject constructor(private val repository: PokemonReposit
         playerScoreList = playerScoreList.take(numberOfPlayer + 1) as MutableList<Float>
         playerRanking = playerRanking.take(numberOfPlayer + 1) as MutableList<Float>
 
-
         generateQuestionIdList()
         getPokemon(questionIdList.first())
         goResultFragment.postValue(false)
@@ -86,7 +78,7 @@ class BuzzerViewModel @Inject constructor(private val repository: PokemonReposit
     }
 
     fun setupNextQuestion() {
-        //checkboxが空ならreturn
+        //checkboxが空ならreturn trueならfalseにリセットして次の問題へ
         if (!isAnswered) return else isAnswered = false
         if (currentProgress.value != numberOfQuestion) {
             updateQuestion()
@@ -102,13 +94,9 @@ class BuzzerViewModel @Inject constructor(private val repository: PokemonReposit
         countPlayerScore()
         incrementCurrentProgress()
         getPokemon(questionIdList[currentProgress.value as Int - 1])
-        //最終問題ならbuttonTextを差し替え
-        if (currentProgress.value == numberOfQuestion) {
-            buttonText.postValue(R.string.finish_btn)
-        }
     }
 
-    private fun navigateResultFragment() {
+    fun navigateResultFragment() {
         countPlayerScore()
         calcRankingFromScore()
         //buzzerQuizFragmentに通知を送って、navigationをFragmentで処理
@@ -116,15 +104,15 @@ class BuzzerViewModel @Inject constructor(private val repository: PokemonReposit
 
     }
 
-
-    /**
-     * layout callback
-     */
     private fun incrementCurrentProgress() {
         currentProgress.value?.let { i ->
             if (i < numberOfQuestion) currentProgress.value = i + 1
+            if (i == numberOfQuestion - 1) buttonText.postValue(R.string.finish_btn) //次が最終問題ならbuttonTextを差し替え
         }
     }
+    /**
+     * layout callback
+     */
 
     //buzzer main fragment
     fun updateNumberOfQuestion() {

@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.DecelerateInterpolator
+import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
@@ -19,10 +20,17 @@ import dagger.hilt.android.AndroidEntryPoint
 class BuzzerQuizFragment: Fragment() {
     private lateinit var binding: FragmentBuzzerQuizBinding
     private val buzzerViewModel: BuzzerViewModel by activityViewModels()
-
+    private val backPressCallback = object: OnBackPressedCallback(true) {
+        override fun handleOnBackPressed() {
+            val action = BuzzerQuizFragmentDirections
+                .actionNavigationBuzzerQuizToNavigationConfirmBackpress(fromBuzzer = true)
+            findNavController().navigate(action)
+        }
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = FragmentBuzzerQuizBinding.inflate(inflater, container, false)
+        requireActivity().onBackPressedDispatcher.addCallback(backPressCallback)
         return binding.root
     }
 
@@ -33,7 +41,7 @@ class BuzzerQuizFragment: Fragment() {
             lifecycleOwner = this@BuzzerQuizFragment
             buzzerProgressBar.apply {
                 min = 0
-                max = buzzerViewModel.numberOfQuestion
+                max = buzzerViewModel.numberOfQuestion *100 //初期値10だと小さすぎてアニメーションが上手くいかない
             }
         }
 
@@ -53,7 +61,7 @@ class BuzzerQuizFragment: Fragment() {
         })
 
        buzzerViewModel.currentProgress.observe(viewLifecycleOwner, { progress ->
-           onProgressChanged(progress)
+           onProgressChanged(progress*100)
        })
 
     }
@@ -63,12 +71,5 @@ class BuzzerQuizFragment: Fragment() {
         animation.duration = 1000
         animation.interpolator = DecelerateInterpolator()
         animation.start()
-        Log.d("animation", "animation called!")
     }
-
-
-
-
-
-
 }

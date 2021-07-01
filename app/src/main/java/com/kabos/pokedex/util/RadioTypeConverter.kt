@@ -6,9 +6,9 @@ import com.kabos.pokedex.R
 
 fun buttonIdToType(selectedButtonId: Int): QuestionsRadio {
     return when (selectedButtonId) {
-        R.id.rb_buzzer_questions_number_first -> QuestionsRadio.first
-        R.id.rb_buzzer_questions_number_second -> QuestionsRadio.secound
-        R.id.rb_buzzer_questions_number_third -> QuestionsRadio.third
+        R.id.rb_questions_number_first -> QuestionsRadio.first
+        R.id.rb_questions_number_second -> QuestionsRadio.secound
+        R.id.rb_questions_number_third -> QuestionsRadio.third
         else -> QuestionsRadio.secound
     }
 }
@@ -16,9 +16,9 @@ fun buttonIdToType(selectedButtonId: Int): QuestionsRadio {
 @InverseMethod("buttonIdToType")
 fun typeToButtonId(radioType: QuestionsRadio): Int {
     return when (radioType) {
-        QuestionsRadio.first -> R.id.rb_buzzer_questions_number_first
-        QuestionsRadio.secound -> R.id.rb_buzzer_questions_number_second
-        QuestionsRadio.third -> R.id.rb_buzzer_questions_number_third
+        QuestionsRadio.first -> R.id.rb_questions_number_first
+        QuestionsRadio.secound -> R.id.rb_questions_number_second
+        QuestionsRadio.third -> R.id.rb_questions_number_third
     }
 }
 

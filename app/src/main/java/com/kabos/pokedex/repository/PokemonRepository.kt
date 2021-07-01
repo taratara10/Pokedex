@@ -66,7 +66,7 @@ class PokemonRepository @Inject constructor(
 
     fun mergePokemonData(info: PokemonInfo, species: PokemonSpecies): Pokemon {
         val typeSize = info.types.size
-        val flavorTextEntry = species.flavor_text_entries.findLast {
+        val flavorTextEntry = species.flavor_text_entries.find {
             it.language.name == "ja-Hrkt"
         }//実際はversion.name == "sword"にしたいけど、未登場ポケモンがnullなので、findLastで最新の説明を引用
         val flavorText = flavorTextEntry!!.flavor_text.replace("\n","")

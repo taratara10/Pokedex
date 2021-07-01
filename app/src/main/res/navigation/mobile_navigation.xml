@@ -45,18 +45,34 @@
             android:name="fromBuzzer"
             app:argType="boolean"
             android:defaultValue="false"/>
+        <argument
+            android:name="fromFour"
+            app:argType="boolean"
+            android:defaultValue="false"/>
     </dialog>
 
-    <fragment
-        android:id="@+id/navigation_four_choices"
-        android:name="com.kabos.pokedex.ui.fourChoicesQuiz.FourChoicesMainFragment"
-        android:label="FourChoices"
-        tools:layout="@layout/fragment_four_choices_main" >
-        <action
-            android:id="@+id/action_navigation_four_choices_to_navigation_region_select"
-            app:destination="@id/navigation_region_select" />
-    </fragment>
+<!--  backPress  -->
+    <dialog
+        android:id="@+id/navigation_confirm_backpress"
+        android:name="com.kabos.pokedex.ui.DialogConfirmBackPress"
+        android:label="Confirm"
+        tools:layout="@layout/dialog_confirm_backpress">
 
+        <argument
+            android:name="fromBuzzer"
+            app:argType="boolean"
+            android:defaultValue="false"/>
+        <argument
+            android:name="fromFour"
+            app:argType="boolean"
+            android:defaultValue="false"/>
+        <action
+            android:id="@+id/action_navigation_confirm_backpress_to_navigation_four_choices_main"
+            app:destination="@id/navigation_four_choices_main" />
+        <action
+            android:id="@+id/action_navigation_confirm_backpress_to_navigation_buzzer_main"
+            app:destination="@id/navigation_buzzer_main" />
+    </dialog>
 
 <!-- buzzer Fragment-->
     <fragment
@@ -75,9 +91,7 @@
         <action
             android:id="@+id/action_navigation_buzzer_main_to_navigation_buzzer_quiz"
             app:destination="@id/navigation_buzzer_quiz" />
-        <action
-            android:id="@+id/action_navigation_buzzer_main_to_navigation_buzzer_result"
-            app:destination="@id/navigation_buzzer_result" />
+
 
     </fragment>
 
@@ -91,6 +105,9 @@
         <action
             android:id="@+id/action_navigation_buzzer_quiz_to_navigation_buzzer_result"
             app:destination="@id/navigation_buzzer_result" />
+        <action
+            android:id="@+id/action_navigation_buzzer_quiz_to_navigation_confirm_backpress"
+            app:destination="@id/navigation_confirm_backpress" />
     </fragment>
 
     <fragment
@@ -99,5 +116,52 @@
         android:label="Buzzer"
         tools:layout="@layout/fragment_buzzer_result" >
 
+        <action
+            android:id="@+id/action_navigation_buzzer_result_to_navigation_buzzer_main"
+            app:destination="@id/navigation_buzzer_main" />
     </fragment>
+
+<!--  four choices  -->
+    <fragment
+        android:id="@+id/navigation_four_choices_main"
+        android:name="com.kabos.pokedex.ui.fourChoicesQuiz.FourChoicesMainFragment"
+        android:label="FourChoices"
+        tools:layout="@layout/fragment_four_choices_main" >
+        <action
+            android:id="@+id/action_navigation_four_choices_to_navigation_region_select"
+            app:destination="@id/navigation_region_select" />
+        <argument
+            android:name="fromFour"
+            app:argType="boolean"
+            android:defaultValue="false"/>
+        <action
+            android:id="@+id/action_navigation_four_choices_main_to_navigation_four_choices_quiz"
+            app:destination="@id/navigation_four_choices_quiz" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_four_choices_quiz"
+        android:name="com.kabos.pokedex.ui.fourChoicesQuiz.FourChoicesQuizFragment"
+        android:label="FourChoices"
+        tools:layout="@layout/fragment_four_choices_quiz" >
+
+        <action
+            android:id="@+id/action_navigation_four_choices_quiz_to_navigation_four_choices_result"
+            app:destination="@id/navigation_four_choices_result" />
+        <action
+            android:id="@+id/action_navigation_four_choices_quiz_to_navigation_confirm_backpress"
+            app:destination="@id/navigation_confirm_backpress" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_four_choices_result"
+        android:name="com.kabos.pokedex.ui.fourChoicesQuiz.FourChoicesResultFragment"
+        android:label="FourChoices"
+        tools:layout="@layout/fragment_four_choices_result" >
+
+        <action
+            android:id="@+id/action_navigation_four_choices_result_to_navigation_four_choices_main"
+            app:destination="@id/navigation_four_choices_main" />
+    </fragment>
+
 </navigation>
