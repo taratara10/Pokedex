@@ -3,17 +3,18 @@
 
     <item
         android:id="@+id/navigation_pokedex"
-        android:icon="@drawable/ic_home_black_24dp"
-        android:title="Pokedex" />
+        android:icon="@drawable/ic_baseline_menu_book_24"
+        android:title="ずかん"
+        />
 
     <item
         android:id="@+id/navigation_four_choices_main"
-        android:icon="@drawable/ic_dashboard_black_24dp"
-        android:title="４たく" />
+        android:icon="@drawable/ic_baseline_person_24"
+        android:title="４たくクイズ" />
 
     <item
         android:id="@+id/navigation_buzzer_main"
-        android:icon="@drawable/ic_notifications_black_24dp"
-        android:title="クイズ" />
+        android:icon="@drawable/ic_baseline_people_24"
+        android:title="みんなでクイズ" />
 
 </menu>
