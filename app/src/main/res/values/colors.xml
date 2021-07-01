@@ -15,6 +15,6 @@
     <color name="red_500_alpha_30">#4DF44336</color>
     <color name="blue_gray_50">#ECEFF1</color>
     <color name="gray_800">#424242</color>
-    <color name="gray_900">#212121</color>
+    <color name="gray_700">#616161</color>
     <color name="bottom_navigation">#CCffffff</color>
 </resources>
